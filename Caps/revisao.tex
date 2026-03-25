@@ -7,12 +7,12 @@ Inicialmente, o gêmeo digital foi considerado apenas um nível superior de simu
 
 \section{Simulação Híbrida}
 \label{sec:hibsim}
-	De acordo com "Mustafee et al. (2015)", a simulação híbrida é a aplicação conjunta de técnicas de forma integrada, onde ambas as abordagens aprimoram harmoniosamente as capacidades uma da outra e reduzem limitações através do compartilhamento de informações. Na prática, a SH busca obter sinergia. Por exemplo, enquanto a Simulação de Eventos Discretos (DES) é mais adequada para modelar questões de foco operacional — sendo quantitativa, discreta e restrita nos detalhes —, ela pode ser combinada com outras técnicas contínuas ou baseadas em agentes para abranger problemas complexos de ponta a ponta (Fakhimi, ANO).
-
-\section{Eventos Discretos}
+De acordo com "Mustafee et al. (2015)", a simulação híbrida é a aplicação conjunta de técnicas de forma integrada, onde ambas as abordagens aprimoram harmoniosamente as capacidades uma da outra e reduzem limitações através do compartilhamento de informações. Na prática, a SH busca obter sinergia. Por exemplo, enquanto a Simulação de Eventos Discretos (DES) é mais adequada para modelar questões de foco operacional — sendo quantitativa, discreta e restrita nos detalhes —, ela pode ser combinada com outras técnicas contínuas ou baseadas em agentes para abranger problemas complexos de ponta a ponta (Fakhimi, ANO).
+	
+\subsection{Eventos Discretos (DES)}
 \label{sec:DE}
-
-\section{Modelo Baseado em Agentes}
+DES é um modelo de simulação, não confundir com SED
+\subsection{Modelo Baseado em Agentes (ABM)}
 \label{sec:ABM}
 
 \section{Ferramentas Computacionais}
@@ -26,8 +26,28 @@ configuração, os parâmetros que Inseri no AnyLogic
 \label{subsec:omniverse}
  modelagem 3D
  
- \subsection{Sistemas de eventos discretos}
- \label{subsec:SED}
- modelagem 3D
+ 
+\section{Sistemas a Eventos Discretos (SED)}
+\label{sec:SED}
+Nesta parte, você define o que é o sistema sob a ótica da engenharia de controle.
+
+\subsection{Definições Fundamentais e Autômatos}Explicar que o sistema é modelado por um autômato $G = (X, \Sigma, f, x_0)$. Definir o que são Estados ($X$) e o que são Eventos ($\Sigma$). É crucial aqui separar o alfabeto em eventos Observáveis ($\Sigma_o$) e Não Observáveis ($\Sigma_{uo}$), pois é essa distinção que justifica a existência de um observador.
+
+\subsection{Linguagens e Trajetórias}
+Uma breve explicação de que o comportamento do canteiro de obras é uma sequência de eventos (strings), e que as falhas são eventos específicos que pertencem ao conjunto dos não observáveis.
+
+\section{Diagnose de Falhas em SED}
+\label{sec:diagnose_sed}
+Esta é a seção mais importante para embasar o seu trabalho prático.
+
+\subsection{O Problema da Observabilidade e o Observador de Estados}
+Explicar que, como nem tudo é visto por sensores, precisamos de um Observador. Definir o conceito de Estimativa de Estado (os conjuntos/balões que desenhamos). Aqui você cita que o observador agrupa estados que são indistinguíveis para o sensor.
+
+\subsection{O Autômato de Rótulos ($A_l$) e a Planta Etiquetada ($G_d$)}Baseado no artigo, explicar que para diagnosticar, precisamos "etiquetar" a planta. Descrever a Composição Paralela entre o modelo do sistema ($G$) e o autômato que carrega os registros de falha ($A_l$). É aqui que você justifica a notação de pares $(x, \ell)$ que usamos.
+
+\subsection{O Diagnosticador de Sampath}Definir formalmente o que é o diagnosticador: um observador construído sobre a planta etiquetada ($G_d$). Explicar os tipos de estados que ele pode assumir:Estado Normal: Contém apenas o rótulo $N$.Estado de Falha (F-diagnosticado): Contém apenas rótulos de falha.Estado Incerto: Contém tanto $N$ quanto rótulos de falha (que é o caso do seu resultado atual).
+
+\subsection{Diagnosticabilidade}
+Explicar o conceito de "Diagnosticabilidade" do artigo: a capacidade de um sistema sair de um estado incerto e chegar a um estado de falha em um número finito de passos após a ocorrência do evento de falha.
  
  

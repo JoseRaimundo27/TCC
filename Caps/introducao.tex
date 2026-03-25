@@ -12,9 +12,9 @@ Apesar da existência dessas tecnologias, para \citeonline{oesterreich2016digiti
 
 O fluxo de trabalho é intenso e os operários atuam em condições complexas, lidando com a constante montagem e desmontagem das fôrmas \cite{tesecarol}. Consequentemente, a dificuldade de gestão manual frequentemente resulta em variabilidades na superfície do concreto e retrabalhos. Tais distúrbios no processo construtivo configuram-se como falhas operacionais. Conforme estabelece Raman (2005), falha é um termo geral usado para descrever um distúrbio significativo que leva um processo para um ponto longe da sua faixa normal de operação, onde um sistema de controle não pode regular eficientemente o processo; se esta situação não for corrigida por uma ação adequada, a operação pode entrar em uma situação emergencial que pode levar a consequências catastróficas.
 
-Para modelar essa dinâmica de forma rigorosa, este trabalho adota a perspectiva dos Sistemas a Eventos Discretos (SED). Conforme define \citeonline{mestradoDudu}, SEDs são sistemas dinâmicos de estados discretos cuja transição de estados se dá por meio da ocorrência, em geral assíncrona, de eventos. No contexto da construção, cada etapa da obra concluída representa um evento que altera o estado do sistema, permitindo que o fluxo construtivo seja tratado matematicamente através de autômatos finitos. Para evitar que as variabilidades citadas tornem-se irreversíveis, a detecção e o diagnóstico de falhas tornam-se fundamentais na supervisão avançada de processos, sendo responsáveis pelo monitoramento do comportamento do sistema e provendo informações críticas sobre condições anormais de operação \cite{castro2009}.
+Para modelar essa dinâmica de forma rigorosa, este trabalho adota a perspectiva dos Sistemas a Eventos Discretos (SED). Conforme define \citeonline{mestradoDudu}, SED são sistemas dinâmicos de estados discretos cuja transição de estados se dá por meio da ocorrência, em geral assíncrona, de eventos. No contexto da construção, cada etapa da obra concluída representa um evento que altera o estado do sistema, permitindo que o fluxo construtivo seja tratado matematicamente através de autômatos finitos. Para evitar que as variabilidades citadas tornem-se irreversíveis, a detecção e o diagnóstico de falhas tornam-se fundamentais na supervisão avançada de processos, sendo responsáveis pelo monitoramento do comportamento do sistema e provendo informações críticas sobre condições anormais de operação \cite{castro2009}.
 
-Portanto, a aplicação de ferramentas tecnológicas avançadas, como a Simulação Híbrida e os Gêmeos Digitais, aliada à modelagem por Sistemas a Eventos Discretos e à teoria de diagnose de falhas, surge como uma oportunidade ímpar para modernizar a supervisão, detectar anomalias antecipadamente e otimizar a alocação de recursos físicos neste tipo de sistema construtivo em larga escala.
+Portanto, a aplicação de ferramentas tecnológicas avançadas, como a Simulação Híbrida e os Gêmeos Digitais, aliada à modelagem por SED e à teoria de diagnose de falhas, surge como uma oportunidade ímpar para modernizar a supervisão, detectar anomalias antecipadamente e otimizar a alocação de recursos físicos neste tipo de sistema construtivo em larga escala.
 	
 
 
@@ -33,33 +33,32 @@ Como aponta \citeonline{cheng}, para permitir a tomada de decisões mais oportun
 Sendo assim, este trabalho justifica-se pela necessidade de preencher essa lacuna tecnológica, analítica e visual. A proposta de integrar a robustez matemática da diagnose de falhas em SEDs, com a criação de um Gêmeo Digital realista fornece aos gestores uma ferramenta avançada de supervisão. Essa abordagem substitui o planejamento estático e o controle manual por um monitoramento dinâmico e visualmente imersivo, capaz de identificar anomalias antes que estas resultem em desperdícios financeiros ou atrasos irreversíveis na execução de paredes de concreto.
 
 
-
 \section{Objetivos}
 \label{sec:objetivos}
-O objetivo geral deste trabalho é propor uma Simulação Híbrida para gestão e controle de recursos físicos do sistema construtivo de paredes de concreto, integrando técnicas de diagnose de falhas em sistemas a eventos discretos, visando otimizar o fluxo de trabalho no canteiro de obras e aumentar a produtividade.
+O objetivo geral deste trabalho é propor uma Simulação Híbrida para gestão e controle de recursos físicos do sistema construtivo de paredes de concreto, integrando técnicas de diagnose de falhas em SED, visando otimizar o fluxo de trabalho no canteiro de obras e aumentar a produtividade.
 
 Para alcançar este propósito, definem-se os seguintes objetivos específicos:
 
 \begin{itemize}
 	\item Desenvolver um modelo computacional de Simulação Híbrida utilizando a ferramenta AnyLogic;
-	\item Modelar o fluxo operacional da montagem de fôrmas como um Sistema a Eventos Discretos, implementando um diagnosticador para a detecção de falhas operacionais;
+	\item Modelar o fluxo operacional da montagem de fôrmas como um SED, implementando um diagnosticador para a detecção de falhas operacionais;
 	\item Criar a representação visual contextualizada em um Gêmeo Digital do canteiro através do software NVIDIA Omniverse;
-	\item Integrar os dados de simulação e os estados do diagnosticador ao ambiente virtual para análise de cenários e detecção de anomalias.
+	\item Integrar os dados de simulação ao ambiente virtual para análise de cenários.
 \end{itemize}
 
 \section{Organização do trabalho}
 \label{sec:organizacao}
-Este trabalho está estruturado em  capítulos, organizados da seguinte forma:
+Este trabalho está estruturado em seis capítulos, organizados da seguinte forma:
 
 O Capítulo \ref{chap:intro} apresenta a contextualização do tema, a justificativa para a realização da pesquisa, bem como os objetivos propostos.
 
-O Capítulo \ref{chap:revisao} dedica-se à revisão da literatura, abordando os conceitos fundamentais sobre Gêmeos Digitais, Simulação Híbrida, Sistemas a Eventos Discretos e as ferramentas AnyLogic e Omniverse.
+O Capítulo \ref{chap:revisao} dedica-se à revisão da literatura, abordando os conceitos fundamentais sobre Gêmeos Digitais, Simulação Híbrida e Sistemas a Eventos Discretos, com foco na teoria de diagnose de falhas em autômatos finitos, além de descrever as ferramentas AnyLogic e Omniverse.
 
-O Capítulo \ref{chap:metodologia} descreve a metodologia da pesquisa, detalhando as etapas de construção do modelo conceitual, coleta de dados e a implementação computacional.
+O Capítulo \ref{chap:metodologia} descreve a metodologia da pesquisa, detalhando as etapas de construção do modelo conceitual, a modelagem da planta e do diagnosticador de falhas, a coleta de dados e a implementação computacional.
 
-O Capítulo \ref{chap:resultados} expõe a validação do modelo, a análise dos cenários simulados 
+O Capítulo \ref{chap:resultados} expõe a validação do modelo, a análise dos cenários simulados e os resultados da detecção de falhas operacionais através do diagnosticador implementado.
 
-O Capítulo \ref{chap:discussao} faz a discussão sobre os impactos da integração das ferramentas na gestão do concreto.
+O Capítulo \ref{chap:discussao} faz a discussão sobre os impactos da integração das ferramentas na gestão do sistema construtivo de paredes de concreto e a eficácia da diagnose na redução de retrabalhos.
 
 Por fim, o Capítulo \ref{chap:conclusao} apresenta as considerações finais, as limitações encontradas ao longo do estudo e as sugestões para trabalhos futuros.
 
