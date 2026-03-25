@@ -1,44 +1,22 @@
 \chapter{Introdução}
 \label{chap:intro}
+A Modelagem e Simulação Computacional (MSC) representa um pilar indispensável na engenharia de sistemas modernos. Ela constitui uma abordagem analítica avançada que permite traduzir o comportamento do mundo real para um ambiente computacional controlado. Devido à sua capacidade de lidar com a complexidade e a incerteza inerentes aos processos físicos, a simulação é amplamente considerada uma ferramenta eficaz de análise operacional \cite{halpin2003}.
 
-\begin{itemize}
-	
-	\item INTRODUZIR SOBRE SIMULAÇÃO ( PARA QUE SERVE)
-	Achar uma definição mais robusta do que é simulação(para complementar, nao substituir), não é só um "conjunto de ferramentas". Devo contextualizar construção antes? to falando aqui sobre simulação
-	A Modelagem e Simulação Computacional (MSC) compreende um conjunto de ferramentas de apoio à decisão que tem beneficiado significativamente diversos setores industriais. A criação de um modelo em um mundo virtual auxilia na compreensão do comportamento do sistema, permitindo que diferentes cenários de projeto sejam examinados antes da fase de implementação, o que inevitavelmente se reflete em otimização de produção e custos \cite{hybridframework} (Levar essa parte para a parte de construção). Devido à sua capacidade de lidar com a complexidade e a incerteza inerentes aos processos físicos, a simulação é amplamente considerada uma ferramenta eficaz de análise operacional \cite{halpin2003}.
-	
-	
-	\item SIMULAÇÃO HIBRIDA ( PARA QUE SERVE)
-	
-	No entanto, para modelar sistemas altamente dinâmicos, a adoção de um único paradigma de simulação pode ser insuficiente. Para solucionar esse problema, emprega-se a Simulação Híbrida. A modelagem híbrida utiliza dois ou mais modelos para representar o comportamento de um sistema, integrando abordagens baseadas em dados e em princípios da física \cite{hybridmodeling}. 
-	
-	
-	\item Gêmeos digitais Atrelado a simulação hibrida:
-	
-	Nesse sentido, o conceito de Gêmeos Digitais surgiu nas últimas duas décadas e tornou-se o centro das atenções de pesquisadores e indústrias \cite{dtchallenges}, sendo uma das principais tecnologias a impulsionar o futuro do setor produtivo \cite{lu2020digitaltwin}. Segundo \citeonline{kritzinger2018digitaltwin}, um gêmeo digital é uma simulação multifísica e probabilística integrada, que utiliza os melhores modelos físicos disponíveis e atualizações de sensores para espelhar a vida de seu correspondente físico em tempo real. OLHAR O CONCEITO DO INSTITUTO DE AEROUNATICA DOS EUA - ZAP
+No entanto, para modelar sistemas altamente dinâmicos, a adoção de um único paradigma de simulação pode ser insuficiente. Para solucionar esse problema, emprega-se a Simulação Híbrida. A modelagem híbrida utiliza dois ou mais modelos para representar o comportamento de um sistema, integrando abordagens baseadas em dados e em princípios da física \cite{hybridmodeling}.
 
-	\item Aplicaçao: Construção e citar que há problemas
-	
-	Apesar da existência dessas tecnologias, para \citeonline{oesterreich2016digitisation} a indústria da construção civil ainda se encontra atrasada em relação a outros setores, como o de manufatura, em termos de digitalização e automação. Os canteiros de obras sofrem com a natureza inerentemente imprevisível do trabalho, marcada por variações inevitáveis, como flutuações na produtividade da mão de obra, interrupções na cadeia de suprimentos e retrabalhos, o que invalida constantemente as suposições feitas no início do projeto \cite{wambeke2011variation}. 
-	
-	
+Nesse sentido, o conceito de Gêmeos Digitais surgiu nas últimas duas décadas e tornou-se o centro das atenções de pesquisadores e indústrias \cite{dtchallenges}, sendo uma das principais tecnologias a impulsionar o futuro do setor produtivo \cite{lu2020digitaltwin}. Segundo \citeonline{aeronautica}, um Gêmeo Digital é definido como um conjunto de construções virtuais de informação que imita a estrutura, o contexto e o comportamento de um ativo físico individual ou de um grupo de ativos físicos, sendo atualizado dinamicamente com dados do seu gêmeo físico ao longo do seu ciclo de vida e servindo de base para decisões que geram valor.
+
+Apesar da existência dessas tecnologias, para \citeonline{oesterreich2016digitisation} a indústria da construção civil ainda se encontra atrasada em relação a outros setores, como o de manufatura, em termos de digitalização e automação. Os canteiros de obras sofrem com a natureza inerentemente imprevisível do trabalho, marcada por variações inevitáveis, como flutuações na produtividade da mão de obra, interrupções na cadeia de suprimentos e retrabalhos, o que invalida constantemente as suposições feitas no início do projeto \cite{wambeke2011variation}. É justamente neste ponto que a criação de um modelo em um mundo virtual auxilia na compreensão do comportamento do sistema, permitindo que diferentes cenários de projeto sejam examinados antes da fase de implementação, o que inevitavelmente se reflete em otimização de produção e custos \cite{hybridframework}.
+
+É neste cenário de alta demanda por controle dinâmico e redução de falhas que se insere o sistema construtivo de paredes de concreto moldadas \textit{in loco}. Esse sistema popularizou-se no Brasil na última década, impulsionado por programas habitacionais governamentais como o "Minha Casa Minha Vida" e o "Casa Verde e Amarela" \cite{tesecarol}. Esse método se baseia na utilização de fôrmas metálicas removíveis e moduladas, frequentemente de alumínio, que permitem a execução de estruturas monolíticas de forma padronizada, conforme definido pela norma NBR 16055 \cite{abnt}.
+
+O fluxo de trabalho é intenso e os operários atuam em condições complexas, lidando com a constante montagem e desmontagem das fôrmas \cite{tesecarol}. Consequentemente, a dificuldade de gestão manual frequentemente resulta em variabilidades na superfície do concreto e retrabalhos. Tais distúrbios no processo construtivo configuram-se como falhas operacionais. Conforme estabelece Raman (2005), falha é um termo geral usado para descrever um distúrbio significativo que leva um processo para um ponto longe da sua faixa normal de operação, onde um sistema de controle não pode regular eficientemente o processo; se esta situação não for corrigida por uma ação adequada, a operação pode entrar em uma situação emergencial que pode levar a consequências catastróficas.
+
+Para modelar essa dinâmica de forma rigorosa, este trabalho adota a perspectiva dos Sistemas a Eventos Discretos (SED). Conforme define \citeonline{mestradoDudu}, SEDs são sistemas dinâmicos de estados discretos cuja transição de estados se dá por meio da ocorrência, em geral assíncrona, de eventos. No contexto da construção, cada etapa da obra concluída representa um evento que altera o estado do sistema, permitindo que o fluxo construtivo seja tratado matematicamente através de autômatos finitos. Para evitar que as variabilidades citadas tornem-se irreversíveis, a detecção e o diagnóstico de falhas tornam-se fundamentais na supervisão avançada de processos, sendo responsáveis pelo monitoramento do comportamento do sistema e provendo informações críticas sobre condições anormais de operação \cite{castro2009}.
+
+Portanto, a aplicação de ferramentas tecnológicas avançadas, como a Simulação Híbrida e os Gêmeos Digitais, aliada à modelagem por Sistemas a Eventos Discretos e à teoria de diagnose de falhas, surge como uma oportunidade ímpar para modernizar a supervisão, detectar anomalias antecipadamente e otimizar a alocação de recursos físicos neste tipo de sistema construtivo em larga escala.
 	
 
-	\item CONTEXTO: Minha casa minha vida:
-	
-		
-	É neste cenário de alta demanda por controle dinâmico e redução de falhas que se insere o sistema construtivo de paredes de concreto moldadas \textit{in loco}. Esse sistema popularizou-se no Brasil na última década, impulsionado por programas habitacionais governamentais como o "Minha Casa Minha Vida" e o "Casa Verde e Amarela" \cite{tesecarol}. Esse método se baseia na utilização de fôrmas metálicas removíveis e moduladas, frequentemente de alumínio, que permitem a execução de estruturas monolíticas de forma padronizada, conforme definido pela norma NBR 16055 \cite{abnt}.
-	
-	 O fluxo de trabalho é intenso e os operários atuam em condições complexas, lidando com a constante montagem e desmontagem das fôrmas \cite{tesecarol}. Consequentemente, a dificuldade de gestão manual frequentemente resulta em variabilidades na superfície do concreto e retrabalhos. 
-	
-	Portanto, a aplicação de ferramentas tecnológicas avançadas, como a Simulação Híbrida e os gêmeos digitais, surge como uma oportunidade ímpar para modernizar a gestão e otimizar a alocação de recursos físicos nesse tipo de sistema construtivo em larga escala.
-	
-	
-	
-
-	
-	
-\end{itemize}
 
 
 \section{Justificativa}
@@ -48,31 +26,25 @@ Historicamente, a indústria da construção civil enfrenta desafios para modern
 
 Para superar as desvantagens das abordagens tradicionais e lidar com a dinamicidade do canteiro de obras, a implementação da modelagem híbrida apresenta-se como uma solução promissora. De acordo com \citeonline{hybridmodeling}, a adoção dessa técnica permite integrar diferentes métodos, aprimorando significativamente a precisão e a confiabilidade da modelagem do sistema. Contudo, a geração de dados puramente quantitativos pode não ser suficiente para a gestão prática diária na obra.
 
-Como aponta \citeonline{cheng}, para permitir a tomada de decisões mais oportunas e precisas durante a construção, atendendo a múltiplos níveis hierárquicos, escalas de tempo e partes interessadas, é necessário um entendimento mais profundo das informações em tempo real e, fundamentalmente, em um formato visualmente atraente. Além disso, o rastreamento e a visualização de dados dinâmicos em um ambiente virtual realista trazem benefícios operacionais indispensáveis para a equipe de projeto \cite{cheng2012}. 
+Ademais, há, também,  o impacto direto das falhas operacionais no fluxo produtivo. Conforme afirma \citeonline{kechida}, cada falha ou defeito pode levar a paralisações ou uma ruptura do serviço e, consequentemente, a uma redução da produção da planta. No sistema de paredes de concreto, onde o ciclo de execução é extremamente rápido e repetitivo, a não detecção de uma inconsistência pode comprometer toda qualidade de produção do canteiro. Nesse contexto, a aplicação da diagnose de falhas torna-se um diferencial estratégico, pois, a detecção precoce e a correção de falhas podem ajudar a evitar as paradas dos sistemas e até catástrofes envolvendo fatalidades humanas e danos materiais \cite{mestradoDudu}.
 
-Sendo assim, este trabalho justifica-se pela necessidade de preencher essa lacuna tecnológica e visual. A proposta de integrar a robustez matemática da Simulação Híbrida com a criação de um Gêmeo Digital realista e interativo  fornece aos gestores uma ferramenta avançada. Essa abordagem substitui o planejamento estático e o controle manual por um monitoramento dinâmico e visualmente imersivo, essencial para otimizar o controle de recursos físicos na execução de paredes de concreto.
+Como aponta \citeonline{cheng}, para permitir a tomada de decisões mais oportunas e precisas durante a construção, atendendo a múltiplos níveis hierárquicos, escalas de tempo e partes interessadas, é necessário um entendimento mais profundo das informações em tempo real e, fundamentalmente, em um formato visualmente atraente. Além disso, o rastreamento e a visualização de dados dinâmicos em um ambiente virtual realista trazem benefícios operacionais indispensáveis para a equipe de projeto \cite{cheng2012}.
 
-	
-\begin{itemize}
-	\item Justificar por que a solução hibrida é uma solução valida
-	\item (lacuna)Muito tradicional/ Manual/ Boca a boca
-	\item (lacuna)Dizer que os estudos não tem uma parte visual -> omniverse;
-	\item dizer o por que é importante/necessário;
-	\item Ir alimentando
-	
-	
-\end{itemize}
+Sendo assim, este trabalho justifica-se pela necessidade de preencher essa lacuna tecnológica, analítica e visual. A proposta de integrar a robustez matemática da diagnose de falhas em SEDs, com a criação de um Gêmeo Digital realista fornece aos gestores uma ferramenta avançada de supervisão. Essa abordagem substitui o planejamento estático e o controle manual por um monitoramento dinâmico e visualmente imersivo, capaz de identificar anomalias antes que estas resultem em desperdícios financeiros ou atrasos irreversíveis na execução de paredes de concreto.
+
 
 
 \section{Objetivos}
 \label{sec:objetivos}
-O objetivo geral deste trabalho é propor uma Simulação Híbrida para gestão e controle de recursos físicos do sistema construtivo de paredes de concreto, visando otimizar o fluxo de trabalho no canteiro de obras e aumentar a produtividade.
-Para alcançar este propósito, definem-se os seguintes objetivos específicos:
-\begin{itemize}
+O objetivo geral deste trabalho é propor uma Simulação Híbrida para gestão e controle de recursos físicos do sistema construtivo de paredes de concreto, integrando técnicas de diagnose de falhas em sistemas a eventos discretos, visando otimizar o fluxo de trabalho no canteiro de obras e aumentar a produtividade.
 
+Para alcançar este propósito, definem-se os seguintes objetivos específicos:
+
+\begin{itemize}
 	\item Desenvolver um modelo computacional de Simulação Híbrida utilizando a ferramenta AnyLogic;
+	\item Modelar o fluxo operacional da montagem de fôrmas como um Sistema a Eventos Discretos, implementando um diagnosticador para a detecção de falhas operacionais;
 	\item Criar a representação visual contextualizada em um Gêmeo Digital do canteiro através do software NVIDIA Omniverse;
-	\item Integrar os dados de simulação ao ambiente virtual para análise de cenários.
+	\item Integrar os dados de simulação e os estados do diagnosticador ao ambiente virtual para análise de cenários e detecção de anomalias.
 \end{itemize}
 
 \section{Organização do trabalho}
@@ -81,7 +53,7 @@ Este trabalho está estruturado em  capítulos, organizados da seguinte forma:
 
 O Capítulo \ref{chap:intro} apresenta a contextualização do tema, a justificativa para a realização da pesquisa, bem como os objetivos propostos.
 
-O Capítulo \ref{chap:revisao} dedica-se à revisão da literatura, abordando os conceitos fundamentais sobre Gêmeos Digitais, Simulação Híbrida e as ferramentas AnyLogic e Omniverse.
+O Capítulo \ref{chap:revisao} dedica-se à revisão da literatura, abordando os conceitos fundamentais sobre Gêmeos Digitais, Simulação Híbrida, Sistemas a Eventos Discretos e as ferramentas AnyLogic e Omniverse.
 
 O Capítulo \ref{chap:metodologia} descreve a metodologia da pesquisa, detalhando as etapas de construção do modelo conceitual, coleta de dados e a implementação computacional.
 
