@@ -3,7 +3,14 @@
 
 \section{Gêmeo Digital}
 \label{sec:digitaltwin}
-Inicialmente, o gêmeo digital foi considerado apenas um nível superior de simulação. Posteriormente, percebeu-se que ele é muito mais do que isso; a simulação é apenas uma parte do seu ecossistema. O principal fator que diferencia o gêmeo digital de uma simulação tradicional é a integração de dados em tempo real e a conexão de alta fidelidade com o ativo físico (AUTOR DO SAP E ANYLOGIC, ANO). Assim, a adoção de simulações híbridas atuando como o "motor lógico" por trás de um gêmeo digital cria um modelo atualizado que pode ser usado para melhorar com precisão a confiabilidade e o desempenho de sistemas complexos.
+
+O conceito de Gêmeos Digitais (GD) tem recebido considerável atenção acadêmica e industrial nas últimas duas décadas, consolidando-se como uma das principais tecnologias impulsionadoras da Indústria 4.0 \cite{dtchallenges, lu2020digitaltwin}. \citeonline{laessgen2012} descrevem o gêmeo digital como uma simulação multifísica, multiescala e probabilística integrada de um sistema complexo. Segundo os autores, essa tecnologia utiliza os melhores modelos físicos disponíveis e atualizações contínuas de sensores para espelhar, de forma fiel, a vida de seu correspondente físico.
+
+Inicialmente, a comunidade técnica interpretava o gêmeo digital apenas como um nível avançado de simulação tridimensional. Contudo, a literatura recente aponta que a simulação clássica é apenas um fragmento do ecossistema de um Gêmeo Digital. A principal característica que distancia o gêmeo digital da simulação computacional tradicional é a via de dados bidirecional e em tempo real \cite{sapandanylogic}. Enquanto modelos de simulação operam, na maioria das vezes, em ambientes estáticos e de forma \textit{offline}, o gêmeo digital exige uma conexão de alta fidelidade com o ativo físico, refletindo seu estado atual dinamicamente.
+
+Nesse sentido, a integração do gêmeo digital com todo o ciclo de vida do produto ou processo é considerada uma área de pesquisa promissora e em expansão \cite{sapandanylogic}. Um sistema fundamentado em GD transcende a modelagem básica; ele engloba o monitoramento, a otimização e o controle do sistema real, demonstrando que um gêmeo digital é, em sua essência, muito mais do que apenas uma simulação.
+
+
 
 \section{Simulação Híbrida}
 \label{sec:hibsim}
@@ -30,6 +37,8 @@ configuração, os parâmetros que Inseri no AnyLogic
 \section{Sistemas a Eventos Discretos (SED)}
 \label{sec:SED}
 Nesta parte, você define o que é o sistema sob a ótica da engenharia de controle.
+Detecção e diagnóstico de falhas são fundamentais na supervisão avançada de processos e no gerenciamento de falhas, sendo responsáveis pelo monitoramento do comportamento do sistema ou de uma planta industrial, provendo informações sobre condições anormais de operação de seus componentes \cite{castro2009}.
+
 
 \subsection{Definições Fundamentais e Autômatos}Explicar que o sistema é modelado por um autômato $G = (X, \Sigma, f, x_0)$. Definir o que são Estados ($X$) e o que são Eventos ($\Sigma$). É crucial aqui separar o alfabeto em eventos Observáveis ($\Sigma_o$) e Não Observáveis ($\Sigma_{uo}$), pois é essa distinção que justifica a existência de um observador.
 
