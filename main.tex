@@ -26,6 +26,7 @@ english,french,spanish,brazil]{abntex2}
 %Observe que a ABNT NBR 14724:2011 (seção 5.1) recomenda que os documentos sejam impressos no anverso e no verso das folhas. Isso é obtido com a opção twoside.
 
 %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 %Pacotes para língua portuguesa do Brasil (código recomendado pelo estilo abntex2):
 \usepackage{ifxetex}
 \ifxetex
@@ -64,6 +65,7 @@ english,french,spanish,brazil]{abntex2}
     abnt-thesis-year=final
 ]{abntex2cite} 
 \usepackage{graphicx}
+\usepackage{placeins}
 \usepackage{nomencl} % Para a lista abreviaturas e siglas
 \makenomenclature    % Para a lista abreviaturas e siglas
 
@@ -124,7 +126,6 @@ english,french,spanish,brazil]{abntex2}
 % Novo list of (listings) para QUADROS:
 \newcommand{\quadroname}{Quadro}
 \newcommand{\listofquadrosname}{Lista de quadros}
-
 \newfloat[chapter]{quadro}{loq}{\quadroname}
 \newlistof{listofquadros}{loq}{\listofquadrosname}
 \newlistentry{quadro}{loq}{0}

@@ -4,53 +4,183 @@
 \section{Gêmeo Digital}
 \label{sec:digitaltwin}
 
-O conceito de Gêmeos Digitais (GD) tem recebido considerável atenção acadêmica e industrial nas últimas duas décadas, consolidando-se como uma das principais tecnologias impulsionadoras da Indústria 4.0 \cite{dtchallenges, lu2020digitaltwin}. \citeonline{laessgen2012} descrevem o gêmeo digital como uma simulação multifísica, multiescala e probabilística integrada de um sistema complexo. Segundo os autores, essa tecnologia utiliza os melhores modelos físicos disponíveis e atualizações contínuas de sensores para espelhar, de forma fiel, a vida de seu correspondente físico.
+O conceito de Gêmeos Digitais tem recebido considerável atenção acadêmica e industrial nas últimas duas décadas, consolidando-se como uma das principais tecnologias impulsionadoras da Indústria 4.0 \cite{dtchallenges, lu2020digitaltwin}. \citeonline{laessgen2012} descrevem o Gêmeo Digital como uma simulação multifísica, multiescala e probabilística integrada de um sistema complexo. Segundo os autores, essa tecnologia utiliza os melhores modelos físicos disponíveis e atualizações contínuas de sensores para espelhar a vida de seu correspondente físico de forma fiel.
 
-Inicialmente, a comunidade técnica interpretava o gêmeo digital apenas como um nível avançado de simulação tridimensional. Contudo, a literatura recente aponta que a simulação clássica é apenas um fragmento do ecossistema de um Gêmeo Digital. A principal característica que distancia o gêmeo digital da simulação computacional tradicional é a via de dados bidirecional e em tempo real \cite{sapandanylogic}. Enquanto modelos de simulação operam, na maioria das vezes, em ambientes estáticos e de forma \textit{offline}, o gêmeo digital exige uma conexão de alta fidelidade com o ativo físico, refletindo seu estado atual dinamicamente.
+Inicialmente, a comunidade técnica interpretava o Gêmeo Digital apenas como um nível avançado de simulação tridimensional. Contudo, a literatura recente aponta que a simulação clássica é apenas um fragmento do ecossistema de um Gêmeo Digital. A principal característica que distancia o Gêmeo Digital da simulação computacional tradicional é a via de dados bidirecional e em tempo real \cite{sapandanylogic}. Enquanto modelos de simulação operam, na maioria das vezes, em ambientes estáticos e de forma \textit{offline}, o Gêmeo Digital exige uma conexão de alta fidelidade com o ativo físico, refletindo seu estado atual dinamicamente.
 
-Nesse sentido, a integração do gêmeo digital com todo o ciclo de vida do produto ou processo é considerada uma área de pesquisa promissora e em expansão \cite{sapandanylogic}. Um sistema fundamentado em GD transcende a modelagem básica; ele engloba o monitoramento, a otimização e o controle do sistema real, demonstrando que um gêmeo digital é, em sua essência, muito mais do que apenas uma simulação.
+Nesse sentido, a integração do Gêmeo Digital com todo o ciclo de vida do produto ou processo é considerada uma área de pesquisa promissora e em expansão \cite{sapandanylogic}. Um sistema fundamentado em Gêmeo Digital transcende a modelagem básica; ele engloba o monitoramento, a otimização e o controle do sistema real, demonstrando que um gêmeo digital é, em sua essência, muito mais do que apenas uma simulação.
+
+Para além da sua definição conceitual, a arquitetura de um Gêmeo Digital é sustentada por núcleos fundamentais de funcionamento. Segundo \citeonline{tao2019}, um gêmeo digital opera através da interação estruturada de quatro elementos principais: Modelos, Dados, Conexões e Serviços. Os modelos atuam como contrapartes digitais que acompanham o ativo físico, possuindo funções que variam desde a reprodução de comportamentos em alta fidelidade até a previsão autônoma de problemas no espaço físico. Os dados, originados tanto no ambiente físico quanto no virtual, são o motor que impulsiona o Gêmeo Digital, permitindo a sua operação contínua e em tempo real. As conexões estabelecem o fluxo integrado de informações e garantem a sincronia em circuito fechado entre os espaços. Por fim, os serviços encapsulam a complexidade do sistema, fornecendo as respostas através de interfaces acessíveis aos utilizadores.
+
 
 
 
 \section{Simulação Híbrida}
 \label{sec:hibsim}
-De acordo com "Mustafee et al. (2015)", a simulação híbrida é a aplicação conjunta de técnicas de forma integrada, onde ambas as abordagens aprimoram harmoniosamente as capacidades uma da outra e reduzem limitações através do compartilhamento de informações. Na prática, a SH busca obter sinergia. Por exemplo, enquanto a Simulação de Eventos Discretos (DES) é mais adequada para modelar questões de foco operacional — sendo quantitativa, discreta e restrita nos detalhes —, ela pode ser combinada com outras técnicas contínuas ou baseadas em agentes para abranger problemas complexos de ponta a ponta (Fakhimi, ANO).
-	
-\subsection{Eventos Discretos (DES)}
+
+De acordo com \citeonline{mustafee2015}, a Simulação Híbrida  é a aplicação conjunta de técnicas de forma integrada, onde ambas as abordagens aprimoram harmoniosamente as capacidades uma da outra e reduzem limitações através do compartilhamento de informações. Na prática, a Simulação Híbrida busca obter sinergia. Por exemplo, enquanto a Simulação a Eventos Discretos (DES) é mais adequada para modelar questões de foco operacional, ela pode ser combinada com outras técnicas baseadas em agentes para abranger problemas complexos de ponta a ponta \cite{fakhimi2023}.
+
+No escopo do desenvolvimento de modelos, a Simulação Híbrida viabiliza a integração de métodos oriundos de diferentes disciplinas científicas, superando as barreiras entre a Pesquisa Operacional e a Ciência da Computação \cite{mustafee2015}. Nesse contexto, ganha destaque a combinação sinérgica entre a Simulação a Eventos Discretos (DES) e a Modelagem Baseada em Agentes (ABM). Essa integração torna-se estritamente necessária para a indústria da construção civil, uma vez que os projetos são altamente complexos e dinâmicos. Eles envolvem tanto o rigoroso fluxo logístico e sequencial das atividades e recursos (melhor representados pela DES) quanto o comportamento autônomo, interativo e estocástico dos operários no canteiro de obras (melhor representado pela ABM) \cite{fakhimi2023}. Ao unir essas duas abordagens, a Simulação Híbrida permite capturar simultaneamente as restrições técnicas e os fatores humanos do sistema de maneira coesa. 
+
+Apesar da clara necessidade de lidar com essa complexidade mista, a aplicação da Simulação Híbrida na construção civil ainda se mantém esporádica, sendo implementada de forma mais pragmática do que sistemática \cite{fakhimi2023}. Uma revisão recente aponta que apenas cerca de 9\% das aplicações globais de Simulação Híbrida são direcionadas à construção. Dada a ampla utilização da simulação tradicional na indústria, esse baixo nível de adoção de modelos híbridos torna imperativo o desenvolvimento de novas pesquisas e soluções tecnológicas integradas para o setor \cite{fakhimi2023}.
+
+\subsection{Simulação a Eventos Discretos (DES)}
 \label{sec:DE}
-DES é um modelo de simulação, não confundir com SED
-\subsection{Modelo Baseado em Agentes (ABM)}
+Não confudir com SED.
+A Simulação a Eventos Discretos (DES) é amplamente utilizada na indústria e na academia como uma ferramenta analítica de apoio à decisão, capaz de simular a dinâmica de sistemas do mundo real evento por evento \cite{babulak2010}. Conforme destaca a literatura \cite{hybridframework}, essa técnica é essencialmente quantitativa e discreta na mudança, sendo a abordagem mais adequada para modelar questões de foco operacional. Na prática, o desempenho do sistema é estruturado como uma sequência cronológica de eventos ao longo do tempo, em que cada ocorrência representa uma mudança brusca de estado no sistema \cite{zamani2024}.
+
+Em relação a seu desempenho, a técnica provou ser uma ferramenta eficaz por permitir reproduzir as interações entre recursos e atividades em cenários que envolvem fluxos físicos de materiais e componentes, como aponta \citeonline{babulak2010}. No contexto da execução de paredes de concreto, a abordagem orientada a eventos permite uma representação detalhada de fluxos de trabalho estritamente sequenciais, como a movimentação dos trabalhadores nas etapas de montagem e desmontagem. Ao lidar adequadamente com mudanças dinâmicas e incertezas temporais, a DES facilita o planejamento e a tomada de decisão gerencial por meio da análise iterativa de cenários \cite{zamani2024}.
+
+Contudo, a aplicação isolada da DES na construção civil apresenta gargalos operacionais. Segundo \citeonline{zamani2024}, as simulações baseadas em eventos discretos possuem limitações significativas de visualização, uma vez que os softwares comerciais carecem das ferramentas visuais extensivas exigidas na gestão do canteiro de obras. Para superar essa limitação, a integração da DES com plataformas de representação visual torna-se crucial. 
+
+\subsection{Modelagem Baseada em Agentes (ABM)}
 \label{sec:ABM}
+
+A Modelagem Baseada em Agentes (ABM), assim como a DES, também atua sob a perspectiva de sistemas discretos, mas configura-se como uma abordagem computacional focada em entidades descentralizadas, sendo altamente adequada para os ciclos de monitoramento e controle em Gêmeos Digitais na construção \cite{sacks2020}. De acordo com \citeonline{bianchi2015}, a ABM simula a interação entre agentes heterogêneos inseridos em estruturas sociais complexas, como é o caso de um canteiro de obras.
+
+Sendo uma abordagem relativamente nova para observar efeitos coletivos, a premissa central dessa técnica é que padrões globais emergem a partir de regras locais, sem que o comportamento final seja explicitamente programado \cite{mustafee2015}. Para estruturar essa modelagem, \cite{macal2005} definem três elementos constituintes de um ABM típico: (1) os agentes, dotados de atributos e comportamentos próprios; (2) os métodos de relacionamento e interação entre os agentes; e (3) a interação do agente com o seu ambiente.
+
+Enquanto a DES gerencia a fila e os recursos logísticos, a ABM foca no indivíduo \cite{mustafee2015}. Em um canteiro de obras, a ABM permite representar os operários como agentes inteligentes com regras próprias de decisão e movimentação. Isso possibilita capturar as variabilidades humanas, o cansaço e a forma como as equipes interagem com as fôrmas, com o espaço físico reduzido e com outros trabalhadores, gerando uma representação computacional muito mais fiel da natureza imprevisível e dinâmica do trabalho manual nas obras.
 
 \section{Ferramentas Computacionais}
 \label{sec:ferramentas}
-% Uma seção para agrupar as tecnologias
+
+A implementação de uma arquitetura de Gêmeo Digital baseada em Simulação Híbrida e Diagnose de Falhas exige a integração de plataformas de software robustas. Nesta seção, descrevem-se as principais ferramentas selecionadas para compor o ecossistema tecnológico deste trabalho, justificando suas adoções com base na literatura e nos requisitos do projeto.
+
 \subsection{AnyLogic}
 \label{subsec:anylogic}
-configuração, os parâmetros que Inseri no AnyLogic
+
+O AnyLogic é reconhecido como a ferramenta pioneira na modelagem e simulação multimétodo, permitindo o desenvolvimento de modelos por meio da integração dos três principais métodos modernos de simulação: Simulação a Eventos Discretos (DES), Modelagem Baseada em Agentes (ABM) e Dinâmica de Sistemas (SD) \cite{AnyLogicFeatures}. 
+
+\begin{figure}[!htb]
+\centering
+\caption{Métodos de simulação do Anylogic}
+\includegraphics[width=0.8\textwidth]{Caps/Figs/anylogicModels.png}
+\fonte{\citeonline{AnyLogicFeatures}}
+\label{fig:anylogic-models}
+\end{figure}
+
+Segundo a desenvolvedora, esses métodos podem ser utilizados em qualquer combinação dentro de um único software, capacitando a plataforma a simular sistemas operacionais e de negócios de qualquer nível de complexidade, o que a torna uma base flexível e robusta para o desenvolvimento e experimentação de Gêmeos Digitais. Além disso, a ferramenta se destaca por oferecer diversas linguagens de modelagem visual, incluindo fluxogramas de processo, diagramas de estoque e fluxo, gráficos de ação e gráficos de estado (statecharts).
+
+No escopo da construção civil, a escolha dessa ferramenta é amplamente respaldada pela literatura acadêmica. De acordo com a recente revisão conduzida por \citeonline{fakhimi2023}, o AnyLogic desponta como o software mais utilizado globalmente para a construção de modelos de Simulação Híbrida no setor, estando presente em grande parte dos estudos documentados na área. Além de facilitar a automação integrada entre diferentes pacotes, a ferramenta apresenta um alto nível de validação e verificação, sendo amplamente alimentada por dados do mundo real em projetos de construção \cite{fakhimi2023}.
+
+Neste trabalho, o AnyLogic será a parte analítica do sistema (abrangendo os núcleos de Modelos e Dados do Gêmeo Digital). Ele será responsável não apenas por rodar a simulação logística das fôrmas (DES) e o comportamento dos operários (ABM), mas também por abrigar a lógica customizada dos Autômatos. 
 
 \subsection{NVIDIA Omniverse}
 \label{subsec:omniverse}
- modelagem 3D
- 
+
+O NVIDIA Omniverse é uma coleção de bibliotecas e microsserviços voltada para o desenvolvimento de aplicações de IA física, como gêmeos digitais industriais e simulações complexas \cite{NvidiaOmniverse}. Aproveitando a expertise da NVIDIA em computação acelerada, a plataforma integra funcionalidades avançadas, como bibliotecas de cálculo estrutural (NVIDIA PhysX) e renderização baseada em física e em tempo real (NVIDIA RTX). Fundamentado no padrão OpenUSD (Universal Scene Description), o Omniverse permite a interoperabilidade perfeita de dados e a colaboração em tempo real, viabilizando a criação de gêmeos digitais prontos para simulação.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Exemplo de Gêmeo Digital no Nvidia Omniverse}
+	\includegraphics[width=0.8\textwidth]{Caps/Figs/omniverse.png}
+	\fonte{\citeonline{NvidiaOmniverse}}
+	\label{fig:omniverse-example}
+\end{figure}
+Conforme discutido anteriormente com base em \citeonline{zamani2024}, os softwares comerciais voltados para simulação apresentam limitações significativas de visualização, carecendo das ferramentas gráficas e espaciais extensivas exigidas na gestão prática de um canteiro de obras. Sendo assim, o Omniverse foi selecionado para preencher exatamente essa lacuna tecnológica.
+
+Neste projeto, o Omniverse atuará como a interface de visualização do Gêmeo Digital. Ele receberá os dados processados gerados em tempo real pelo AnyLogic, traduzindo essas informações analíticas em uma representação geométrica tridimensional e interativa do canteiro. 
  
 \section{Sistemas a Eventos Discretos (SED)}
-\label{sec:SED}
-Nesta parte, você define o que é o sistema sob a ótica da engenharia de controle.
-Detecção e diagnóstico de falhas são fundamentais na supervisão avançada de processos e no gerenciamento de falhas, sendo responsáveis pelo monitoramento do comportamento do sistema ou de uma planta industrial, provendo informações sobre condições anormais de operação de seus componentes \cite{castro2009}.
+\label{sec:sed}
+
+Os Sistemas a Eventos Discretos (SED) são sistemas dinâmicos de estados discretos cuja transição se dá por meio da ocorrência, em geral assíncrona, de eventos \cite{ basilio2010}. O fato de o estado do sistema ser discreto implica que este pode assumir valores simbólicos, como por exemplo \{ligado, desligado\}, ou valores numéricos pertencentes a conjuntos discretos (como $\mathbb{N}$ ou $\mathbb{Z}$). Os eventos, por sua vez, podem estar associados a ações específicas iniciadas por agentes ou ser o resultado do cumprimento de diversas condições lógicas ou físicas.
+
+Embora seja possível modelar praticamente qualquer sistema físico como um SED, dependendo do grau de abstração adotado, determinados ambientes operacionais são naturalmente discretos e têm sua evolução determinada estritamente pela ocorrência de eventos \cite{mestradoDudu}. Nesse sentido, as etapas de trabalho em um canteiro de obras enquadram-se perfeitamente nesse paradigma, uma vez que o avanço físico da montagem ou desmontagem de formas dependem de transições pontuais e sequenciais do processo de construção.
+
+Ao se considerar a evolução de um SED, a maior preocupação da modelagem reside na sequência de estados visitados e nos eventos que causaram as correspondentes transições \cite{mestradoDudu}. Conforme fundamentado pela teoria clássica de \cite{cassandra2008}, o modelo formal de um SED é composto basicamente por esses dois elementos fundamentais: estados e eventos.
+
+\subsection{Estados e Eventos}
+\label{subsec:estados_eventos}
+
+O estado de um sistema num instante deve descrever o seu comportamento
+nesse instante de alguma forma mensurável \cite{cassandra2008}. Ele funciona como a memória do sistema naquele momento, assumindo valores discretos e simbólicos. No contexto de um canteiro de obras, cada processo da montagem ou desmontagem de uma forma pode ser definido como um estado.
+
+Os eventos, por sua vez, são as ocorrências instantâneas responsáveis por causar a transição do sistema de um estado para outro \cite{cassandra2008}. Um evento pode estar associado a uma ação específica iniciada por um agente ou ser o resultado do cumprimento de uma condição física no sistema. A evolução de um SED é ditada estritamente pela sequência em que esses eventos ocorrem \cite{basilio2010}.
+
+\subsection{Eventos Observáveis, Não Observáveis e a Diagnose de Falhas}
+\label{subsec:observabilidade_falhas}
+
+Para que seja possível aplicar a teoria de SED na identificação de problemas reais, é necessário classificar os eventos do sistema de acordo com a sua capacidade de serem registados. Segundo \citeonline{basilio2010}, a diagnose de falhas em SEDs é norteada por dois paradigmas centrais:
+\begin{enumerate}
+	\item As falhas a serem diagnosticadas são inerentemente \textbf{eventos não observáveis}, isto é, são ocorrências que não podem ser diretamente registadas por sensores físicos ou por apontamentos diretos no canteiro de obras;
+	\item A ocorrência de uma falha altera o comportamento do sistema, porém não leva necessariamente à sua paragem imediata. Por exemplo, a ocorrência de uma falha não diagnosticada em um processo de manufatura ou construção civil pode levar apenas a uma degradação invisível dos indicadores de eficácia global, como atrasos logísticos ou queda de qualidade \cite{basilio2010}.
+\end{enumerate}
+
+Dessa forma, o problema da diagnose de falhas consiste em inferir a ocorrência de um evento de falha não observável baseando-se exclusivamente no histórico dos eventos regulares que foram observáveis. De maneira informal, diz-se que um evento de falha pode ser diagnosticado se a sua ocorrência puder ser detetada com exatidão após a ocorrência de um número finito de eventos observáveis subsequentes \cite{basilio2010}.
+
+Para atingir esse objetivo, constroem-se sistemas de diagnose de falhas atuando como "sensores virtuais". O projeto destes sistemas requer a construção prévia de um modelo a eventos discretos que capture tanto o comportamento normal quanto o comportamento falho do sistema \cite{basilio2010}.
+
+\subsection{Linguagens}
+\label{subsec:linguagens}
+
+Embora os conceitos de estados e eventos determinem a natureza de um SED, a modelagem rigorosa e o estudo do comportamento desse sistema exigem uma base matemática sólida. Um dos caminhos formais mais utilizados para essa finalidade fundamenta-se na teoria de linguagens e autômatos \cite{mestradoDudu}.
+
+O ponto de partida dessa formulação é a definição do conjunto de todos os eventos possíveis no sistema, tipicamente denotado por $\Sigma$. Neste contexto formal, o conjunto de eventos $\Sigma$ atua como o "alfabeto" da linguagem, enquanto uma sequência finita de eventos executada pelo sistema é tratada como uma "palavra" \cite{mestradoDudu}. 
+
+Considerando que $\Sigma$ seja um conjunto finito, o comprimento de uma palavra, ou seja, o número de eventos contidos nela, é denotado por $|s|$, onde $s$ representa a palavra em questão. Destaca-se também a existência fundamental de uma palavra que não contém nenhum evento, denominada "palavra vazia" e classicamente denotada pelo símbolo $\varepsilon$. A operação matemática chave para a construção dessas sequências é a concatenação, onde a palavra vazia $\varepsilon$ atua como o elemento identidade \cite{mestradoDudu}.
+\begin{align}
+	\varepsilon s = s \varepsilon = s
+\end{align}
 
 
-\subsection{Definições Fundamentais e Autômatos}Explicar que o sistema é modelado por um autômato $G = (X, \Sigma, f, x_0)$. Definir o que são Estados ($X$) e o que são Eventos ($\Sigma$). É crucial aqui separar o alfabeto em eventos Observáveis ($\Sigma_o$) e Não Observáveis ($\Sigma_{uo}$), pois é essa distinção que justifica a existência de um observador.
+Para mapear todas as possibilidades do sistema, define-se $\Sigma^*$ como o conjunto de todas as sequências finitas que podem ser formadas a partir do alfabeto $\Sigma$, incluindo a palavra vazia $\varepsilon$. Dessa forma, define-se formalmente o conceito de linguagem em um SED: uma linguagem $L$ é simplesmente um subconjunto de $\Sigma^*$ ($L \subseteq \Sigma^*$), formada exclusivamente por sequências de eventos que o sistema é fisicamente ou logicamente capaz de executar.
 
-\subsection{Linguagens e Trajetórias}
-Uma breve explicação de que o comportamento do canteiro de obras é uma sequência de eventos (strings), e que as falhas são eventos específicos que pertencem ao conjunto dos não observáveis.
+No formalismo de SED, um autômato atua como o dispositivo matemático capaz de representar e gerar essa linguagem de acordo com regras lógicas de transição \cite{basilio2010}. Para que o sistema processe as palavras, a função de transição de estados $f$ é estendida recursivamente para lidar com palavras inteiras pertencentes a $\Sigma^*$:
+\begin{align}
+	f(x, \varepsilon) &:= x \\
+	f(x, se) &:= f(f(x, s), e) \quad \text{para } s \in \Sigma^* \text{ e } e \in \Sigma
+\end{align}
+
+Essa formulação garante que a leitura da palavra vazia $\varepsilon$ mantenha o sistema no mesmo estado, enquanto a leitura de uma palavra composta $se$ consiste em processar primeiro a sequência $s$ e, em seguida, aplicar a transição referente ao último evento $e$ \cite{basilio2010}. 
+
+A totalidade dos caminhos que podem ser seguidos no sistema, partindo do seu estado inicial $x_0$, caracteriza a sua linguagem gerada. Para o escopo de monitoramento e diagnose de falhas, uma propriedade fundamental dessa linguagem é que ela é estritamente **prefixo-fechada** \cite{basilio2010}. Na prática de um canteiro de obras, isso significa que se uma determinada sequência de eventos (normal ou de falha) é capaz de ser executada e pertence à linguagem do sistema, obrigatoriamente todos os eventos intermediários que a precederam (seus prefixos) também ocorreram e pertencem à linguagem.
+
+\subsection{Autômatos Finitos Determinísticos}
+\label{subsec:automatos}
+
+Uma das maneiras mais eficientes e rigorosas de se modelar e visualizar um Sistema a Eventos Discretos é através de Autômatos Finitos Determinísticos. Um autômato é um dispositivo matemático capaz de representar a linguagem de um sistema de acordo com regras bem definidas, sendo frequentemente ilustrado por diagramas de transição de estados \cite{basilio2010}.
+
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Exemplo de Autômato}
+	\includegraphics[width=0.6\textwidth]{Caps/Figs/automato.png}
+	\fonte{\citeonline{basilio2010}}
+	\label{fig:exemplo-automato}
+\end{figure}
+
+\FloatBarrier
+
+Formalmente, um autômato determinístico é definido pela quíntupla:
+\begin{equation}
+	G = (X, \Sigma, f, x_0, X_m)
+\end{equation}
+onde:
+\begin{itemize}
+	\item $X$ é o conjunto finito de estados do sistema;
+	\item $\Sigma$ é o conjunto finito de eventos (alfabeto);
+	\item $f: X \times \Sigma \to X$ é a função de transição parcial, que define o novo estado do sistema após a ocorrência de um evento;
+	\item $x_0 \in X$ é o estado inicial do sistema;
+	\item $X_m \subseteq X$ é o subconjunto de estados marcados (geralmente associados à conclusão de tarefas ou ciclos operacionais).
+\end{itemize}
+
+Para complementar a dinâmica do modelo, define-se $\Gamma(x) \subseteq \Sigma$ como o conjunto de eventos ativos no estado $x$, ou seja, o subconjunto de eventos que estão fisicamente ou logicamente habilitados a ocorrer quando o sistema se encontra naquele estado específico.
+
+Para que seja possível aplicar a teoria de diagnose de falhas sobre o modelo $G$, a literatura clássica estabelece três premissas fundamentais que o sistema deve respeitar \cite{basilio2010}. No contexto da modelagem logística de um canteiro de obras, essas hipóteses traduzem-se da seguinte forma:
+
+\begin{enumerate}
+	\item \textbf{A1 - Sistema Vivo ($\Gamma(x) \neq \emptyset$ para todo $x \in X$):} Assume-se que o autômato gerado por $G$ não possui estados de travamento irreversível (deadlocks). Na prática, isso significa que a obra está em contínua operação; mesmo que ocorra uma falha logística ou um atraso, o sistema sempre terá algum evento possível para dar sequência ao processo.
+	\item \textbf{A2 - Ausência de ciclos não observáveis:} O modelo não pode possuir nenhum ciclo de estados formado exclusivamente por eventos não observáveis. Essa hipótese garante que, caso uma falha oculta ocorra, o sistema não ficará preso em um \textit{loop} invisível aos sensores. O processo de construção continuará avançando até gerar um evento observável, permitindo que o Gêmeo Digital detecte a falha pregressa.
+	\item \textbf{A3 - Único tipo de falha ($\Sigma_f = \{\sigma_f\}$):} Embora tutoriais clássicos muitas vezes assumam um único tipo de falha por simplicidade didática, a teoria permite a modelagem de múltiplos eventos anômalos. Para isso, o conjunto de falhas $\Sigma_f$ é particionado em $m$ classes disjuntas. No escopo deste trabalho, o sistema contemplará diferentes tipos de falha (como, por exemplo, problemas na montagem ou atrasos na concretagem), sendo os fundamentos de diagnosticabilidade aplicados para identificar a ocorrência de cada classe de falha de maneira independente 
+\end{enumerate}
+
+
 
 \section{Diagnose de Falhas em SED}
 \label{sec:diagnose_sed}
-Esta é a seção mais importante para embasar o seu trabalho prático.
-
-\subsection{O Problema da Observabilidade e o Observador de Estados}
-Explicar que, como nem tudo é visto por sensores, precisamos de um Observador. Definir o conceito de Estimativa de Estado (os conjuntos/balões que desenhamos). Aqui você cita que o observador agrupa estados que são indistinguíveis para o sensor.
+Esta é a seção mais importante para embasar o seu trabalho prático.z
 
 \subsection{O Autômato de Rótulos ($A_l$) e a Planta Etiquetada ($G_d$)}Baseado no artigo, explicar que para diagnosticar, precisamos "etiquetar" a planta. Descrever a Composição Paralela entre o modelo do sistema ($G$) e o autômato que carrega os registros de falha ($A_l$). É aqui que você justifica a notação de pares $(x, \ell)$ que usamos.
 
@@ -58,5 +188,7 @@ Explicar que, como nem tudo é visto por sensores, precisamos de um Observador. 
 
 \subsection{Diagnosticabilidade}
 Explicar o conceito de "Diagnosticabilidade" do artigo: a capacidade de um sistema sair de um estado incerto e chegar a um estado de falha em um número finito de passos após a ocorrência do evento de falha.
+
+\section{Consideração do capítulo}
  
  
