@@ -177,17 +177,57 @@ Para que seja possível aplicar a teoria de diagnose de falhas sobre o modelo $G
 \end{enumerate}
 
 
+\subsection{Diagnose Centralizada sob Observação Parcial}
+\label{subsec:diagnosticador}
 
-\section{Diagnose de Falhas em SED}
-\label{sec:diagnose_sed}
-Esta é a seção mais importante para embasar o seu trabalho prático.z
+A essência da diagnose de falhas em um SED reside na capacidade de inferir a ocorrência de eventos não observáveis a partir da sequência de eventos observáveis gerada pelo sistema. Para formalizar essa restrição de visibilidade, define-se o conjunto de eventos do sistema como a união disjunta $\Sigma = \Sigma_o \cup \Sigma_{uo}$, onde $\Sigma_o$ representa os eventos observáveis (registrados pelos sensores ou apontamentos no canteiro) e $\Sigma_{uo}$ os eventos não observáveis (que incluem o subconjunto de eventos de falha $\Sigma_f$).
 
-\subsection{O Autômato de Rótulos ($A_l$) e a Planta Etiquetada ($G_d$)}Baseado no artigo, explicar que para diagnosticar, precisamos "etiquetar" a planta. Descrever a Composição Paralela entre o modelo do sistema ($G$) e o autômato que carrega os registros de falha ($A_l$). É aqui que você justifica a notação de pares $(x, \ell)$ que usamos.
+A relação entre o que o sistema efetivamente executa e o que o observador capta é matematicamente descrita pela função de Projeção $P_o: \Sigma^* \to \Sigma_o^*$. Essa função atua "apagando" os eventos não observáveis de uma sequência, mantendo intacto apenas o rastro visível da operação \cite{basilio2010}. 
 
-\subsection{O Diagnosticador de Sampath}Definir formalmente o que é o diagnosticador: um observador construído sobre a planta etiquetada ($G_d$). Explicar os tipos de estados que ele pode assumir:Estado Normal: Contém apenas o rótulo $N$.Estado de Falha (F-diagnosticado): Contém apenas rótulos de falha.Estado Incerto: Contém tanto $N$ quanto rótulos de falha (que é o caso do seu resultado atual).
+Para que a tomada de decisão sobre a ocorrência ou não de uma falha seja realizada por um único agente analítico, utiliza-se a abordagem de diagnose centralizada. O projeto desse agente é dividido metodologicamente em duas etapas de modelagem: o Autômato Rotulador ($G_{al}$) e o Autômato Diagnosticador ($G_d$).
+
+\subsubsection{Autômato Rotulador ($G_{al}$)}
+
+Para rastrear o impacto das falhas ao longo das transições do sistema, o primeiro passo consiste na construção de um Autômato Rotulador ($G_{al}$). Este autômato expande o modelo original $G$, acoplando ao estado físico do sistema uma "etiqueta" (ou rótulo) que indica a ocorrência de anomalias. Define-se o conjunto de rótulos $\Delta = \{N, F_1, F_2\}$, onde $N$ indica o comportamento Normal, enquanto $F_1$ e $F_2$ indicam a ocorrência pregressa das respectivas classes de falha modeladas na obra.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Exemplo de Autômato Rotulador}
+	\includegraphics[width=0.6\textwidth]{Caps/Figs/rotulador.png}
+	\fonte{\citeonline{basilio2010}}
+	\label{fig:exemplo-rotulador}
+\end{figure}
+
+\FloatBarrier
+Dessa forma, os estados do autômato rotulador assumem a forma de pares ordenados $(x, l)$, onde $x \in X$ é o estado da planta e $l \in \Delta$ é a condição de falha associada. O $G_{al}$ processa todos os eventos (observáveis e não observáveis). Quando um evento de falha ocorre, o autômato altera o rótulo de $N$ para $F_i$ e propaga essa etiqueta para todos os estados subsequentes, funcionando como uma memória permanente de que o sistema foi corrompido.
+
+
+\subsubsection{Autômato Diagnosticador ($G_d$)}
+
+Na prática, o sistema de monitoramento não tem acesso direto aos estados e eventos internos do $G_{al}$, uma vez que está submetido à observação parcial ($P_o$). Para superar essa limitação, constrói-se o Autômato Diagnosticador Centralizado ($G_d$). O diagnosticador é, essencialmente, um observador determinístico construído a partir do $G_{al}$, cuja função de transição é acionada exclusivamente pela ocorrência de eventos observáveis ($\Sigma_o$) \cite{basilio2010}.
+
+Devido à ausência de informações completas, cada estado $q$ do diagnosticador $G_d$ é composto por um conjunto de estimativas de estado do rotulador, assumindo a forma $q = \{(x_1, l_1), (x_2, l_2), \dots, (x_n, l_n)\}$. Baseando-se nas etiquetas contidas no estado atual $q$, o diagnosticador classifica a condição operacional do sistema em três categorias principais:
+
+\begin{itemize}
+	\item \textbf{Normal:} Todos os pares no estado $q$ possuem o rótulo $N$. O sistema opera sem indícios de falhas.
+	\item \textbf{Incerteza:} O estado $q$ contém simultaneamente pares com o rótulo $N$ e pares com rótulos de falha ($F_1$ ou $F_2$). O sistema suspeita de uma anomalia (pois um caminho falho é possível), mas requer a observação de eventos futuros para confirmar o diagnóstico.
+	\item \textbf{Falha Diagnosticada (Certeza):} Todos os pares no estado $q$ possuem o mesmo rótulo de falha (ex: $F_1$). Neste momento, independentemente do caminho oculto que o sistema tomou, a falha é matematicamente certa.
+\end{itemize}
+
+No escopo do Gêmeo Digital proposto, o AnyLogic atuará como o motor de execução deste diagnosticador centralizado ($G_d$). Ao receber os \textit{inputs} observáveis do avanço logístico das fôrmas, o autômato processará as transições e calculará as estimativas de estado $q$ em tempo real. Caso o diagnóstico atinja um estado de Certeza de Falha, a plataforma acionará um alerta visual integrado, garantindo uma resposta preditiva por parte da gestão da obra.
 
 \subsection{Diagnosticabilidade}
-Explicar o conceito de "Diagnosticabilidade" do artigo: a capacidade de um sistema sair de um estado incerto e chegar a um estado de falha em um número finito de passos após a ocorrência do evento de falha.
+\label{subsec:diagnosticabilidade}
+
+A construção de um Autômato Diagnosticador ($G_d$) não garante, por si só, que todas as anomalias do sistema serão invariavelmente identificadas. Para que o monitoramento seja efetivo e o sensor virtual funcione, a linguagem gerada pelo sistema deve possuir uma propriedade fundamental denominada \textbf{diagnosticabilidade} \cite{basilio2010}.
+
+De maneira informal, diz-se que a linguagem gerada por um autômato é diagnosticável em relação a um conjunto de eventos observáveis $\Sigma_o$ e a uma classe de falhas $\Sigma_f$ se a ocorrência de um evento de falha puder ser detectada com exatidão após um número finito de transições subsequentes, utilizando exclusivamente a leitura das sequências de eventos observáveis \cite{basilio2010}.
+
+Na prática da modelagem de um canteiro de obras, isso significa que, após a ocorrência de uma anomalia oculta, o processo logístico deve obrigatoriamente continuar avançando e gerando eventos visíveis suficientes para que o Gêmeo Digital deduza a falha pregressa. O sucesso desse processo ocorre quando o autômato diagnosticador consegue sair de um estado de "Incerteza" e transitar definitivamente para um estado de "Certeza de Falha".
+
+Por outro lado, um sistema é classificado como \textbf{não diagnosticável} quando existe a possibilidade de o diagnosticador ficar preso indefinidamente em estados de incerteza. Matematicamente, isso ocorre quando o modelo da planta possui ciclos de eventos que geram exatamente a mesma projeção observável tanto para um comportamento normal quanto para um comportamento falho. Diante dessa ambiguidade permanente, o sistema analítico torna-se incapaz de confirmar a ocorrência da anomalia, independentemente de quanto tempo o monitoramento continue. Nesses casos, a teoria de controle indica que o projeto do sistema deve ser revisto, seja adicionando novos sensores ou alterando a lógica do processo, para que a falha se torne detectável.
+
+
 
 \section{Consideração do capítulo}
  
