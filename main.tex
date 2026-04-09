@@ -53,6 +53,7 @@ english,french,spanish,brazil]{abntex2}
 \usepackage{amssymb}
 \usepackage{tabto}
 
+
 \usepackage[%
     alf,
     abnt-emphasize=bf,
@@ -106,6 +107,9 @@ english,french,spanish,brazil]{abntex2}
 
 %insira novos pacotes aqui:
 \usepackage{amsmath}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{multirow}
 \renewcommand{\theequation}{\arabic{equation}}
 
 \usepackage{remreset}
@@ -210,6 +214,9 @@ english,french,spanish,brazil]{abntex2}
     \pdfbookmark[0]{\contentsname}{toc}
     \tableofcontents*
     \cleardoublepage
+  
+  
+    % Se já tiver, ok.
     
     %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     % Elementos textuais

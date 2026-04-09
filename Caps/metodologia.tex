@@ -3,12 +3,98 @@
 
 \section{Etapas de Desenvolvimento do Modelo}
 \label{sec:desenhopesquisa}
-Este presente capítulo descreverá as etapas do desenvolvimento da Simulação Híbrida. De forma geral, a abordagem de eventos discretos (DE) simula as etapas macro gerais do processo no modelo computacional, enquanto a modelagem baseada em agentes (ABM) simula as decisões dos trabalhadores em relação à conclusão de cada atividade necessária. A simulação DE foi escolhida por ser considerada adequada para modelar o fluxo sequencial do canteiro de obras, considerando as mudanças de estados e recursos à medida que a sequência de eventos progride. Por outro lado, a ABM foi considerada satisfatória na representação do processo de tomada de decisão e dos padrões de comportamento dos trabalhadores inseridos no contexto dos eventos do canteiro de obras.
+Este capítulo detalha as etapas de desenvolvimento computacional do Gêmeo Digital, estruturado sob a abordagem de Simulação Híbrida. De forma geral, a Simulação a Eventos Discretos (DES) é empregada para representar as etapas macro do processo, sendo a abordagem mais adequada para modelar o fluxo sequencial do canteiro de obras e as mudanças de estado à medida que as atividades progridem. Em paralelo, a Modelagem Baseada em Agentes (ABM) atua no nível micro, sendo responsável por representar o processo de tomada de decisão, a movimentação e os padrões de comportamento dos trabalhadores frente aos eventos da obra.
 
+No contexto deste estudo, essas duas abordagens (DES e ABM) operam de forma integrada e simultânea dentro de uma mesma plataforma de desenvolvimento (AnyLogic). O ciclo de construção deste modelo híbrido segue a estrutura metodológica descrita na Figura \ref{fig:modeling-process}, fundamentada nos conceitos de \citeonline{crooks2019}.
 
-Considerando que as duas abordagens de simulação funcionam juntas neste estudo dentro da mesma plataforma de desenvolvimento, ambas seguem as etapas descritas na Figura 1, conforme originalmente definido por Crooks et al. (2019) para modelos ABM. De acordo com a Figura 1, o modelo deve ser preparado, projetado, implementado e submetido a procedimentos de verificação, calibração e validação antes das etapas de explicação e previsão. A Tabela 1, também baseada em Crooks et al. (2019), descreve o protocolo geral e os parâmetros definidos para o projeto do modelo. Este estudo concentra-se na modelagem do problema, e não em todos os elementos do sistema construtivo. Os dados foram coletados no Canteiro de Obras A.
+\begin{figure}[!htb]
+	\centering
+	\caption{Processo de modelagem}
+	\includegraphics[width=1 \textwidth]{Caps/Figs/crook-model.png}
+	\fonte{\citeonline{crooks2019} (Adaptado)}
+	\label{fig:modeling-process}
+\end{figure}
+\FloatBarrier
 
+Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de vida da simulação é segmentado em grandes fases contínuas. Inicialmente, ocorre a Preparação do modelo, seguida pela sua Construção e Avaliação, onde o modelo computacional deve ser submetido a procedimentos de verificação, calibração e validação de seus parâmetros. Apenas após a consolidação dessas três etapas o sistema híbrido torna-se apto para as fases de Exploração, permitindo a explicação de fenômenos passados e a previsão de cenários futuros no canteiro de obras.
+ 
+ Com as diretrizes metodológicas do ciclo de vida da simulação estabelecidas, o passo seguinte consiste na estruturação lógica. Segundo \cite{crooks2019}, a fundamentação desse protocolo abrange os seguintes aspectos centrais:
+ 
+ \begin{itemize}
+ 	\item \textbf{Visão Geral (Objetivo e Processo):} Define as metas principais e a justificativa metodológica para a utilização do modelo, estabelecendo de antemão os mecanismos macro do processo e os fatores decisórios que serão simulados.
+ 	\item \textbf{Coleta de Dados:} Refere-se à obtenção e estruturação das informações essenciais para calibrar e validar o modelo computacional contra dados do mundo real.
+ 	\item \textbf{Desenvolvimento e Software:} Trata da seleção das ferramentas computacionais e dos ambientes de programação adequados, considerando as exigências de arquitetura e processamento do Gêmeo Digital.
+ 	\item \textbf{Visualização:} Permite a verificação contínua da coerência lógica do comportamento dos agentes pelo modelador e facilita a comunicação de resultados através de interfaces bidimensionais ou tridimensionais.
+ 	\item \textbf{Vieses, Incertezas e Suposições:} Garante a transparência acadêmica ao declarar formalmente as premissas e simplificações adotadas para isolar os aspectos críticos de produtividade e qualidade, reduzindo a complexidade desnecessária do mundo real.
+ 	\item \textbf{Contexto de Aplicação:} Delimita as fronteiras lógicas e físicas da simulação. Isso engloba o sistema exógeno limitante, a delimitação do \textbf{Espaço} geográfico/celular da obra, a escala de \textbf{Tempo}, o tamanho da \textbf{População} e as \textbf{Regras Físicas} que impedem sobreposições espaciais ilógicas.
+ 	\item \textbf{Interações:} Estruturam a dinâmica sistêmica do canteiro. Incluem as interações \textbf{físicas}, ou seja, as forças de atração ou restrições de ocupação em um cômodo, as vias de \textbf{comunicação} de status da obra e a lógica de \textbf{troca de recursos} indiretos essenciais para a continuidade do fluxo.
+ 	\item \textbf{Agentes:} Representam as entidades autônomas responsáveis por impulsionar a simulação híbrida. O projeto metodológico do agente encapsula três pilares: suas \textbf{Características} intrínsecas , suas \textbf{Decisões} e suas \textbf{Ações}.
+ \end{itemize}
+ Sendo assim, é possível ara organizar as premissas do sistema de forma padronizada. A Tabela \ref{tab:protocolo_abm} sintetiza o protocolo geral de modelagem e os parâmetros de entrada definidos para o presente projeto
+ 
+\begin{longtable}{@{} p{0.28\textwidth} p{0.68\textwidth} @{}}
+	\caption{Modelagem da Simulação}
+	\label{tab:protocolo_abm} \\
+	
+	\toprule
+	\textbf{Aspecto} & \textbf{Descrição} \\
+	\midrule
+	\endfirsthead
+	
+	\toprule
+	\textbf{Aspecto} & \textbf{Descrição} \\
+	\midrule
+	\endhead
+	
+	Visão Geral: Objetivo e processo & O modelo explora as etapas macro da produção de paredes de concreto e os fatores envolvidos na decisão do agente de concluir as principais atividades do processo, que influenciam a ocorrência de não conformidades e problemas de produtividade. \\
+	\midrule
+	
+	Coleta de Dados & Entrevistas, observação direta no local e revisão bibliográfica. \\
+	\midrule
+	
+	Software de desenvolvimento & AnyLogic 8.9.1, AnyLogic 8.9.7 e Nvidia Omniverse. \\
+	\midrule
+	
+	Visualização & Planta bidimensional no AnyLogic e posterior conexão do modelo no Omniverse NVIDIA para exibir a simulação em três dimensões. \\
+	\midrule
+	
+	Vieses, incertezas e suposições & O modelo possui suposições e simplificações para reduzir a complexidade e representar apenas os principais aspectos do processo construtivo relacionados à qualidade e à produtividade. \\
+	\midrule
+	
+	Contexto de aplicação & \textbf{Sistema Externo:} O foco será no contexto dos sistemas construtivos da parede de concreto durante a produção da parede utilizando fôrmas metálicas. \\
+	& \textbf{Espaço:} Espaço pequeno, limitado pelo pavimento do edifício, simulando uma obra da “Minha Casa Minha Vida”. \\
+	& \textbf{Tempo:} Médias obtidas a partir de observações no local. \\
+	& \textbf{População:} Equipe de montagem de fôrmas e trabalhadores associados. \\
+	& \textbf{Regras Físicas:} Os agentes devem respeitar as restrições espaciais de uma célula e a presença de outros agentes durante a movimentação. \\
+	\midrule
+	
+	Interações & \textbf{Interações Físicas:} Cada agente ocupa uma célula diferente, e deve haver no máximo dois agentes por sala. \\
+	& \textbf{Comunicação:} Comunicação entre os agentes trabalhadores e o processo. \\
+	& \textbf{Troca de recursos:} Troca indireta de recursos entre a empresa e os agentes. \\
+	\midrule
+	
+	Agentes & \textbf{Características:} Trabalhador de montagem e desmontagem. \\
+	& \textbf{Decisões:} O modelo cognitivo leva o agente a tomar a decisão de concluir as principais atividades do processo. \\
+	& \textbf{Ações:} Comportamento adequado/inadequado na conclusão das atividades necessárias que influencia as causas de conformidade/não conformidade. \\
+	
+	\bottomrule
+\end{longtable}
+ 
+ PERGUNTA: Devo citar da onde os dados vieram (carol)? Devo falar sobre toda essa parte contextual da empresa? 
+ 
+ Os dados foram coletados com a ajuda do Canteiro de Obras A. O canteiro de Obras A é uma organização brasileira de médio e grande porte que atua na área de construção civil e de desenvolvimento imobiliário. Trata-se de um projeto residencial do programa Minha Casa, Minha Vida, do governo federal brasileiro, voltado para a população de baixa renda. A empresa atuou como uma parceira selecionada para o estudo.
+\subsection{Modelando o comportamento dos trabalhadores}
+A figura \ref{fig:modeling-worker} descreve, de modo geral, as etapas macro etapas do processo de produção de paredes de concreto em um edifício, utilizando fôrmas metálicas e trabalhadores como agentes passivos e ativos de interesse, respectivamente.
+\begin{figure}[!htb]
+	\centering
+	\caption{Etapas gerais do processo de produção de paredes de concreto em um edifício.}
+	\includegraphics[width=1 \textwidth]{Caps/Figs/worker-model.png}
+	\fonte{Banco de imagens do GETEC}
+	\label{fig:modeling-worker}
+\end{figure}
+\FloatBarrier
 
+Conforme ilustrado, o fluxo construtivo é estruturado em um ciclo contínuo de fases sequenciais. Nessa dinâmica, o operário atua como o agente ativo, responsável pela tomada de decisão e execução, enquanto a fôrma metálica representa o agente passivo, por ser alvo de toda decisão do processo. A lógica de execução do modelo baseia-se na divisão do andar em dois setores (meios pavimentos), uma estratégia logística adotada para otimizar a alocação de recursos e evitar a ociosidade da equipe. Inicialmente, o trabalhador parte de seu ponto de origem para coletar as fôrmas e iniciar a etapa de montagem no primeiro meio pavimento, etapa que sucede a armação e as instalações. Após a concretagem desse setor, o modelo incorpora um tempo de espera de um dia, referente à cura inicial do concreto. Concluído esse prazo, os operários realizam a desforma e a limpeza, transferindo as fôrmas sequencialmente para iniciar a montagem do segundo meio pavimento, repetindo esse ciclo até completar todos os pavimentos da obra.
 
 \section{SED}
 \label{sec:integraçao}
