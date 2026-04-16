@@ -3,7 +3,7 @@
 
 \section{Etapas de Desenvolvimento do Modelo}
 \label{sec:desenhopesquisa}
-Este capítulo detalha as etapas de desenvolvimento computacional do Gêmeo Digital, estruturado sob a abordagem de Simulação Híbrida. De forma geral, a Simulação a Eventos Discretos (DES) é empregada para representar as etapas macro do processo, sendo a abordagem mais adequada para modelar o fluxo sequencial do canteiro de obras e as mudanças de estado à medida que as atividades progridem. Em paralelo, a Modelagem Baseada em Agentes (ABM) atua no nível micro, sendo responsável por representar o processo de tomada de decisão, a movimentação e os padrões de comportamento dos trabalhadores frente aos eventos da obra.
+Esta seção detalha as etapas de desenvolvimento computacional da Simulação Híbrida, desenvolvida como um componente de Gêmeo Digital. De forma geral, a DES é empregada para representar as etapas macro do processo, sendo a abordagem mais adequada para modelar o fluxo sequencial do canteiro de obras e as mudanças de estado à medida que as atividades progridem. Em paralelo, a ABM atua no nível micro, sendo responsável por representar o processo de tomada de decisão, a movimentação e os padrões de comportamento dos trabalhadores frente aos eventos da obra.
 
 No contexto deste estudo, essas duas abordagens (DES e ABM) operam de forma integrada e simultânea dentro de uma mesma plataforma de desenvolvimento (AnyLogic). O ciclo de construção deste modelo híbrido segue a estrutura metodológica descrita na Figura \ref{fig:modeling-process}, fundamentada nos conceitos de \citeonline{crooks2019}.
 
@@ -11,14 +11,14 @@ No contexto deste estudo, essas duas abordagens (DES e ABM) operam de forma inte
 	\centering
 	\caption{Processo de modelagem}
 	\includegraphics[width=1 \textwidth]{Caps/Figs/crook-model.png}
-	\fonte{\citeonline{crooks2019} (Adaptado)}
+	\fonte{\citeonline{crooks2019} (Adaptado).}
 	\label{fig:modeling-process}
 \end{figure}
 \FloatBarrier
 
-Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de vida da simulação é segmentado em grandes fases contínuas. Inicialmente, ocorre a Preparação do modelo, seguida pela sua Construção e Avaliação, onde o modelo computacional deve ser submetido a procedimentos de verificação, calibração e validação de seus parâmetros. Apenas após a consolidação dessas três etapas o sistema híbrido torna-se apto para as fases de Exploração, permitindo a explicação de fenômenos passados e a previsão de cenários futuros no canteiro de obras.
+Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvimento da simulação é segmentado em grandes fases. Inicialmente, ocorre a Preparação do modelo, seguida pela sua Construção e Avaliação, onde o modelo computacional deve ser submetido a procedimentos de verificação, Calibração e Validação de seus parâmetros. Apenas após a consolidação dessas três etapas o sistema híbrido torna-se apto para as fases de Exploração, permitindo a explicação de fenômenos passados e a previsão de cenários futuros no canteiro de obras.
  
- Com as diretrizes metodológicas do ciclo de vida da simulação estabelecidas, o passo seguinte consiste na estruturação lógica. Segundo \cite{crooks2019}, a fundamentação desse protocolo abrange os seguintes aspectos centrais:
+ Com as diretrizes metodológicas do ciclo de desenvolvimento da simulação estabelecidas, o passo seguinte consiste na estruturação lógica. Segundo \citeonline{crooks2019}, a fundamentação desse protocolo abrange os seguintes aspectos centrais:
  
  \begin{itemize}
  	\item \textbf{Visão Geral (Objetivo e Processo):} Define as metas principais e a justificativa metodológica para a utilização do modelo, estabelecendo de antemão os mecanismos macro do processo e os fatores decisórios que serão simulados.
@@ -30,10 +30,10 @@ Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de vida da simu
  	\item \textbf{Interações:} Estruturam a dinâmica sistêmica do canteiro. Incluem as interações \textbf{físicas}, ou seja, as forças de atração ou restrições de ocupação em um cômodo, as vias de \textbf{comunicação} de status da obra e a lógica de \textbf{troca de recursos} indiretos essenciais para a continuidade do fluxo.
  	\item \textbf{Agentes:} Representam as entidades autônomas responsáveis por impulsionar a simulação híbrida. O projeto metodológico do agente encapsula três pilares: suas \textbf{Características} intrínsecas , suas \textbf{Decisões} e suas \textbf{Ações}.
  \end{itemize}
- Sendo assim, é possível ara organizar as premissas do sistema de forma padronizada. A Tabela \ref{tab:protocolo_abm} sintetiza o protocolo geral de modelagem e os parâmetros de entrada definidos para o presente projeto
+ Sendo assim, é possível organizar as premissas do sistema de forma padronizada. A Tabela \ref{tab:protocolo_abm} sintetiza o protocolo geral de modelagem e os parâmetros de entrada definidos para o presente projeto
  
 \begin{longtable}{@{} p{0.28\textwidth} p{0.68\textwidth} @{}}
-	\caption{Modelagem da Simulação}
+	\caption{Dimensões de Modelagem, Adaptado de \citeonline{tesecarol}}
 	\label{tab:protocolo_abm} \\
 	
 	\toprule
@@ -80,21 +80,201 @@ Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de vida da simu
 	\bottomrule
 \end{longtable}
  
- PERGUNTA: Devo citar da onde os dados vieram (carol)? Devo falar sobre toda essa parte contextual da empresa? 
  
- Os dados foram coletados com a ajuda do Canteiro de Obras A. O canteiro de Obras A é uma organização brasileira de médio e grande porte que atua na área de construção civil e de desenvolvimento imobiliário. Trata-se de um projeto residencial do programa Minha Casa, Minha Vida, do governo federal brasileiro, voltado para a população de baixa renda. A empresa atuou como uma parceira selecionada para o estudo.
-\subsection{Modelando o comportamento dos trabalhadores}
-A figura \ref{fig:modeling-worker} descreve, de modo geral, as etapas macro etapas do processo de produção de paredes de concreto em um edifício, utilizando fôrmas metálicas e trabalhadores como agentes passivos e ativos de interesse, respectivamente.
+ 
+
+\subsection{Descrição do contexto da obra}
+A Figura \ref{fig:modeling-worker} descreve, de modo geral, as etapas macro etapas do processo de produção de paredes de concreto em um edifício, utilizando fôrmas metálicas e trabalhadores como agentes passivos e ativos de interesse, respectivamente.
 \begin{figure}[!htb]
 	\centering
 	\caption{Etapas gerais do processo de produção de paredes de concreto em um edifício.}
 	\includegraphics[width=1 \textwidth]{Caps/Figs/worker-model.png}
-	\fonte{Banco de imagens do GETEC}
+	\fonte{\cite{tesecarol} (Adaptado).}
 	\label{fig:modeling-worker}
 \end{figure}
 \FloatBarrier
 
-Conforme ilustrado, o fluxo construtivo é estruturado em um ciclo contínuo de fases sequenciais. Nessa dinâmica, o operário atua como o agente ativo, responsável pela tomada de decisão e execução, enquanto a fôrma metálica representa o agente passivo, por ser alvo de toda decisão do processo. A lógica de execução do modelo baseia-se na divisão do andar em dois setores (meios pavimentos), uma estratégia logística adotada para otimizar a alocação de recursos e evitar a ociosidade da equipe. Inicialmente, o trabalhador parte de seu ponto de origem para coletar as fôrmas e iniciar a etapa de montagem no primeiro meio pavimento, etapa que sucede a armação e as instalações. Após a concretagem desse setor, o modelo incorpora um tempo de espera de um dia, referente à cura inicial do concreto. Concluído esse prazo, os operários realizam a desforma e a limpeza, transferindo as fôrmas sequencialmente para iniciar a montagem do segundo meio pavimento, repetindo esse ciclo até completar todos os pavimentos da obra.
+Conforme ilustrado, o fluxo construtivo é estruturado em um ciclo contínuo de fases sequenciais. Nessa dinâmica, o operário atua como o agente ativo, responsável pela tomada de decisão e execução, enquanto a fôrma metálica representa o agente passivo, por ser alvo de toda decisão do processo. A lógica de execução do modelo baseia-se na divisão do pavimento em dois setores (dois meios pavimentos por andar), uma estratégia logística adotada para otimizar a alocação de recursos. Inicialmente, o trabalhador parte de seu ponto de origem para coletar as fôrmas e iniciar a etapa de montagem no primeiro meio pavimento, etapa que sucede a colocação da armadura (tela metálica da estrutura) e as instalações elétricas e hidrossanitárias. Após a concretagem desse setor, o modelo incorpora um tempo de espera de um dia, referente à cura do concreto. Concluído esse prazo, os operários realizam a desforma e a limpeza, transferindo as fôrmas sequencialmente para iniciar a montagem do segundo meio pavimento, repetindo esse ciclo até completar todos os pavimentos da obra.
+
+Para garantir a qualidade dos serviços de montagem e desmontagem, a empresa parceira utiliza Formulários de Verificação de Serviço diários. Contudo, observações em campo revelaram que os operários frequentemente negligenciam etapas obrigatórias. Essas omissões envolvem tanto os itens previstos nos formulários quanto recomendações cruciais de manuais técnicos, a exemplo da aplicação de desmoldante e da inserção de capas plásticas nas ancoragens. 
+
+A análise de dados históricos e documentos da empresa evidenciou uma forte correlação entre o comportamento da equipe (omissão de tarefas), o surgimento de defeitos nas paredes e a consequente necessidade de retrabalho, fatores que comprometem severamente a produtividade da obra. Nesse sentido, a não execução de qualquer atividade essencial do fluxo de trabalho resulta na consolidação de uma não conformidade.
+
+É exatamente diante dessa dinâmica de falhas operacionais, muitas vezes silenciosas, que surge a necessidade da aplicação da teoria de Sistemas a Eventos Discretos (SED),  cuja modelagem lógica será detalhada nos próximos tópicos. Os itens do Formulário de Verificação de Serviço e Produtividade considerados mais relevantes para o escopo da pesquisa, juntamente com itens pertinentes adicionais observados durante os estudos em campo (como a aplicação do agente desmoldante e a inserção ou remoção das proteções plásticas das faquetas), foram convertidos em atividades como referência para um fluxo de trabalho eficaz, seguindo o fluxo ilustrado na Figura \ref{fig:atividades}. 
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Atividades necessárias para um fluxo de trabalho adequado durante a montagem e desmontagem.}
+	\includegraphics[width=1 \textwidth]{Caps/Figs/atividades.png}
+	\fonte{\cite{tesecarol} (Adaptado).}
+	\label{fig:atividades}
+\end{figure}
+\FloatBarrier
+Segundo o fluxo delineado na Figura \ref{fig:atividades}, o processo é estruturado em dois grandes ciclos operacionais, intermediados pela etapa de concretagem. A fase de montagem de fôrmas tem início com as verificações preliminares de segurança do ambiente e da disponibilidade de recursos e materiais. Adiante, executa-se a aplicação do agente desmoldante, seguida pelo posicionamento dos painéis conforme a sequência do projeto. A consolidação da estrutura exige a inserção das proteções plásticas das faquetas, o travamento mecânico (utilizando pinos, cunhas e as próprias faquetas) e, por fim, a instalação de alinhadores, esquadros e tensores. A liberação para a concretagem fica condicionada à espera e aprovação do formulário de verificação. 
+
+Após a concretagem e o período de cura, inicia-se a fase de desmontagem. Esta etapa demanda uma nova checagem de segurança, procedendo-se com a remoção sequencial dos pinos, cunhas e faquetas, bem como a retirada de suas respectivas proteções plásticas. O ciclo é encerrado com uma nova submissão ao formulário de verificação, garantindo que os componentes estejam prontos e em conformidade para o transporte e reinício do processo no próximo meio pavimento.
+
+
+\subsection{Modelando o comportamento dos trabalhadores}
+Após o mapeamento do processo de construção e considerando os aspectos intrínsecos relacionados aos projetos de construção, é possível propor um modelo computacional híbrido para simular e analisar o comportamento dos trabalhadores com base nas macroetapas e nas atividades necessárias para a montagem e desmontagem de fôrmas. A arquitetura metodológica do modelo computacional híbrido, dividida em duas perspectivas complementares (Figuras \ref{fig:de-model} e \ref{fig:abm-model}), permite simular e analisar o comportamento dos operários em função das macroetapas de montagem e desmontagem das fôrmas. A DES rege o fluxo físico e logístico da construção da parede de concreto, enquanto que a ABM executa a análise cognitiva das decisões dos trabalhadores durante a execução das tarefas. 
+\begin{figure}[!htb]
+	\centering
+	\caption{Estrutura da simulação utilizando DES.}
+	\includegraphics[width=0.8 \textwidth]{Caps/Figs/DE-MODEL.png}
+	\fonte{\cite{tesecarol} (Adaptado).}
+	\label{fig:de-model}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Estrutura da simulação utilizando ABM.}
+	\includegraphics[width=0.8 \textwidth]{Caps/Figs/ABM-MODEL.png}
+	\fonte{\cite{tesecarol} (Adaptado).}
+	\label{fig:abm-model}
+\end{figure}
+\FloatBarrier
+
+A Figura \ref{fig:de-model} detalha o Modelo do Canteiro de Obras sob a ótica da DES. O ambiente espacial simula a geometria de um cômodo pertencente a um apartamento típico do sistema construtivo em estudo. Alinhada à realidade da Empresa A e do setor, a meta de produção estabelecida no modelo é a execução de um meio pavimento por dia. A dinâmica do sistema obedece a um fluxo logístico rigoroso, categorizando as ações em inventário (localização inicial das fôrmas e operários), transporte (trajetórias de movimentação), processamento (montagem e desmontagem) e inspeção.
+
+Por sua vez, a Figura \ref{fig:abm-model} ilustra a lógica interna da ABM. O diagrama sequencia os principais Eventos (E) e Tempos de Espera (T) vinculados às macroetapas da obra. Como regra de negócio do modelo, as operações de montagem e desmontagem possuem pré-requisitos estritos, como por exemplo, elas só são iniciadas mediante a verificação de segurança do ambiente e a disponibilidade de recursos físicos (agente desmoldante, faquetas, cunhas, pinos e alinhadores). Uma vez que as macroetapas de montagem (Evento 3) e desmontagem (Evento 5) são deflagradas, o modelo aciona as atividades operacionais (A1 a A10). É nesse nível de detalhe que a simulação híbrida se destaca: a execução correta ou a omissão de cada uma dessas subatividades dependerá exclusivamente do processo de tomada de decisão do operário (agente ativo), permitindo quantificar o impacto dessas escolhas na qualidade e produtividade final do fluxo.
+
+
+Para compreender como a tomada de decisão ocorre dentro da ABM, a Figura \ref{fig:fatores_influencia} detalha o esquema lógico utilizado para determinar a probabilidade ($P$) de um operário executar, ou não, cada atividade operacional. Este esquema consiste em uma adaptação do modelo de análise cognitiva proposto por Zhang et al. (2019), originalmente voltado para o comportamento de segurança de trabalhadores da construção civil, agora transposto para a análise de produtividade e conformidade de execução.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Análise do modelo cognitivo.}
+	\includegraphics[width=0.9 \textwidth]{Caps/Figs/FatoresDeInfluencia.png}
+	\fonte{\cite{tao2019} (Adaptado).}
+	\label{fig:fatores_influencia}
+\end{figure}
+\FloatBarrier
+
+Conforme ilustrado no fluxograma, o processo cognitivo do agente é estruturado em uma sequência condicional de cinco estágios. A consolidação do Comportamento Adequado exige uma resposta afirmativa em todos os níveis. Caso contrário, qualquer interrupção na cadeia resulta inevitavelmente em um Comportamento Inadequado (falha ou omissão da tarefa). Os fatores de influência em cada estágio são definidos da seguinte forma:
+
+\begin{enumerate}
+	\item \textbf{Consciência (Estágio 1):} Refere-se à percepção inicial do trabalhador sobre a existência e a necessidade da atividade de produção exigida naquele momento.
+	\item \textbf{Conhecimento (Estágio 2):} Envolve a compreensão do agente acerca das possíveis consequências geradas pela omissão da tarefa (como defeitos na parede e necessidade de retrabalho).
+	\item \textbf{Normas (Estágio 3):} Representa o resgate, na memória de longo prazo do trabalhador, das diretrizes técnicas e normas da empresa ao perceber um potencial problema de produção.
+	\item \textbf{Atitude (Estágio 4):} Trata-se da decisão ativa e intencional do operário de adotar a conduta correta para concluir a atividade de produção.
+	\item \textbf{Controle Comportamental (Estágio 5):} Refere-se à capacidade real (técnica e física) percebida pelo trabalhador para responder à demanda e executar o comportamento decidido.
+\end{enumerate}
+
+Dessa forma, o modelo computacional utiliza essa arquitetura de cinco filtros probabilísticos para simular, de forma realista, as nuances humanas que levam ao desvio de padrão no canteiro de obras.
+As respostas probabilísticas determinam a tendência do agente em adotar um comportamento adequado ou inadequado ao longo da simulação. Nesse processo interativo, curvas de aprendizado são empregadas para determinar os resultados parciais em cada um dos estágios cognitivos. A expressão geral utilizada para calcular a probabilidade do comportamento é apresentada na Equação \ref{eq:prob_cognitiva}:
+
+\begin{equation}
+	P = (1 - X_1) + \sum_{j=2}^{5} \left[ (1 - X_j) \prod_{i=1}^{j-1} X_i \right]
+	\label{eq:prob_cognitiva}
+\end{equation}
+
+Nessa formulação, adaptada de \citeonline{tao2019}, cada um dos cinco estágios do modelo cognitivo possui um fator de influência chave específico. As variáveis e operadores da equação são definidos da seguinte forma:\begin{itemize}\item $P$: representa a probabilidade final de o agente adotar um comportamento inadequado (consolidando a falha).\item $X_1$: representa o valor do fator de influência chave no primeiro estágio (Consciência).\item O operador de somatório ($\sum$) percorre os estágios subsequentes do modelo cognitivo (do estágio 2 ao 5).\item O operador de produtório ($\prod$) itera sobre todos os estágios anteriores ao estágio $j$, calculando a contribuição do sucesso acumulado na probabilidade final de falha.\item $X_j$ e $X_i$: representam os valores dos fatores de influência chave nos estágios $j$ e $i$, respectivamente.\end{itemize}Para incorporar o ganho de experiência do trabalhador em função do tempo e da repetição das tarefas, o modelo utiliza uma equação geral de curva de aprendizado aplicada a cada um dos cinco estágios, expressa na Equação \ref{eq:curva_aprendizado}:
+
+\begin{equation}
+	Y(t) = 1 - (1 - Y(0)) X(t)^{-\theta}
+	\label{eq:curva_aprendizado}
+\end{equation}
+
+Onde a constante que dita o ritmo dessa evolução técnica é a Taxa de Aprendizado (\textit{Learning Rate}), definida pela Equação \ref{eq:taxa_aprendizado}:
+
+\begin{equation}
+	\text{Taxa de Aprendizado} = 2^{-\theta}
+	\label{eq:taxa_aprendizado}
+\end{equation}
+
+\subsection{Coleta de dados para definição dos fatores de influência, parâmetros e variáveis}
+
+Esta seção detalha o processo de coleta de dados empíricos para viabilizar as operações práticas da simulação e permitir a criação e análise de diferentes cenários. Segundo \citeonline{tesecarol}, objetivo principal das idas a campo foi monitorar o fluxo de trabalho na produção das paredes de concreto, identificar os problemas mais recorrentes nas fases de montagem e desmontagem das fôrmas metálicas, avaliar o grau de dificuldade das atividades obrigatórias e determinar os principais fatores que influenciam a não conformidade dessas tarefas, segundo a percepção dos próprios trabalhadores. 
+
+Os dados coletados não apenas validaram o problema prático com base na experiência operacional da equipe, mas também forneceram os parâmetros de entrada para o modelo computacional. Cabe destacar que, embora o estudo utilize um caso exemplar específico, os valores padrão dos parâmetros e variáveis podem ser facilmente ajustados para simular outros canteiros de obras que adotem o mesmo sistema construtivo.
+
+O modelo computacional proposto adapta a arquitetura cognitiva de \citeonline{tao2019}, originalmente voltada à segurança do trabalho, para o contexto de gestão e controle da produção. O diferencial desta pesquisa, no entanto, reside na introdução de uma simulação híbrida, que incorpora elementos de DES e um modelo de detecção de falhas utilizando SED.
+
+A parametrização do tempo demandou a observação direta e a cronometragem do período despendido pelos operários na execução de cada atividade obrigatória (A1 a A10) \cite{tesecarol}. É importante ressaltar que essas estimativas refletem o desempenho de uma equipe específica no canteiro de obras analisado, aproximando os parâmetros daquela realidade particular, sem a pretensão de generalizar para todos os cenários possíveis da construção civil. Contudo, a flexibilidade do software permite que o usuário modifique esses valores para estudos futuros. 
+
+Durante a coleta, observou-se que algumas atividades apresentavam tempos de execução consistentes, sendo consolidadas no modelo como tempos médios fixos. Por outro lado, tarefas com maior variabilidade natural foram modeladas como intervalos de tempo (valores mínimo e máximo), permitindo que a simulação aplique uma função de distribuição para selecionar o tempo de forma estocástica a cada ciclo. Os tempos médios e os intervalos derivados dessa análise, medidos em segundos, estão consolidados na Figura \ref{fig:tempo_atividade}.
+\begin{figure}[!htb]
+	\centering
+	\caption{Tempo médio observado de cada etapa}
+	\includegraphics[width=0.8 \textwidth]{Caps/Figs/TempoPorAtividade.png}
+	\fonte{\cite{tesecarol} (Adaptado).}
+	\label{fig:tempo_atividade}
+\end{figure}
+\FloatBarrier
+Para aprofundar a análise, o estudo também investigou os fatores de influência subjacentes às falhas de processo. Por meio de um questionário aplicado a 15 trabalhadores, buscou-se identificar quais elementos mais induzem a omissão de atividades obrigatórias durante a montagem e desmontagem das fôrmas \cite{tesecarol}. As opções de múltipla escolha fornecidas aos respondentes foram fundamentadas na literatura, principalmente nos estudos de \citeonline{tao2019}, havendo também um campo aberto para sugestões.
+
+A análise dos resultados, ilustrada na Figura \ref{fig:resultado_questionario}, ranqueou a percepção dos operários sobre esses fatores. O defeito mais frequentemente apontado foi a ``Falta de materiais ou recursos, como ferramentas e equipamentos''. Em segundo lugar, empataram a ``Falta de comunicação por parte de gerentes e supervisores'' e a ``Falta de experiência ou conhecimento dos trabalhadores''. Na sequência, foram citados o ``Estresse do trabalhador'' e a ``Pressão para acelerar o trabalho''. Fatores como ``Prazos apertados'', ``Falta de inspeções'' e ``Falta de treinamento'' apresentaram menor incidência. No campo aberto, a própria rotina intensa do canteiro de obras foi relatada como um fator influente.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Tempo médio observado de cada etapa}
+	\includegraphics[width=0.8 \textwidth]{Caps/Figs/resultado_questionario.png}
+	\fonte{\cite{tesecarol} (Adaptado).}
+	\label{fig:resultado_questionario}
+\end{figure}
+\FloatBarrier
+
+Após o processamento desses dados, o fator ``Falta de materiais ou recursos'' foi desvinculado do modelo cognitivo e estabelecido como um pré-requisito físico na Simulação a Eventos Discretos (DES), uma vez que o fluxo de trabalho não pode avançar sem esses itens essenciais. 
+
+Como não surgiram ideias comportamentais adicionais fora do que já estava previsto na literatura, os demais fatores apontados pelos trabalhadores foram analisados metodologicamente e agrupados. Esse esforço de síntese resultou em cinco parâmetros de influência chave, detalhados na Tabela \ref{tab:fatores_influencia}. Cada parâmetro consolida um grupo de percepções do canteiro e foi diretamente vinculado a um estágio específico do processo de tomada de decisão do modelo cognitivo.
+
+
+
+
+\begin{table}[htpb]
+	\centering
+	\caption{Estágios do modelo cognitivo e parâmetros de influência adotados no estudo, Adaptado de \citeonline{tesecarol}}
+	\label{tab:fatores_influencia}
+	\begin{tabular}{cll}
+		\hline
+		\textbf{Variável ($X_i$)} & \textbf{Estágio Cognitivo} & \textbf{Parâmetro de Influência} \\ \hline
+		$X_1$ & Consciência & Treinamento \\
+		$X_2$ & Conhecimento & Experiência \\
+		$X_3$ & Normas & Inspeção \\
+		$X_4$ & Atitude & \textit{Feedback} \\
+		$X_5$ & Controle Comportamental & Nível de Estresse \\ \hline
+	\end{tabular}
+\end{table}
+
+Cabe destacar que a arquitetura da simulação mantém sua flexibilidade, podendo ser facilmente adaptada para testar outras formulações cognitivas. Além disso, como os parâmetros de influência calibram as curvas de aprendizado em cada estágio, o modelo captura a evolução empírica da equipe: quanto maior o número de ciclos de produção concluídos, maior o aprendizado acumulado e, consequentemente, menor a probabilidade de os operários omitirem as atividades obrigatórias.
+
+Em síntese, o levantamento em campo confirmou que os operários percebem diversos problemas recorrentes atrelados à montagem e desmontagem das fôrmas, os quais têm origens tanto estruturais quanto cognitivas. A modelagem computacional foi instanciada no software \textit{AnyLogic}, incorporando a lista definitiva de atividades obrigatórias e seus respectivos tempos de execução. Os pesos atribuídos a essas tarefas na simulação refletem diretamente o grau de dificuldade relatado pelos trabalhadores para concluí-las. 
+
+
+Por fim, informações como a duração global dos serviços e as diretrizes de layout do canteiro de obras foram obtidas por meio de entrevistas não estruturadas com a equipe de gestão e fundamentadas na experiência empírica do pesquisador com este sistema construtivo específico.
+
 
 \section{SED}
-\label{sec:integraçao}
+\label{sec:SED}
+Esta seção detalha as etapas de desenvolvimento do diagnosticador do SED. Como evidenciado na modelagem comportamental prévia, o processo produtivo de montagem e desmontagem de fôrmas é suscetível a falhas não observáveis decorrentes das omissões dos trabalhadores. Para diagnosticar matematicamente essas anomalias, é possível adotar a teoria do SED, baseado no modelo de \citeonline{basilio2010}. Sob essa ótica, o fluxo logístico da construção será modelado por meio de autômatos de estados finitos determinísticos. 
+
+Formalmente, o sistema construtivo é representado por um gerador de linguagem, definido pela quíntupla:
+$$G = (X, \Sigma, f, x_0, X_m)$$
+Onde cada parâmetro descreve uma característica física ou lógica do processo de execução das paredes de concreto, conforme detalhado nas subseções a seguir. O desenvolvimento estruturado desse autômato ($G$) formará a base teórica necessária para a posterior síntese do autômato diagnosticador.
+
+\subsection{Espaço de Estados ($X$) e Estado Inicial ($x_0$)}
+
+O conjunto finito de estados $X$ representa as condições operacionais do canteiro de obras em um dado instante de tempo. Na modelagem da execução das fôrmas, um estado consolida a situação atual do fluxo físico. Com base nas principais atividades realizadas pelo trabalhador, definidas na figura \ref{fig:abm-model}, é possível definir os estados do SED.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Estados do SED}
+	\includegraphics[width=0.8 \textwidth]{Caps/Figs/estados-sed.png}
+	\fonte{Autoral.}
+	\label{fig:estados-sed}
+\end{figure}
+\FloatBarrier
+
+Dentro desse espaço, define-se o estado inicial $x_0 \in X$. Ele representa o ponto de partida do ciclo construtivo de um meio pavimento, caracterizado pela verificação de segurança e pela disponibilidade inicial de recursos e ferramentas antes da execução da primeira atividade, marcado como $A_0$ na figura \ref{fig:estados-sed}.  O estado final, ou subconjunto de estados marcados, é representado por $X_m \subseteq X$. Na modelagem proposta, o estado $A_{10}$ atua como o estado marcado, designando a conclusão de todas as etapas de montagem e desmontagem das fôrmas. Atingir este estado indica que o ciclo produtivo daquele meio pavimento foi finalizado e o sistema está apto a reiniciar o fluxo na próxima fôrma.
+\subsection{Conjunto de Eventos ($\Sigma$)}
+
+O conjunto finito de eventos $\Sigma$ engloba todas as ocorrências capazes de alterar o estado do sistema. No contexto desta pesquisa, os eventos correspondem à conclusão das macroetapas e das atividades obrigatórias detalhadas no capítulo anterior (como a aplicação de desmoldante, travamento mecânico, etc.). 
+
+Para viabilizar a arquitetura de diagnóstico, esse conjunto é particionado de forma disjunta em duas categorias principais:
+$$\Sigma = \Sigma_o \cup \Sigma_{uo}$$
+Onde $\Sigma_o$ representa o conjunto de Eventos Observáveis (ações que deixam rastros evidentes ou geram registros formais no formulário de verificação) e $\Sigma_{uo}$ representa os Eventos Não Observáveis. Dentro de $\Sigma_{uo}$, encontra-se o subconjunto de Eventos de Falha ($\Sigma_f$), que modela matematicamente o momento exato em que o operário decide omitir uma atividade obrigatória de forma velada.
+
+\subsection{Função de Transição Parcial ($f$)}
+
+A evolução sequencial do canteiro de obras é formalizada pela função de transição parcial, definida como:$$f: X \times \Sigma \to X$$A função $f(x, \sigma)$ estabelece o novo estado do sistema após a ocorrência de um evento $\sigma \in \Sigma$, partindo de um estado atual $x \in X$. No contexto da execução das fôrmas, essa função atua como o controle lógico de precedência do projeto. Por exemplo, a função de transição garante que o sistema só alcance o estado $A_5$ (Fixação dos pinos, cunhas e faquetas) se o evento correspondente à inserção do plástico de proteção (referente à saída do estado $A_4$) tiver ocorrido de forma satisfatória no modelo físico. Se ocorrer um evento de falha não observável ($\sigma_f$), a função de transição levará o sistema para um estado anômalo, o qual o diagnosticador terá a missão de rastrear.
