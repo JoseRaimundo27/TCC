@@ -1,16 +1,41 @@
-\chapter{Resultados}
-\label{chap:resultados}
-A simulação rodou bem e não tivemos resultados absurdos
+\section{Resultados e Discussão}
+\label{sec:resultados}
 
-\section{Resultados da Simulação (AnyLogic)}
-\label{sec:resultados_anylogic}
+Neste capítulo, são apresentados e discutidos os resultados obtidos a partir da implementação dos modelos propostos. A análise é dividida em duas grandes etapas: primeiramente, avalia-se o comportamento do sistema produtivo por meio da simulação computacional híbrida e sua respectiva visualização avançada; em seguida, apresenta-se a síntese do modelo matemático de diagnóstico (SED) capaz de rastrear as falhas comportamentais observadas na simulação.
 
-\section{O Gêmeo Digital na Prática (Omniverse)}
-\label{sec:resultados_omniverse}
-Olha como ficou mais bonito e mais fácil de entender com Omniverse
 
-\section{Discussão dos resultados}
-\label{sec:discussao}
-Mostrando que os resultados resolvem a lacuna ( ou não)
-% Aqui você responde: A sua ideia de usar simulação híbrida ajudou em quê?
-% Evita atraso? Melhora a visão do engenheiro? É melhor que o método tradicional de papel e caneta?
+\subsubsection{Simulação Híbrida no AnyLogic}
+A simulação híbrida, combinando ABM e DES foi executada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado e as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas.
+APAGAR:
+O objetivo desta etapa de resultados é avaliar o comportamento dinâmico do sistema construtivo frente às variações de desempenho humano. Para isso, o modelo foi configurado para rodar o caso base e simular os cenários em que os agentes (trabalhadores), influenciados por fatores cognitivos e fadiga, tomam a decisão de omitir tarefas percebidas como difíceis ou menos prioritárias. 
+
+A partir das rodadas de simulação, foi possível extrair dados quantitativos referentes ao tempo total de ciclo, à flutuação da produtividade da equipe e à frequência de ocorrência das falhas comportamentais (como a omissão da verificação inicial ou a não aplicação de desmoldante).
+
+\subsubsection{ Visualização no NVIDIA Omniverse}
+% Descrição: Apresente os resultados visuais e os insights que o 3D trouxe.
+% O que abordar:
+% - Imagens/prints do modelo renderizado no Omniverse.
+% - Como a conexão dos dados do AnyLogic com o Omniverse facilitou a percepção espacial do canteiro.
+% - Discussão sobre como ver os avatares (agentes) se movendo ajuda o gestor da obra a validar o modelo comportamental de forma muito mais intuitiva que apenas olhando gráficos 2D.
+
+\subsection{Diagnóstico de Falhas por Sistemas a Eventos Discretos (SED)}
+% Descrição: Faça uma ponte com a seção anterior. Diga que, como a simulação mostrou que as falhas ocorrem de forma velada, agora você aplicará o SED para detectá-las matematicamente.
+
+\subsubsection{Autômato Gerador do Canteiro de Obras ($G$)}
+% Descrição: É aqui que entra o grafo que desenha a tabela da metodologia.
+% O que abordar:
+% - Apresente a figura do grafo do autômato (as bolinhas de E0 a E11 e as setas das transições).
+% - Discuta como as ramificações de falha (F1 a F5) criam caminhos paralelos que terminam no mesmo estado físico, ilustrando a "cegueira" do sistema de verificação tradicional.
+
+\subsubsection{Síntese do Autômato Diagnosticador ($G_d$)}
+% Descrição: Onde a mágica acontece. Você mostra o autômato observador que rastreia os eventos.
+% O que abordar:
+% - Apresente o grafo ou a tabela do Diagnosticador gerado.
+% - Mostre como os estados agora carregam os rótulos (Normal, F1, F2, etc.).
+% - Explique a evolução do diagnóstico: por exemplo, como o sistema percebe que a "Falha 3 (Omissão do desmoldante)" aconteceu logo após a leitura do evento observável O4.
+
+\subsubsection{Análise de Diagnosticabilidade e Impactos na Gestão}
+% Descrição: O fechamento de ouro juntando a engenharia com a matemática.
+% O que abordar:
+% - Confirme se o sistema é diagnosticável (se todas as falhas são descobertas antes que o ciclo da parede termine). Como o fluxo é finito (termina em E11), não deve haver ciclos indeterminados.
+% - Discuta o impacto prático: como essa ferramenta matemática, integrada ao modelo de simulação, permitiria ao gestor da obra agir proativamente antes da concretagem, evitando o retrabalho pesado que você viu no AnyLogic.

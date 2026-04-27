@@ -1,7 +1,7 @@
 \chapter{Metodologia}
 \label{chap:metodologia}
 
-\section{Etapas de Desenvolvimento do Modelo}
+\section{Etapas de Desenvolvimento da Simulação Híbrida}
 \label{sec:desenhopesquisa}
 Esta seção detalha as etapas de desenvolvimento computacional da Simulação Híbrida, desenvolvida como um componente de Gêmeo Digital. De forma geral, a DES é empregada para representar as etapas macro do processo, sendo a abordagem mais adequada para modelar o fluxo sequencial do canteiro de obras e as mudanças de estado à medida que as atividades progridem. Em paralelo, a ABM atua no nível micro, sendo responsável por representar o processo de tomada de decisão, a movimentação e os padrões de comportamento dos trabalhadores frente aos eventos da obra.
 
@@ -16,7 +16,7 @@ No contexto deste estudo, essas duas abordagens (DES e ABM) operam de forma inte
 \end{figure}
 \FloatBarrier
 
-Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvimento da simulação é segmentado em grandes fases. Inicialmente, ocorre a Preparação do modelo, seguida pela sua Construção e Avaliação, onde o modelo computacional deve ser submetido a procedimentos de verificação, Calibração e Validação de seus parâmetros. Apenas após a consolidação dessas três etapas o sistema híbrido torna-se apto para as fases de Exploração, permitindo a explicação de fenômenos passados e a previsão de cenários futuros no canteiro de obras.
+Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvimento da simulação é segmentado em grandes fases. Inicialmente, ocorre a Preparação e Design, seguida pela sua Construção e Modelagem, onde o modelo computacional deve ser submetido a procedimentos de verificação, Calibração e Validação de seus parâmetros. Apenas após a consolidação dessas três etapas o Sistema Híbrido torna-se apto para as fases de Explicação e Predição, permitindo a explicação de fenômenos passados e a previsão de cenários futuros no canteiro de obras.
  
  Com as diretrizes metodológicas do ciclo de desenvolvimento da simulação estabelecidas, o passo seguinte consiste na estruturação lógica. Segundo \citeonline{crooks2019}, a fundamentação desse protocolo abrange os seguintes aspectos centrais:
  
@@ -94,13 +94,13 @@ A Figura \ref{fig:modeling-worker} descreve, de modo geral, as etapas macro etap
 \end{figure}
 \FloatBarrier
 
-Conforme ilustrado, o fluxo construtivo é estruturado em um ciclo contínuo de fases sequenciais. Nessa dinâmica, o operário atua como o agente ativo, responsável pela tomada de decisão e execução, enquanto a fôrma metálica representa o agente passivo, por ser alvo de toda decisão do processo. A lógica de execução do modelo baseia-se na divisão do pavimento em dois setores (dois meios pavimentos por andar), uma estratégia logística adotada para otimizar a alocação de recursos. Inicialmente, o trabalhador parte de seu ponto de origem para coletar as fôrmas e iniciar a etapa de montagem no primeiro meio pavimento, etapa que sucede a colocação da armadura (tela metálica da estrutura) e as instalações elétricas e hidrossanitárias. Após a concretagem desse setor, o modelo incorpora um tempo de espera de um dia, referente à cura do concreto. Concluído esse prazo, os operários realizam a desforma e a limpeza, transferindo as fôrmas sequencialmente para iniciar a montagem do segundo meio pavimento, repetindo esse ciclo até completar todos os pavimentos da obra.
+Conforme ilustrado na Figura \ref{fig:modeling-worker}, o fluxo construtivo é estruturado em um ciclo contínuo de macro etapas sequenciais. Nessa dinâmica, o operário atua como o agente ativo, responsável pela tomada de decisão e execução, enquanto a fôrma metálica representa o agente passivo, por ser alvo de toda decisão do processo. A lógica de execução do modelo baseia-se na divisão do pavimento em dois setores (dois meios pavimentos por andar), uma estratégia logística adotada para otimizar a alocação de recursos. Inicialmente, o trabalhador parte de seu ponto de origem para coletar as fôrmas e iniciar a etapa de montagem no primeiro meio pavimento, etapa que sucede a colocação da armadura (tela metálica da estrutura) e as instalações elétricas e hidrossanitárias. Após a concretagem desse setor, o modelo incorpora um tempo de espera de um dia, referente à cura do concreto. Concluído esse prazo, os operários realizam a desforma e a limpeza, transferindo as fôrmas sequencialmente para iniciar a montagem do segundo meio pavimento, repetindo esse ciclo até completar todos os pavimentos da obra.
 
-Para garantir a qualidade dos serviços de montagem e desmontagem, a empresa parceira utiliza Formulários de Verificação de Serviço diários. Contudo, observações em campo revelaram que os operários frequentemente negligenciam etapas obrigatórias. Essas omissões envolvem tanto os itens previstos nos formulários quanto recomendações cruciais de manuais técnicos, a exemplo da aplicação de desmoldante e da inserção de capas plásticas nas ancoragens. 
+Para garantir a qualidade dos serviços de montagem e desmontagem, a empresa parceira utiliza Formulários de Verificação de Serviço diários.\ Contudo, observações em campo revelaram que os operários frequentemente negligenciam etapas obrigatórias. Essas omissões envolvem tanto os itens previstos nos formulários quanto recomendações cruciais de manuais técnicos, a exemplo da aplicação de desmoldante e da inserção de capas plásticas nas ancoragens. 
 
 A análise de dados históricos e documentos da empresa evidenciou uma forte correlação entre o comportamento da equipe (omissão de tarefas), o surgimento de defeitos nas paredes e a consequente necessidade de retrabalho, fatores que comprometem severamente a produtividade da obra. Nesse sentido, a não execução de qualquer atividade essencial do fluxo de trabalho resulta na consolidação de uma não conformidade.
 
-É exatamente diante dessa dinâmica de falhas operacionais, muitas vezes silenciosas, que surge a necessidade da aplicação da teoria de Sistemas a Eventos Discretos (SED),  cuja modelagem lógica será detalhada nos próximos tópicos. Os itens do Formulário de Verificação de Serviço e Produtividade considerados mais relevantes para o escopo da pesquisa, juntamente com itens pertinentes adicionais observados durante os estudos em campo (como a aplicação do agente desmoldante e a inserção ou remoção das proteções plásticas das faquetas), foram convertidos em atividades como referência para um fluxo de trabalho eficaz, seguindo o fluxo ilustrado na Figura \ref{fig:atividades}. 
+É exatamente diante dessa dinâmica de falhas operacionais, muitas vezes silenciosas, que surge a necessidade da aplicação da teoria de Sistemas a Eventos Discretos (SED),  cuja modelagem lógica será detalhada nos próximos tópicos. Os itens do Formulário de Verificação de Serviço e Produtividade referentes à montagem e desmontagem das fôrmas considerados mais relevantes para o escopo da pesquisa, juntamente com itens pertinentes adicionais observados durante os estudos em campo (como a aplicação do agente desmoldante e a inserção ou remoção das proteções plásticas das faquetas), foram convertidos em atividades como referência para um fluxo de trabalho eficaz, seguindo o fluxo ilustrado na Figura \ref{fig:atividades}. 
 
 \begin{figure}[!htb]
 	\centering
@@ -112,11 +112,11 @@ A análise de dados históricos e documentos da empresa evidenciou uma forte cor
 \FloatBarrier
 Segundo o fluxo delineado na Figura \ref{fig:atividades}, o processo é estruturado em dois grandes ciclos operacionais, intermediados pela etapa de concretagem. A fase de montagem de fôrmas tem início com as verificações preliminares de segurança do ambiente e da disponibilidade de recursos e materiais. Adiante, executa-se a aplicação do agente desmoldante, seguida pelo posicionamento dos painéis conforme a sequência do projeto. A consolidação da estrutura exige a inserção das proteções plásticas das faquetas, o travamento mecânico (utilizando pinos, cunhas e as próprias faquetas) e, por fim, a instalação de alinhadores, esquadros e tensores. A liberação para a concretagem fica condicionada à espera e aprovação do formulário de verificação. 
 
-Após a concretagem e o período de cura, inicia-se a fase de desmontagem. Esta etapa demanda uma nova checagem de segurança, procedendo-se com a remoção sequencial dos pinos, cunhas e faquetas, bem como a retirada de suas respectivas proteções plásticas. O ciclo é encerrado com uma nova submissão ao formulário de verificação, garantindo que os componentes estejam prontos e em conformidade para o transporte e reinício do processo no próximo meio pavimento.
+Após a concretagem e o período de cura (processo de manutenção da umidade e das condições adequadas para que o concreto desenvolva suas propriedades mecânicas, como resistência e durabilidade), inicia-se a fase de desmontagem. Esta etapa demanda uma nova checagem de segurança, procedendo-se com a remoção sequencial dos pinos, cunhas e faquetas, bem como a retirada de suas respectivas proteções plásticas. O ciclo é encerrado com uma nova submissão ao formulário de verificação, garantindo que os componentes estejam prontos e em conformidade para o transporte e reinício do processo no próximo meio pavimento.
 
 
-\subsection{Modelando o comportamento dos trabalhadores}
-Após o mapeamento do processo de construção e considerando os aspectos intrínsecos relacionados aos projetos de construção, é possível propor um modelo computacional híbrido para simular e analisar o comportamento dos trabalhadores com base nas macroetapas e nas atividades necessárias para a montagem e desmontagem de fôrmas. A arquitetura metodológica do modelo computacional híbrido, dividida em duas perspectivas complementares (Figuras \ref{fig:de-model} e \ref{fig:abm-model}), permite simular e analisar o comportamento dos operários em função das macroetapas de montagem e desmontagem das fôrmas. A DES rege o fluxo físico e logístico da construção da parede de concreto, enquanto que a ABM executa a análise cognitiva das decisões dos trabalhadores durante a execução das tarefas. 
+\subsection{Etapas de Modelagem do Comportamento dos Trabalhadores}
+Após o mapeamento do processo de construção e considerando os aspectos intrínsecos relacionados aos projetos de construção, foi possível propor um modelo computacional híbrido para simular e analisar o comportamento dos trabalhadores com base nas macroetapas e nas atividades necessárias para a montagem e desmontagem de fôrmas. A arquitetura metodológica do modelo computacional híbrido, dividida em duas perspectivas complementares (Figuras \ref{fig:de-model} e \ref{fig:abm-model}), permite simular e analisar o comportamento dos operários em função das macroetapas de montagem e desmontagem das fôrmas. A DES rege o fluxo físico e logístico da construção da parede de concreto, enquanto que a ABM executa a análise cognitiva das decisões dos trabalhadores durante a execução das tarefas. 
 \begin{figure}[!htb]
 	\centering
 	\caption{Estrutura da simulação utilizando DES.}
@@ -137,7 +137,7 @@ Após o mapeamento do processo de construção e considerando os aspectos intrí
 
 A Figura \ref{fig:de-model} detalha o Modelo do Canteiro de Obras sob a ótica da DES. O ambiente espacial simula a geometria de um cômodo pertencente a um apartamento típico do sistema construtivo em estudo. Alinhada à realidade da Empresa A e do setor, a meta de produção estabelecida no modelo é a execução de um meio pavimento por dia. A dinâmica do sistema obedece a um fluxo logístico rigoroso, categorizando as ações em inventário (localização inicial das fôrmas e operários), transporte (trajetórias de movimentação), processamento (montagem e desmontagem) e inspeção.
 
-Por sua vez, a Figura \ref{fig:abm-model} ilustra a lógica interna da ABM. O diagrama sequencia os principais Eventos (E) e Tempos de Espera (T) vinculados às macroetapas da obra. Como regra de negócio do modelo, as operações de montagem e desmontagem possuem pré-requisitos estritos, como por exemplo, elas só são iniciadas mediante a verificação de segurança do ambiente e a disponibilidade de recursos físicos (agente desmoldante, faquetas, cunhas, pinos e alinhadores). Uma vez que as macroetapas de montagem (Evento 3) e desmontagem (Evento 5) são deflagradas, o modelo aciona as atividades operacionais (A1 a A10). É nesse nível de detalhe que a simulação híbrida se destaca: a execução correta ou a omissão de cada uma dessas subatividades dependerá exclusivamente do processo de tomada de decisão do operário (agente ativo), permitindo quantificar o impacto dessas escolhas na qualidade e produtividade final do fluxo.
+Por sua vez, a Figura \ref{fig:abm-model} ilustra a lógica interna da ABM. O diagrama sequencia os principais Eventos (E) e Tempos de Espera (T) vinculados às macroetapas da obra. Como regra de negócio do modelo, as operações de montagem e desmontagem possuem pré-requisitos estritos, como por exemplo, elas só são iniciadas mediante a verificação de segurança do ambiente e a disponibilidade de recursos físicos (agente desmoldante, faquetas, cunhas, pinos e alinhadores). Uma vez que as macroetapas de montagem (Evento 3) e desmontagem (Evento 5) são deflagradas, o modelo aciona as atividades operacionais (A1 a A10). É nesse nível de detalhe que a simulação híbrida se destaca: a execução correta ou a omissão de cada uma dessas subatividades dependerá exclusivamente do processo simulado de tomada de decisão do operário (agente ativo), permitindo quantificar o impacto dessas escolhas na qualidade e produtividade final do fluxo.
 
 
 Para compreender como a tomada de decisão ocorre dentro da ABM, a Figura \ref{fig:fatores_influencia} detalha o esquema lógico utilizado para determinar a probabilidade ($P$) de um operário executar, ou não, cada atividade operacional. Este esquema consiste em uma adaptação do modelo de análise cognitiva proposto por Zhang et al. (2019), originalmente voltado para o comportamento de segurança de trabalhadores da construção civil, agora transposto para a análise de produtividade e conformidade de execução.
@@ -189,7 +189,7 @@ Esta seção detalha o processo de coleta de dados empíricos para viabilizar as
 
 Os dados coletados não apenas validaram o problema prático com base na experiência operacional da equipe, mas também forneceram os parâmetros de entrada para o modelo computacional. Cabe destacar que, embora o estudo utilize um caso exemplar específico, os valores padrão dos parâmetros e variáveis podem ser facilmente ajustados para simular outros canteiros de obras que adotem o mesmo sistema construtivo.
 
-O modelo computacional proposto adapta a arquitetura cognitiva de \citeonline{tao2019}, originalmente voltada à segurança do trabalho, para o contexto de gestão e controle da produção. O diferencial desta pesquisa, no entanto, reside na introdução de uma simulação híbrida, que incorpora elementos de DES e um modelo de detecção de falhas utilizando SED.
+Adapatado ao modelo de \citeonline{tao2019}, originalmente voltada à segurança do trabalho, o diferencial desta pesquisa reside na introdução de uma simulação híbrida, que incorpora elementos de DES e um modelo de detecção de falhas utilizando SED.
 
 A parametrização do tempo demandou a observação direta e a cronometragem do período despendido pelos operários na execução de cada atividade obrigatória (A1 a A10) \cite{tesecarol}. É importante ressaltar que essas estimativas refletem o desempenho de uma equipe específica no canteiro de obras analisado, aproximando os parâmetros daquela realidade particular, sem a pretensão de generalizar para todos os cenários possíveis da construção civil. Contudo, a flexibilidade do software permite que o usuário modifique esses valores para estudos futuros. 
 
@@ -202,13 +202,14 @@ Durante a coleta, observou-se que algumas atividades apresentavam tempos de exec
 	\label{fig:tempo_atividade}
 \end{figure}
 \FloatBarrier
+
 Para aprofundar a análise, o estudo também investigou os fatores de influência subjacentes às falhas de processo. Por meio de um questionário aplicado a 15 trabalhadores, buscou-se identificar quais elementos mais induzem a omissão de atividades obrigatórias durante a montagem e desmontagem das fôrmas \cite{tesecarol}. As opções de múltipla escolha fornecidas aos respondentes foram fundamentadas na literatura, principalmente nos estudos de \citeonline{tao2019}, havendo também um campo aberto para sugestões.
 
 A análise dos resultados, ilustrada na Figura \ref{fig:resultado_questionario}, ranqueou a percepção dos operários sobre esses fatores. O defeito mais frequentemente apontado foi a ``Falta de materiais ou recursos, como ferramentas e equipamentos''. Em segundo lugar, empataram a ``Falta de comunicação por parte de gerentes e supervisores'' e a ``Falta de experiência ou conhecimento dos trabalhadores''. Na sequência, foram citados o ``Estresse do trabalhador'' e a ``Pressão para acelerar o trabalho''. Fatores como ``Prazos apertados'', ``Falta de inspeções'' e ``Falta de treinamento'' apresentaram menor incidência. No campo aberto, a própria rotina intensa do canteiro de obras foi relatada como um fator influente.
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Tempo médio observado de cada etapa}
+	\caption{Questionário sobre fatores para omissões dos trabalhadores}
 	\includegraphics[width=0.8 \textwidth]{Caps/Figs/resultado_questionario.png}
 	\fonte{\cite{tesecarol} (Adaptado).}
 	\label{fig:resultado_questionario}
@@ -266,15 +267,137 @@ O conjunto finito de estados $X$ representa as condições operacionais do cante
 \end{figure}
 \FloatBarrier
 
-Dentro desse espaço, define-se o estado inicial $x_0 \in X$. Ele representa o ponto de partida do ciclo construtivo de um meio pavimento, caracterizado pela verificação de segurança e pela disponibilidade inicial de recursos e ferramentas antes da execução da primeira atividade, marcado como $A_0$ na figura \ref{fig:estados-sed}.  O estado final, ou subconjunto de estados marcados, é representado por $X_m \subseteq X$. Na modelagem proposta, o estado $A_{10}$ atua como o estado marcado, designando a conclusão de todas as etapas de montagem e desmontagem das fôrmas. Atingir este estado indica que o ciclo produtivo daquele meio pavimento foi finalizado e o sistema está apto a reiniciar o fluxo na próxima fôrma.
-\subsection{Conjunto de Eventos ($\Sigma$)}
+Dentro desse espaço, define-se o estado inicial $x_0 \in X$. Ele representa o ponto de partida do ciclo construtivo de um meio pavimento, caracterizado pela verificação de segurança e pela disponibilidade inicial de recursos e ferramentas antes da execução da primeira atividade, marcado como $E_0$ na figura \ref{fig:estados-sed}.  O estado final, ou subconjunto de estados marcados, é representado por $X_m \subseteq X$. Na modelagem proposta, o estado $E_{11}$ atua como o estado marcado, designando a conclusão de todas as etapas de montagem e desmontagem das fôrmas. Atingir este estado indica que o ciclo produtivo daquele meio pavimento foi finalizado e o sistema está apto a reiniciar o fluxo na próxima fôrma.
+\subsection{Conjunto de Eventos ($\Sigma$) e Conjunto de Eventos de Falhas ($\Sigma_f$)}
 
 O conjunto finito de eventos $\Sigma$ engloba todas as ocorrências capazes de alterar o estado do sistema. No contexto desta pesquisa, os eventos correspondem à conclusão das macroetapas e das atividades obrigatórias detalhadas no capítulo anterior (como a aplicação de desmoldante, travamento mecânico, etc.). 
 
 Para viabilizar a arquitetura de diagnóstico, esse conjunto é particionado de forma disjunta em duas categorias principais:
 $$\Sigma = \Sigma_o \cup \Sigma_{uo}$$
-Onde $\Sigma_o$ representa o conjunto de Eventos Observáveis (ações que deixam rastros evidentes ou geram registros formais no formulário de verificação) e $\Sigma_{uo}$ representa os Eventos Não Observáveis. Dentro de $\Sigma_{uo}$, encontra-se o subconjunto de Eventos de Falha ($\Sigma_f$), que modela matematicamente o momento exato em que o operário decide omitir uma atividade obrigatória de forma velada.
+Onde $\Sigma_o$ representa o conjunto de Eventos Observáveis e $\Sigma_{uo}$ representa os Eventos Não Observáveis. Dentro de $\Sigma_{uo}$, encontra-se o subconjunto de Eventos de Falhas ($\Sigma_f$), que modela matematicamente o momento exato em que o operário decide omitir uma atividade obrigatória de forma velada.
+
+A fim de definir o Conjunto de Eventos, utilizou-se como base o sequenciamento lógico das etapas de montagem e desmontagem, que ditam as transições entre os estados previamente mapeados na Figura \ref{fig:estados-sed}. Dessa forma, os eventos regulares que compõem o sistema representam as ações operacionais (como ``Processo Iniciado'' ou ``Desmoldante Aplicado'') que impulsionam o fluxo do canteiro de obras do estado inicial ($E_0$) até a sua conclusão no estado marcado ($E_{11}$). 
+
+Para fins de notação e padronização do modelo matemático, os eventos observáveis foram indexados com a letra ``O'' (do inglês \textit{Observable}), enquanto os eventos não observáveis foram indexados com a letra ``U'' (do inglês \textit{Unobservable}). Conforme detalhado na Figura \ref{fig:eventos}, o único evento regular da operação classificado como não observável ($U_1$) corresponde à conclusão da checagem das fôrmas. Essa modelagem justifica-se pelo fato de que, na dinâmica real do canteiro de obras, não há um mecanismo de controle formal que permita validar de maneira inequívoca se o trabalhador de fato realizou, ou não, essa inspeção visual preliminar.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Eventos Observáveis ($\Sigma_o$) e Eventos Não Observáveis ($\Sigma_{uo}$).}
+	\includegraphics[width=0.8 \textwidth]{Caps/Figs/eventos.png}
+	\fonte{Autoral.}
+	\label{fig:eventos}
+\end{figure}
+\FloatBarrier
+
+A definição do Conjunto de Eventos de Falha foi feita a partir dos dados obtidos por meio de um questionário aplicado aos trabalhadores, desenvolvido e documentado por \citeonline{tesecarol}, com as observações diretas realizadas no canteiro de obras. O questionário avaliou a percepção dos operários quanto aos problemas mais frequentes e o grau de dificuldade das tarefas de montagem e desmontagem. 
+
+A premissa adotada no modelo lógico é que atividades classificadas com alto grau de dificuldade impõem maior carga cognitiva e física aos agentes, aumentando a probabilidade de omissão na prática. As Tabelas \ref{tab:dificuldade_montagem} e \ref{tab:dificuldade_desmontagem} apresentam o ranqueamento das atividades obrigatórias consideradas mais difíceis nessas duas fases da execução, conforme o levantamento de \citeonline{tesecarol}.
+
+\begin{table}[!htb]
+	\centering
+	\caption{Ranqueamento das atividades obrigatórias consideradas mais difíceis durante a montagem.}
+	\label{tab:dificuldade_montagem}
+	\begin{tabular}{cl}
+		\hline
+		\textbf{Posição} & \textbf{Atividade} \\
+		\hline
+		1ª & Verificar as condições de segurança do ambiente antes de iniciar a montagem. \\
+		2ª & Verificar a limpeza das fôrmas, escoras e acessórios antes de iniciar. \\
+		3ª & Verificar a integridade das fôrmas e relatar defeitos ao supervisor. \\
+		4ª & Fixar as fôrmas com todas as faquetas, pinos e cunhas necessários. \\
+		5ª & Instalar todos os alinhadores, esquadros e tensores necessários no ambiente. \\
+		6ª & Posicionar as fôrmas no ambiente conforme a sequência do projeto. \\
+		7ª & Aplicar desmoldante no verso das fôrmas antes de fixar cada painel. \\
+		8ª & Inserir os plásticos de proteção em todas as faquetas. \\
+		\hline
+	\end{tabular}
+	\fonte{\citeonline{tesecarol} (Adaptado).}
+\end{table}
+
+\begin{table}[!htb]
+	\centering
+	\caption{Ranqueamento das atividades obrigatórias consideradas mais difíceis durante a desmontagem.}
+	\label{tab:dificuldade_desmontagem}
+	\begin{tabular}{cl}
+		\hline
+		\textbf{Posição} & \textbf{Atividade} \\
+		\hline
+		1ª & Transportar cuidadosamente as fôrmas para o próximo meio pavimento. \\
+		2ª & Remover cuidadosamente os painéis durante a desmontagem. \\
+		3ª & Remover os plásticos de proteção  das faquetas. \\
+		4ª & Remover todas as faquetas, pinos e cunhas antes de mover os painéis. \\
+		5ª & Remover todos os alinhadores, esquadros e tensores do ambiente antes da desmontagem. \\
+		\hline
+	\end{tabular}
+	\fonte{\citeonline{tesecarol} (Adaptado).}
+\end{table}
+
+Da mesma forma, atividades cujas omissões não são percebidas pelos trabalhadores como defeitos, mas que foram constatadas \textit{in loco} pela pesquisa de \citeonline{tesecarol}, representam anomalias furtivas ideais para o rastreamento via autômato diagnosticador. Desta forma, os eventos de falha mais críticos selecionados para a implementação matemática no SED foram:
+
+\begin{itemize}
+	\item \textbf{$F1$ - Omissão da verificação das condições iniciais (Segurança, limpeza e integridade):} Configura a burla das atividades ranqueadas em 1º, 2º e 3º lugares como as mais difíceis durante a fase de montagem (Tabela \ref{tab:dificuldade_montagem}). Está diretamente associada ao estado não observável $E_1$.
+	
+	\item \textbf{$F2$ - Checagem das fôrmas mal executada:} Ainda em relação às 3 atividades ranqueadas como mais difíceis durante a montagem, destaca-se as atividades de verificação e checahem de integridade das fôrmas, portanto esta falha foi escolhida
+	
+	\item \textbf{$F3$ - Omissão na aplicação do desmoldante:} Considerada uma falha crítica de rastreamento porque, embora a omissão tenha sido frequentemente observada \textit{in loco}, os dados revelaram que os trabalhadores não a percebem como um problema, configurando um ponto cego operacional \cite{tesecarol}.
+	\item \textbf{$F4$ - Falha ou omissão na fixação de pinos, cunhas e faquetas:} Selecionada por ter sido apontada no questionário como um dos problemas mais frequentes no canteiro e por ocupar a 4ª posição no ranking de dificuldade de montagem.
+	\item \textbf{$F5$ - Falha na remoção dos plásticos de proteção das faquetas:} A remoção desses componentes ocupou o 3º lugar no ranking de dificuldade durante a desmontagem (Tabela \ref{tab:dificuldade_desmontagem}).
+\end{itemize}
+
+Esses eventos não observáveis em $\Sigma_f$ representam desvios críticos da rota ideal do autômato. No modelo do SED, a ocorrência de qualquer um desses eventos leva o sistema de um estado regular para um estado de falha, acionando a necessidade de o diagnosticador utilizar a sequência de eventos observáveis subsequentes ($\Sigma_o$) para inferir, retrospectivamente, qual omissão foi cometida pela equipe.
 
 \subsection{Função de Transição Parcial ($f$)}
 
-A evolução sequencial do canteiro de obras é formalizada pela função de transição parcial, definida como:$$f: X \times \Sigma \to X$$A função $f(x, \sigma)$ estabelece o novo estado do sistema após a ocorrência de um evento $\sigma \in \Sigma$, partindo de um estado atual $x \in X$. No contexto da execução das fôrmas, essa função atua como o controle lógico de precedência do projeto. Por exemplo, a função de transição garante que o sistema só alcance o estado $A_5$ (Fixação dos pinos, cunhas e faquetas) se o evento correspondente à inserção do plástico de proteção (referente à saída do estado $A_4$) tiver ocorrido de forma satisfatória no modelo físico. Se ocorrer um evento de falha não observável ($\sigma_f$), a função de transição levará o sistema para um estado anômalo, o qual o diagnosticador terá a missão de rastrear.
+A evolução sequencial do canteiro de obras é formalizada pela função de transição parcial, definida como:
+$$f: X \times \Sigma \to X$$
+
+A função $f(x, \sigma)$ estabelece o novo estado do sistema após a ocorrência de um evento $\sigma \in \Sigma$, partindo de um estado atual $x \in X$. No contexto da execução das paredes de concreto, essa função atua como o controle lógico de precedência do projeto. 
+
+Para a construção de $f$, o fluxo foi estruturado assumindo que o avanço físico da montagem e desmontagem das fôrmas ocorre de forma sequencial (do estado $E_0$ ao $E_{11}$). Esse avanço pode ser impulsionado tanto pelos eventos regulares (observáveis $O_i$ e não observável $U_1$) quanto pelos eventos de falha ($f_i$). A Tabela \ref{tab:funcao_transicao} detalha exaustivamente todas as transições mapeadas no autômato gerador ($G$).
+
+\begin{table}[htpb]
+	\centering
+	\caption{Mapeamento da Função de Transição Parcial ($f$) do sistema de fôrmas.}
+	\label{tab:funcao_transicao}
+	\begin{tabular}{cclc}
+		\hline
+		\textbf{Estado Atual} & \textbf{Evento} & \textbf{Descrição} & \textbf{Próximo Estado} \\ \hline
+		\multicolumn{4}{c}{\textbf{Fluxo Regular}} \\ \hline
+		$E_0$ & $O_1$ & Observável & $E_1$ \\
+		$E_1$ & $U_1$ & Não Observável & $E_2$ \\
+		$E_2$ & $O_3$ & Observável & $E_3$ \\
+		$E_3$ & $O_4$ & Observável & $E_4$ \\
+		$E_4$ & $O_5$ & Observável & $E_5$ \\
+		$E_5$ & $O_6$ & Observável & $E_6$ \\
+		$E_6$ & $O_7$ & Observável & $E_7$ \\
+		$E_7$ & $O_8$ & Observável & $E_8$ \\
+		$E_8$ & $O_9$ & Observável & $E_9$ \\
+		$E_9$ & $O_{10}$ & Observável & $E_{10}$ \\
+		$E_{10}$ & $O_{11}$ & Observável & $E_{11}$ \\ \hline
+		\multicolumn{4}{c}{\textbf{Fluxo de Falhas }} \\ \hline
+		$E_0$ & $F_1$ & Omissão da verificação inicial & $E_1$ \\
+		$E_1$ & $F_2$ & Checagem mal executada & $E_2$ \\
+		$E_2$ & $F_3$ & Omissão do desmoldante & $E_3$ \\
+		$E_5$ & $F_4$ & Falha na fixação de pinos & $E_6$ \\
+		$E_8$ & $F_5$ & Omissão da remoção dos plásticos & $E_9$ \\ \hline
+	\end{tabular}
+	\fonte{Autoral.}
+\end{table}
+\FloatBarrier
+
+Observe que as falhas modeladas levam o sistema para o mesmo estado físico subsequente que o evento regular correspondente levaria (por exemplo, tanto $O_1$ quanto $F1$ levam o canteiro ao estado $E_1$). Essa é a representação matemática do fato de que o trabalhador continua o processo construtivo mesmo tendo pulado ou executado mal uma etapa. Para a gestão da obra, a parede parece estar sendo montada normalmente, reforçando a natureza oculta da anomalia.
+
+\subsection{Arquitetura do Autômato Diagnosticador ($G_d$)}
+
+Uma vez definidas as regras lógicas e a quíntupla que compõe o gerador da planta ($G$), a metodologia requer a síntese de um sistema supervisor capaz de inferir a ocorrência dos eventos ocultos de falha com base exclusivamente no fluxo de eventos observáveis que a gestão da obra consegue enxergar. 
+
+Para isso, adota-se a construção do autômato diagnosticador, formalmente denotado como $G_d$. A síntese do $G_d$ consiste em calcular o fechamento não observável do sistema e atribuir \textit{labels} (rótulos) aos estados estimados. Segundo a formulação clássica de \citeonline{basilio2010}, cada estado do diagnosticador carrega consigo o diagnóstico atual da planta, podendo ser classificado como:
+\begin{itemize}
+	\item \textbf{Normal ($N$):} Quando se tem certeza de que nenhuma falha ocorreu.
+	\item \textbf{Falha ($F_i$):} Quando se tem certeza de que a falha do tipo $i$ ocorreu.
+	\item \textbf{Incerto ($N, F_i$ ou $F_i, F_j$):} Quando os eventos observáveis até o momento não são suficientes para distinguir se o sistema está em um estado normal ou se já sofreu uma falha.
+\end{itemize}
+
+O desenvolvimento do autômato da planta e a posterior geração e análise do diagnosticador para a execução das paredes de concreto serão apresentados no capítulo de Resultados.
+
+
