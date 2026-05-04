@@ -3,15 +3,141 @@
 
 Neste capítulo, são apresentados e discutidos os resultados obtidos a partir da implementação dos modelos propostos. A análise é dividida em duas grandes etapas: primeiramente, avalia-se o comportamento do sistema produtivo por meio da simulação computacional híbrida e sua respectiva visualização avançada; em seguida, apresenta-se a síntese do modelo matemático de diagnóstico (SED) capaz de rastrear as falhas comportamentais observadas na simulação.
 
+\subsection{Simulação Híbrida no AnyLogic}
 
-\subsubsection{Simulação Híbrida no AnyLogic}
-A simulação híbrida, combinando ABM e DES foi executada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado e as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas.
-APAGAR:
-O objetivo desta etapa de resultados é avaliar o comportamento dinâmico do sistema construtivo frente às variações de desempenho humano. Para isso, o modelo foi configurado para rodar o caso base e simular os cenários em que os agentes (trabalhadores), influenciados por fatores cognitivos e fadiga, tomam a decisão de omitir tarefas percebidas como difíceis ou menos prioritárias. 
+A simulação híbrida, combinando a Modelagem Baseada em Agentes (ABM) e a Simulação a Eventos Discretos (DES), foi executada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado e as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas.
 
-A partir das rodadas de simulação, foi possível extrair dados quantitativos referentes ao tempo total de ciclo, à flutuação da produtividade da equipe e à frequência de ocorrência das falhas comportamentais (como a omissão da verificação inicial ou a não aplicação de desmoldante).
+Primeiramente, foram estruturados os agentes da simulação: as fôrmas (\textit{Formworks}) e os trabalhadores (\textit{Workers}). No ambiente de modelagem AnyLogic, os agentes representam entidades com participação ativa ou passiva no sistema. Nesse sentido, as fôrmas atuam como os principais elementos de fluxo da DES, enquanto os trabalhadores representam os agentes autônomos da ABM.
 
-\subsubsection{ Visualização no NVIDIA Omniverse}
+\begin{figure}[!htb]
+	\centering
+	\caption{Propriedades do Agente fôrma.}
+	\includegraphics[width=0.8\textwidth]{Caps/Figs/formworks.jpeg}
+	\fonte{Autoral.}
+	\label{fig:formworks}
+\end{figure}
+\FloatBarrier
+
+Conforme ilustrado na Figura \ref{fig:formworks}, cada fôrma possui um parâmetro de identificação exclusivo (\textit{id}) e armazena a informação do trabalhador associado responsável pelo seu transporte. No ambiente principal da simulação (\textit{Main}), o modelo foi projetado com arquitetura escalável para permitir a análise de múltiplas frentes de trabalho operando simultaneamente. Para isso, o Agente Fôrma foi instanciado em quatro populações distintas (Figura \ref{fig:formwork-population}). Cada população agrupa uma dupla de fôrmas direcionada a um setor específico da obra. Devido à sua natureza estática até serem manipuladas, a velocidade inicial desses agentes foi definida como zero, juntamente com a atribuição de sua localização espacial de origem. 
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Propriedades da população de fôrmas.}
+	\includegraphics[width=0.6\textwidth]{Caps/Figs/formwork-population.png}
+	\fonte{Autoral.}
+	\label{fig:formwork-population}
+\end{figure}
+\FloatBarrier
+
+De maneira análoga, os trabalhadores também foram inseridos na \textit{Main} do projeto. Para espelhar a distribuição das fôrmas e manter a escalabilidade do canteiro, o Agente Trabalhador foi distribuído em quatro populações (Figuras \ref{fig:workers} e \ref{fig:workers-population}). Cada uma dessas populações é composta por uma dupla de operários, nascendo inicialmente vazias e sendo preenchidas dinamicamente durante a execução da simulação para atender aos respectivos setores.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Propriedades do Agente trabalhador.}
+	\includegraphics[width=0.6\textwidth]{Caps/Figs/workers.png}
+	\fonte{Autoral.}
+	\label{fig:workers}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Propriedades da população de trabalhadores.}
+	\includegraphics[width=0.6\textwidth]{Caps/Figs/workers-population.png}
+	\fonte{Autoral.}
+	\label{fig:workers-population}
+\end{figure}
+\FloatBarrier
+
+Por serem os agentes centrais da arquitetura ABM, os trabalhadores carregam parâmetros individuais essenciais para o cálculo probabilístico do modelo cognitivo definido anteriormente na Equação \ref{eq:prob_cognitiva}. Tais parâmetros incluem os Ciclos de Treinamento (\textit{TrainingCycles}), Ciclos de Produção (\textit{ProductionCycles}), Ciclos de Inspeção (\textit{InspectionCycles}), Ciclos de Realimentação (\textit{FeedbackCycles}) e Ciclos de Estresse (\textit{StressCycles}). Os valores iniciais destas variáveis são carregados automaticamente a partir de um banco de dados externo em formato de planilha.
+
+Diferentemente das fôrmas, os trabalhadores possuem mobilidade autônoma. A velocidade inicial de deslocamento desses agentes não é um valor constante, mas sim modelada por meio de uma distribuição probabilística triangular de parâmetros (1, 2, 4) representando a variabilidade da locomoção humana. Neste contexto, o valor 1 define a velocidade mínima, o valor 4 representa a velocidade máxima alcançável, e o valor 2 indica a moda, ou seja, a velocidade de caminhada mais provável e frequente durante a jornada de trabalho.
+
+\subsubsection{Simulação a Eventos Discretos no AnyLogic}
+
+A abordagem DES foi responsável por definir a representação geométrica do espaço físico, delimitando as fronteiras de atuação dentro do ambiente \textit{Main} do AnyLogic. Para o dimensionamento e o posicionamento espacial dos elementos da simulação, foram utilizados os blocos construtivos \textit{Storage} e \textit{Rectangular Node}. A disposição espacial foi baseada nas obras do projeto "Minha Casa, Minha Vida".
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Representação geométrica do cômodo e blocos no ambiente do AnyLogic.}
+	\includegraphics[width=0.8\textwidth]{Caps/Figs/des-vision.png} 
+	\fonte{Autoral.}
+	\label{fig:layout-des}
+\end{figure}
+\FloatBarrier
+
+Para operacionalizar a movimentação física das fôrmas no ambiente simulado, utilizou-se o elemento \textit{Transporter Fleet}, configurado com o tipo de navegação de espaço livre. A capacidade dessa frota foi restrita a apenas dois agentes por cômodo, em estrita conformidade com as observações empíricas realizadas durante a coleta de dados no canteiro. Além de gerenciar a logística, o \textit{Transporter Fleet} atua como a principal ponte de comunicação entre a modelagem DES e a ABM. Conforme configurado na ação nativa \textit{On Release} (Figura \ref{fig:transporter}), assim que um trabalhador conclui a tarefa de montagem ou desmontagem de um painel, o sistema emite uma mensagem de "finalizado" (\textit{finished}). Essa mensagem é imediatamente capturada e processada pelo diagrama de estados (\textit{Statechart}) do agente trabalhador na ABM, que será visto mais a frente.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Propriedades do \textit{Transporter Fleet} com movimentação livre.}
+	 \includegraphics[width=0.8\textwidth]{Caps/Figs/transporter-fleet.png}
+	\fonte{Autoral.}
+	\label{fig:transporter}
+\end{figure}
+\FloatBarrier
+
+A lógica de roteamento da montagem baseada em eventos discretos é estabelecida por uma cadeia de blocos interconectados (Figura \ref{fig:assembly-logic}). Após a inserção da fôrma no sistema pelo bloco \textit{Enter}, aplicou-se um \textit{Delay} de 1 segundo com o intuito de evitar sobrecarga computacional durante a simulação. Em seguida, o fluxo alcança o bloco \textit{SelectOutput5}, que atua como o controlador de roteamento, direcionando os painéis para as suas respectivas posições obedecendo à sequência de paredes do projeto. 
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Conexão dos blocos na lógica de montagem (DES).}
+	 \includegraphics[width=0.5\textwidth]{Caps/Figs/assembly-logic.png}
+	\fonte{Autoral.}
+	\label{fig:assembly-logic}
+\end{figure}
+\FloatBarrier
+
+O bloco \textit{SelectOutput5} é regido por condições lógicas que verificam continuamente a disponibilidade de espaço em cada parede. Uma vez que a capacidade máxima de uma parede é atingida, o fluxo é redirecionado para a próxima, até que a montagem de todo o ambiente seja concluída e as entidades saiam do sistema por meio do bloco \textit{Exit} (Figura \ref{fig:select-output}).
+TA ERRADP ESSE SEÇECTPUPUT5
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Propriedades lógicas do bloco \textit{SelectOutput5}.}
+	 \includegraphics[width=0.8\textwidth]{Caps/Figs/chooseoutput.png}
+	\fonte{Autoral.}
+	\label{fig:chooseoutput}
+\end{figure}
+\FloatBarrier
+
+Cada componente de montagem atrelado ao bloco \textit{Store} recebe configurações que definem o transportador utilizado, o local de busca da fôrma, o tempo de carregamento (baseado em uma distribuição triangular) e a liberação do trabalhador após a tarefa. O diferencial desta arquitetura híbrida reside na definição do tempo de armazenamento (equivalente ao tempo de montagem da fôrma). Esse valor não é constante; ele é calculado dinamicamente por meio do comando \textit{setDelay}. Este comando acumula o tempo de ciclo com base nos estados executados — ou omitidos — pelo trabalhador na ABM. Dessa forma, as decisões tomadas no nível cognitivo do agente refletem diretamente nos atrasos e no tempo físico computado pela DES.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Figure 65: Properties of Store building block.}
+	\includegraphics[width=0.6\textwidth]{Caps/Figs/store.png}
+	\fonte{Autoral.}
+	\label{fig:store}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Components connection in disassembly.}
+	\includegraphics[width=0.5\textwidth]{Caps/Figs/disassembly-logic.png}
+	\fonte{Autoral.}
+	\label{fig:disassembly}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htb]
+	\centering
+	\caption{RETRIEVE}
+	\includegraphics[width=0.5\textwidth]{Caps/Figs/retrieve.png}
+	\fonte{Autoral.}
+	\label{fig:retrieve}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htb]
+	\centering
+	\caption{qassembly}
+	\includegraphics[width=0.2\textwidth]{Caps/Figs/qassembly.png}
+	\fonte{Autoral.}
+	\label{fig:qassembly}
+\end{figure}
+\FloatBarrier
+\subsection{ Visualização no NVIDIA Omniverse}
 % Descrição: Apresente os resultados visuais e os insights que o 3D trouxe.
 % O que abordar:
 % - Imagens/prints do modelo renderizado no Omniverse.
@@ -21,20 +147,20 @@ A partir das rodadas de simulação, foi possível extrair dados quantitativos r
 \subsection{Diagnóstico de Falhas por Sistemas a Eventos Discretos (SED)}
 % Descrição: Faça uma ponte com a seção anterior. Diga que, como a simulação mostrou que as falhas ocorrem de forma velada, agora você aplicará o SED para detectá-las matematicamente.
 
-\subsubsection{Autômato Gerador do Canteiro de Obras ($G$)}
+\subsection{Autômato Gerador do Canteiro de Obras ($G$)}
 % Descrição: É aqui que entra o grafo que desenha a tabela da metodologia.
 % O que abordar:
 % - Apresente a figura do grafo do autômato (as bolinhas de E0 a E11 e as setas das transições).
 % - Discuta como as ramificações de falha (F1 a F5) criam caminhos paralelos que terminam no mesmo estado físico, ilustrando a "cegueira" do sistema de verificação tradicional.
 
-\subsubsection{Síntese do Autômato Diagnosticador ($G_d$)}
+\subsection{Síntese do Autômato Diagnosticador ($G_d$)}
 % Descrição: Onde a mágica acontece. Você mostra o autômato observador que rastreia os eventos.
 % O que abordar:
 % - Apresente o grafo ou a tabela do Diagnosticador gerado.
 % - Mostre como os estados agora carregam os rótulos (Normal, F1, F2, etc.).
 % - Explique a evolução do diagnóstico: por exemplo, como o sistema percebe que a "Falha 3 (Omissão do desmoldante)" aconteceu logo após a leitura do evento observável O4.
 
-\subsubsection{Análise de Diagnosticabilidade e Impactos na Gestão}
+\subsection{Análise de Diagnosticabilidade e Impactos na Gestão}
 % Descrição: O fechamento de ouro juntando a engenharia com a matemática.
 % O que abordar:
 % - Confirme se o sistema é diagnosticável (se todas as falhas são descobertas antes que o ciclo da parede termine). Como o fluxo é finito (termina em E11), não deve haver ciclos indeterminados.
