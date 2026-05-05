@@ -1,11 +1,11 @@
 \section{Resultados e Discussão}
 \label{sec:resultados}
 
-Neste capítulo, são apresentados e discutidos os resultados obtidos a partir da implementação dos modelos propostos. A análise é dividida em duas grandes etapas: primeiramente, avalia-se o comportamento do sistema produtivo por meio da simulação computacional híbrida e sua respectiva visualização avançada; em seguida, apresenta-se a síntese do modelo matemático de diagnóstico (SED) capaz de rastrear as falhas comportamentais observadas na simulação.
+Neste capítulo, são apresentados e discutidos os resultados obtidos a partir da implementação dos modelos propostos. A análise é dividida em duas grandes etapas: primeiramente, avalia-se o comportamento do sistema produtivo por meio da simulação computacional híbrida e sua respectiva visualização avançada, em seguida, apresenta-se a síntese do SED capaz de rastrear as falhas comportamentais observadas na simulação.
 
 \subsection{Simulação Híbrida no AnyLogic}
 
-A simulação híbrida, combinando a Modelagem Baseada em Agentes (ABM) e a Simulação a Eventos Discretos (DES), foi executada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado e as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas.
+A simulação híbrida, combinando a Modelagem Baseada em Agentes (ABM) e a Simulação a Eventos Discretos (DES), foi implementada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado, as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas e a disposição física da obra.
 
 Primeiramente, foram estruturados os agentes da simulação: as fôrmas (\textit{Formworks}) e os trabalhadores (\textit{Workers}). No ambiente de modelagem AnyLogic, os agentes representam entidades com participação ativa ou passiva no sistema. Nesse sentido, as fôrmas atuam como os principais elementos de fluxo da DES, enquanto os trabalhadores representam os agentes autônomos da ABM.
 
@@ -29,7 +29,7 @@ Conforme ilustrado na Figura \ref{fig:formworks}, cada fôrma possui um parâmet
 \end{figure}
 \FloatBarrier
 
-De maneira análoga, os trabalhadores também foram inseridos na \textit{Main} do projeto. Para espelhar a distribuição das fôrmas e manter a escalabilidade do canteiro, o Agente Trabalhador foi distribuído em quatro populações (Figuras \ref{fig:workers} e \ref{fig:workers-population}). Cada uma dessas populações é composta por uma dupla de operários, nascendo inicialmente vazias e sendo preenchidas dinamicamente durante a execução da simulação para atender aos respectivos setores.
+De maneira análoga, foram criados os agentes dos trabalhadores e inseridos na \textit{Main} do projeto. Para espelhar a distribuição das fôrmas e manter a escalabilidade do canteiro, o Agente Trabalhador foi distribuído em quatro populações (Figuras \ref{fig:workers} e \ref{fig:workers-population}). Cada uma dessas populações é composta por uma dupla de operários, nascendo inicialmente vazias e sendo preenchidas dinamicamente durante a execução da simulação para atender aos respectivos setores.
 
 \begin{figure}[!htb]
 	\centering
@@ -51,11 +51,11 @@ De maneira análoga, os trabalhadores também foram inseridos na \textit{Main} d
 
 Por serem os agentes centrais da arquitetura ABM, os trabalhadores carregam parâmetros individuais essenciais para o cálculo probabilístico do modelo cognitivo definido anteriormente na Equação \ref{eq:prob_cognitiva}. Tais parâmetros incluem os Ciclos de Treinamento (\textit{TrainingCycles}), Ciclos de Produção (\textit{ProductionCycles}), Ciclos de Inspeção (\textit{InspectionCycles}), Ciclos de Realimentação (\textit{FeedbackCycles}) e Ciclos de Estresse (\textit{StressCycles}). Os valores iniciais destas variáveis são carregados automaticamente a partir de um banco de dados externo em formato de planilha.
 
-Diferentemente das fôrmas, os trabalhadores possuem mobilidade autônoma. A velocidade inicial de deslocamento desses agentes não é um valor constante, mas sim modelada por meio de uma distribuição probabilística triangular de parâmetros (1, 2, 4) representando a variabilidade da locomoção humana. Neste contexto, o valor 1 define a velocidade mínima, o valor 4 representa a velocidade máxima alcançável, e o valor 2 indica a moda, ou seja, a velocidade de caminhada mais provável e frequente durante a jornada de trabalho.The identification number was not distinguished inside each WORKER agent as the objective was not to identify them individually.
+Diferentemente das fôrmas, os trabalhadores possuem mobilidade autônoma. A velocidade inicial de deslocamento desses agentes não é um valor constante, mas sim modelada por meio de uma distribuição probabilística triangular de parâmetros (1, 2, 4) representando a variabilidade da locomoção humana. Neste contexto, o valor 1 define a velocidade mínima, o valor 4 representa a velocidade máxima alcançável, e o valor 2 indica a moda, ou seja, a velocidade de caminhada mais provável e frequente durante a jornada de trabalho. Trabalhadores não têm um ID associado, haja visto que não é necessário identifica-los individualmente.
 
-\subsubsection{Simulação a Eventos Discretos no AnyLogic}
+\subsubsection{DES no AnyLogic}
 
-A abordagem DES foi responsável por definir a representação geométrica do espaço físico, delimitando as fronteiras de atuação dentro do ambiente \textit{Main} do AnyLogic. Para o dimensionamento e o posicionamento espacial dos elementos da simulação, foram utilizados os blocos construtivos \textit{Storage} e \textit{Rectangular Node}. A disposição espacial foi baseada nas obras do projeto "Minha Casa, Minha Vida".
+A abordagem DES foi responsável por definir a representação geométrica do espaço físico, delimitando as fronteiras de atuação dentro do ambiente \textit{Main} do AnyLogic. Para o dimensionamento e o posicionamento espacial dos elementos da simulação, foram utilizados os blocos construtivos \textit{Storage} e \textit{Rectangular Node}. Como mencionado previamente, a disposição espacial foi baseada nas obras do canteiro de obras A.
 
 \begin{figure}[!htb]
 	\centering
@@ -66,7 +66,7 @@ A abordagem DES foi responsável por definir a representação geométrica do es
 \end{figure}
 \FloatBarrier
 
-Para operacionalizar a movimentação física das fôrmas no ambiente simulado, utilizou-se o elemento \textit{Transporter Fleet}, configurado com o tipo de navegação de espaço livre. A capacidade dessa frota foi restrita a apenas dois agentes por cômodo, em estrita conformidade com as observações empíricas realizadas durante a coleta de dados no canteiro. Além de gerenciar a logística, o \textit{Transporter Fleet} atua como a principal ponte de comunicação entre a modelagem DES e a ABM. Conforme configurado na ação nativa \textit{On Release} (Figura \ref{fig:transporter}), assim que um trabalhador conclui a tarefa de montagem ou desmontagem de um painel, o sistema emite uma mensagem de "finalizado" (\textit{finished}). Essa mensagem é imediatamente capturada e processada pelo diagrama de estados (\textit{Statechart}) do agente trabalhador na ABM, que será visto mais a frente.
+Para operacionalizar a movimentação física das fôrmas no ambiente simulado, utilizou-se o elemento \textit{Transporter Fleet} do Anylogic, configurado com o tipo de navegação de espaço livre. O \textit{Transporter Fleet} é um bloco capaz de definir e gerenciar um grupo de transportadores de outros agentes e  simular movimentações dentro do software, sendo utilizado para que os trabalhadores movam as fôrmas no canteiro. A capacidade dessa frota foi restrita a apenas dois agentes por cômodo, em estrita conformidade com as observações empíricas realizadas durante a coleta de dados no canteiro. Além de gerenciar a logística, o \textit{Transporter Fleet} atua como a principal ponte de comunicação entre a modelagem DES e a ABM. Conforme configurado na ação nativa \textit{On Release} (Figura \ref{fig:transporter}), assim que um trabalhador conclui a tarefa de montagem ou desmontagem de um painel, o sistema emite uma mensagem de "finalizado" (\textit{finished}). Essa mensagem é imediatamente capturada e processada pelo diagrama de estados (\textit{Statechart}) do agente trabalhador na ABM, que será visto mais a frente. Ao chegar ao destino final do transporte com "\textit{on destination reached}", ou seja, quando o trabalhador está montando as fôrmas é realizada uma transformação estética nas fôrmas para melhor visualização.
 
 \begin{figure}[!htb]
 	\centering
@@ -77,43 +77,56 @@ Para operacionalizar a movimentação física das fôrmas no ambiente simulado, 
 \end{figure}
 \FloatBarrier
 
-A lógica de roteamento da montagem baseada em eventos discretos é estabelecida por uma cadeia de blocos interconectados (Figura \ref{fig:assembly-logic}). Após a inserção da fôrma no sistema pelo bloco \textit{Enter}, aplicou-se um \textit{Delay} de 1 segundo com o intuito de evitar sobrecarga computacional durante a simulação. Em seguida, o fluxo alcança o bloco \textit{SelectOutput5}, que atua como o controlador de roteamento, direcionando os painéis para as suas respectivas posições obedecendo à sequência de paredes do projeto. 
+A lógica de roteamento da montagem baseada em eventos discretos é estabelecida por uma cadeia de blocos interconectados (Figura \ref{fig:assembly-logic}). Após a inserção da fôrma no sistema pelo bloco \textit{Enter}, aplicou-se um bloco de \textit{Delay} de 1 segundo com o intuito de evitar sobrecarga computacional durante a simulação. Em seguida, o fluxo alcança o bloco \textit{SelectOutputln}, que atua como o controlador de roteamento. Esse bloco chama a função \textit{chooseOutput}, a qual é regida por condições lógicas que verificam continuamente a disponibilidade de espaço em cada parede. Uma vez que a capacidade máxima de uma parede é atingida, o fluxo é redirecionado para a próxima, até que a montagem de todo o ambiente seja concluída e as entidades saiam do sistema por meio do bloco \textit{Exit} (Figura \ref{fig:choose-output}).
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Conexão dos blocos na lógica de montagem (DES).}
+	\caption{Conexão dos blocos na lógica de montagem.}
 	 \includegraphics[width=0.5\textwidth]{Caps/Figs/assembly-logic.png}
 	\fonte{Autoral.}
 	\label{fig:assembly-logic}
 \end{figure}
 \FloatBarrier
 
-O bloco \textit{SelectOutput5} é regido por condições lógicas que verificam continuamente a disponibilidade de espaço em cada parede. Uma vez que a capacidade máxima de uma parede é atingida, o fluxo é redirecionado para a próxima, até que a montagem de todo o ambiente seja concluída e as entidades saiam do sistema por meio do bloco \textit{Exit} (Figura \ref{fig:select-output}).
-TA ERRADP ESSE SEÇECTPUPUT5
+
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Propriedades lógicas do bloco \textit{SelectOutput5}.}
+	\caption{Propriedades lógicas da função \textit{chooseOutput}.}
 	 \includegraphics[width=0.8\textwidth]{Caps/Figs/chooseoutput.png}
 	\fonte{Autoral.}
-	\label{fig:chooseoutput}
+	\label{fig:choose-output}
 \end{figure}
 \FloatBarrier
 
-Cada componente de montagem atrelado ao bloco \textit{Store} recebe configurações que definem o transportador utilizado, o local de busca da fôrma, o tempo de carregamento (baseado em uma distribuição triangular) e a liberação do trabalhador após a tarefa. O diferencial desta arquitetura híbrida reside na definição do tempo de armazenamento (equivalente ao tempo de montagem da fôrma). Esse valor não é constante; ele é calculado dinamicamente por meio do comando \textit{setDelay}. Este comando acumula o tempo de ciclo com base nos estados executados — ou omitidos — pelo trabalhador na ABM. Dessa forma, as decisões tomadas no nível cognitivo do agente refletem diretamente nos atrasos e no tempo físico computado pela DES.
+Cada componente de montagem atrelado ao bloco \textit{Store} recebe configurações que definem o transportador utilizado, o local de busca da fôrma, o tempo de carregamento (baseado em uma distribuição triangular) e a liberação do trabalhador após a tarefa. O bloco \textit{Store} é utilizado para modelar o armazenamento de itens (agentes) em sistemas de armazenagem, como estantes, prateleiras ou racks. 
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Figure 65: Properties of Store building block.}
+	\caption{Propiedades do bloco de armazenagem \textit{Store}.}
 	\includegraphics[width=0.6\textwidth]{Caps/Figs/store.png}
 	\fonte{Autoral.}
 	\label{fig:store}
 \end{figure}
 \FloatBarrier
 
+O diferencial desta arquitetura híbrida reside na definição do tempo de armazenamento (equivalente ao tempo de montagem ou desmontagem da fôrma). Esse valor não é constante, ele é calculado dinamicamente por meio da função \textit{setDelay}, como mostra a Figura \ref{fig:setDelay}. Dentro da ABM, o trabalhador \textit{work} contém uma variável chamada \textit{CountDelay}. A cada etapa realizada pelo trabalhador, essa variável será incrementada com o tempo da etapa realizada. Se o trabalhador fizer pelo menos uma etapa, a flag de \textit{IsNeedDelay} é setada para \textit{True}. Dessa forma, \textit{CountDelay} acumula o tempo de realização das tarefas com base nas etapas executadas ou não executadas pelo trabalhador na ABM. Sendo assim, as decisões tomadas no nível cognitivo do agente refletem diretamente nos atrasos e no tempo físico computado pela DES.
+
 \begin{figure}[!htb]
 	\centering
-	\caption{Components connection in disassembly.}
+	\caption{Função \textit{setDelay}.}
+	\includegraphics[width=0.8\textwidth]{Caps/Figs/setDelay.png}
+	\fonte{Autoral.}
+	\label{fig:setDelay}
+\end{figure}
+\FloatBarrier
+
+
+A etapa de desmontagem foi feita de forma similar com a utilização do bloco \textit{Enter}, um bloco \textit{Delay} de 1 segundo e um bloco \textit{Retrieve}. O bloco \textit{Retrieve} é utilizado para remover agentes de um sistema de armazenagem. Destarte, o bloco \textit{Retrieve} realiza diretamente o processo de desmontagem. O bloco também usa a função \textit{setDelay} para retornar o tempo de desmontagem com base no tempo etapas de desmontagem realizadas ou não pelo trabalhador na ABM. Quando as fôrmas são removidas, o trabalhador as leva para a sua locação inicial, completando o ciclo da simulação.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Conexão dos blocos na lógica de desmontagem.}
 	\includegraphics[width=0.5\textwidth]{Caps/Figs/disassembly-logic.png}
 	\fonte{Autoral.}
 	\label{fig:disassembly}
@@ -122,21 +135,83 @@ Cada componente de montagem atrelado ao bloco \textit{Store} recebe configuraç�
 
 \begin{figure}[!htb]
 	\centering
-	\caption{RETRIEVE}
+	\caption{Propiedades do bloco de desmonte \textit{Retrieve}.}
 	\includegraphics[width=0.5\textwidth]{Caps/Figs/retrieve.png}
 	\fonte{Autoral.}
 	\label{fig:retrieve}
 \end{figure}
 \FloatBarrier
 
+Para concluir a etapa de DES, foram definidas duas \textit{flags} na função \textit{main}, responsáveis por controlar o estado da simulação: \textit{qAssembly} e \textit{qDissassembly}. Essas variáveis podem assumir valores binários (0 ou 1). Quando \textit{qAssembly} é igual a 0, a simulação encontra-se na etapa de montagem, a qual é considerada finalizada quando essa variável passa a valer 1.
+
 \begin{figure}[!htb]
 	\centering
-	\caption{qassembly}
-	\includegraphics[width=0.2\textwidth]{Caps/Figs/qassembly.png}
+	\caption{Variáveis para montagem e desmontagem.}
+	\includegraphics[width=0.3\textwidth]{Caps/Figs/qassembly.png}
 	\fonte{Autoral.}
 	\label{fig:qassembly}
 \end{figure}
 \FloatBarrier
+
+Como as etapas são sequenciais, somente após a conclusão da montagem (\textit{qAssembly} = 1) é que se avalia o estado de \textit{qDissassembly}. Nesse caso, se \textit{qDissassembly} for igual a 0, a simulação está na etapa de desmontagem. Quando assume o valor 1, indica que ambas as etapas (montagem e desmontagem) foram concluídas.
+
+\subsubsection{ABM no AnyLogic}
+A abordagem ABM foi responsável por descrever o modelo cognitivo do trabalhador. A Figura \ref{fig:statechart} mostra o diagrama de estados do trabalhador, representado os estados possíveis do trabalhador no processo de montagem e desmontagem. O agente trabalhador inicia no modo Ocioso (\textit{Idle}). É no estado de Locomoção (\textit{Locomotion}) que está a lógica principal do trabalhador, seguido das etapas de montagem à esquerda e etapas de desmontagem à direita. Os útimos Estados definem se o comportamento do trabalhador foi adequado (\textit{AdeqBehaviorA}), concluindo todas as atividades, ou inadequado (\textit{InadeqBehavior}), pulando pelo menos uma atividade.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Diagrama de estados na ABM.}
+	\includegraphics[width=0.8\textwidth]{Caps/Figs/stateChart.png}
+	\fonte{Autoral.}
+	\label{fig:statechart}
+\end{figure}
+\FloatBarrier
+
+A transição para sair do estado Ocioso para o de Locomoção ocorre a partir de um Evento. No Anylogic, Eventos são elementos de modelagem utilizados para agendar e executar ações específicas em momentos definidos ou quando certas condições são atendidas no tempo de simulação.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Eventos da ABM.}
+	\includegraphics[width=0.3\textwidth]{Caps/Figs/Eventos.png}
+	\fonte{Autoral.}
+	\label{fig:eventos}
+\end{figure}
+\FloatBarrier
+
+No contexto do projeto, o trabalhador sai do modo Ocioso quando as condições de tempo de trabalho são atendidas, ou seja, que foi iniciado o turno do serviço do trabalhador.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Propriedades dos turnos.}
+	
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/MorningShift.png}
+		\caption*{(a) Morning Shift}
+		\label{fig:morningShift}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/EveningShift.png}
+		\caption*{(b) Evening Shift}
+		\label{fig:eventos}
+	\end{minipage}
+	
+	\fonte{Autoral.}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Propiedade do descanso \textit{Break}.}
+	\includegraphics[width=0.45\textwidth]{Caps/Figs/Break.png}
+	\fonte{Autoral.}
+	\label{fig:eventos}
+\end{figure}
+\FloatBarrier
+
+
+
 \subsection{ Visualização no NVIDIA Omniverse}
 % Descrição: Apresente os resultados visuais e os insights que o 3D trouxe.
 % O que abordar:
