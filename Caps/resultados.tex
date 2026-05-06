@@ -178,7 +178,8 @@ A transição para sair do estado Ocioso para o de Locomoção ocorre a partir d
 \end{figure}
 \FloatBarrier
 
-No contexto do projeto, o trabalhador sai do modo Ocioso quando as condições de tempo de trabalho são atendidas, ou seja, que foi iniciado o turno do serviço do trabalhador.
+
+No contexto do projeto, o trabalhador sai do modo Ocioso quando as condições de tempo de trabalho são atendidas, ou seja, que foi iniciado o turno do serviço do trabalhador. O Turno da Manhã (\textit{MorningShift}) e o Turno da Tarde (\textit{EveningShift}) são os eventos responsáveis por tirar o trabalhador da ociosidade, setando a variavél de Hora de Serviço (\textit{ServiceHours}) para \textit{True}. 
 
 \begin{figure}[!htb]
 	\centering
@@ -201,6 +202,7 @@ No contexto do projeto, o trabalhador sai do modo Ocioso quando as condições d
 	\fonte{Autoral.}
 \end{figure}
 
+De forma contrária, o Evento de descanso (\textit{Break}) coloca o trabalhador em modo ocioso, setando a variável \textit{ServiceHours} para \textit{False}.
 \begin{figure}[!htb]
 	\centering
 	\caption{Propiedade do descanso \textit{Break}.}
