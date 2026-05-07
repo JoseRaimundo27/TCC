@@ -1,4 +1,4 @@
-\section{Resultados e Discussão}
+\section{Resultados}
 \label{sec:resultados}
 
 Neste capítulo, são apresentados e discutidos os resultados obtidos a partir da implementação dos modelos propostos. A análise é dividida em duas grandes etapas: primeiramente, avalia-se o comportamento do sistema produtivo por meio da simulação computacional híbrida e sua respectiva visualização avançada, em seguida, apresenta-se a síntese do SED capaz de rastrear as falhas comportamentais observadas na simulação.
@@ -156,7 +156,8 @@ Para concluir a etapa de DES, foram definidas duas \textit{flags} na função \t
 Como as etapas são sequenciais, somente após a conclusão da montagem (\textit{qAssembly} = 1) é que se avalia o estado de \textit{qDissassembly}. Nesse caso, se \textit{qDissassembly} for igual a 0, a simulação está na etapa de desmontagem. Quando assume o valor 1, indica que ambas as etapas (montagem e desmontagem) foram concluídas.
 
 \subsubsection{ABM no AnyLogic}
-A abordagem ABM foi responsável por descrever o modelo cognitivo do trabalhador. A Figura \ref{fig:statechart} mostra o diagrama de estados do trabalhador, representado os estados possíveis do trabalhador no processo de montagem e desmontagem. O agente trabalhador inicia no modo Ocioso (\textit{Idle}). É no estado de Locomoção (\textit{Locomotion}) que está a lógica principal do trabalhador, seguido das etapas de montagem à esquerda e etapas de desmontagem à direita. Os útimos Estados definem se o comportamento do trabalhador foi adequado (\textit{AdeqBehaviorA}), concluindo todas as atividades, ou inadequado (\textit{InadeqBehavior}), pulando pelo menos uma atividade.
+
+A abordagem ABM foi responsável por descrever o modelo cognitivo do trabalhador. A Figura \ref{fig:statechart} apresenta o diagrama de estados, representando os possíveis estados do trabalhador no processo de montagem e desmontagem. O agente trabalhador inicia no estado Ocioso (\textit{Idle}). No estado de Locomoção (\textit{Locomotion}) encontra-se a lógica principal do comportamento do trabalhador, seguido pelas etapas de montagem, à esquerda, e de desmontagem, à direita, cuja execução é influenciada pelos parâmetros de influência. Os estados finais definem se o comportamento do trabalhador foi adequado (\textit{AdeqBehaviorA}), quando todas as atividades são concluídas, ou inadequado (\textit{InadeqBehavior}), quando pelo menos uma atividade é ignorada.
 
 \begin{figure}[!htb]
 	\centering
@@ -167,19 +168,18 @@ A abordagem ABM foi responsável por descrever o modelo cognitivo do trabalhador
 \end{figure}
 \FloatBarrier
 
-A transição para sair do estado Ocioso para o de Locomoção ocorre a partir de um Evento. No Anylogic, Eventos são elementos de modelagem utilizados para agendar e executar ações específicas em momentos definidos ou quando certas condições são atendidas no tempo de simulação.
+A transição do estado Ocioso para o estado de Locomoção ocorre a partir de um Evento. No AnyLogic, eventos são elementos de modelagem utilizados para agendar e executar ações específicas em momentos definidos ou quando determinadas condições são satisfeitas durante o tempo de simulação.
 
 \begin{figure}[!htb]
 	\centering
 	\caption{Eventos da ABM.}
 	\includegraphics[width=0.3\textwidth]{Caps/Figs/Eventos.png}
 	\fonte{Autoral.}
-	\label{fig:eventos}
+	\label{fig:eventosABM}
 \end{figure}
 \FloatBarrier
 
-
-No contexto do projeto, o trabalhador sai do modo Ocioso quando as condições de tempo de trabalho são atendidas, ou seja, que foi iniciado o turno do serviço do trabalhador. O Turno da Manhã (\textit{MorningShift}) e o Turno da Tarde (\textit{EveningShift}) são os eventos responsáveis por tirar o trabalhador da ociosidade, setando a variavél de Hora de Serviço (\textit{ServiceHours}) para \textit{True}. 
+No contexto do projeto, o trabalhador deixa o estado Ocioso quando as condições de trabalho são atendidas, ou seja, quando o turno de serviço é iniciado. Os eventos Turno da Manhã (\textit{MorningShift}) e Turno da Tarde (\textit{EveningShift}) são responsáveis por retirar o trabalhador da ociosidade, configurando a variável Hora de Serviço (\textit{ServiceHours}) como \textit{True}.
 
 \begin{figure}[!htb]
 	\centering
@@ -188,31 +188,221 @@ No contexto do projeto, o trabalhador sai do modo Ocioso quando as condições d
 	\begin{minipage}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Caps/Figs/MorningShift.png}
-		\caption*{(a) Morning Shift}
+		\caption*{(a) Turno da manhã.}
 		\label{fig:morningShift}
 	\end{minipage}
 	\hfill
 	\begin{minipage}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Caps/Figs/EveningShift.png}
-		\caption*{(b) Evening Shift}
-		\label{fig:eventos}
+		\caption*{(b) Turno da tarde.}
+		\label{fig:eveningShift}
 	\end{minipage}
 	
 	\fonte{Autoral.}
+	
 \end{figure}
 
-De forma contrária, o Evento de descanso (\textit{Break}) coloca o trabalhador em modo ocioso, setando a variável \textit{ServiceHours} para \textit{False}.
+De forma análoga, o evento de descanso (\textit{Break}) retorna o trabalhador ao estado Ocioso, configurando a variável \textit{ServiceHours} como \textit{False}.
+
 \begin{figure}[!htb]
 	\centering
-	\caption{Propiedade do descanso \textit{Break}.}
+	\caption{Propriedades do descanso (\textit{Break}).}
 	\includegraphics[width=0.45\textwidth]{Caps/Figs/Break.png}
 	\fonte{Autoral.}
-	\label{fig:eventos}
+	\label{fig:break}
 \end{figure}
 \FloatBarrier
 
+Os eventos \textit{EndA} e \textit{EndD} referem-se ao término da montagem (\textit{End Assemble}) e da desmontagem (\textit{End Disassemble}), respectivamente.
 
+\begin{figure}[!htb]
+	\centering
+	\caption{Propriedades dos eventos de término.}
+	
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/EndA.png}
+		\caption*{(a) Fim da montagem.}
+		\label{fig:endA}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/EndB.png}
+		\caption*{(b) Fim da desmontagem.}
+		\label{fig:endB}
+	\end{minipage}
+	
+	\fonte{Autoral.}
+	
+\end{figure}
+
+Esses eventos são disparados quando a montagem ou desmontagem é concluída. Essa verificação é realizada ao identificar se a última parede foi montada, no caso da montagem, ou se todas as fôrmas (total de 36) foram desmontadas. Os eventos atribuem valores às variáveis \textit{qAssemble} e \textit{qDisassemble}, conforme a funcionalidade previamente discutida. Além disso, a variável \textit{ServiceHours} é configurada como \textit{False}, indicando o término do serviço.
+
+Conforme a Figura \ref{fig:simulationStates}, cada atividade do trabalhador, tanto de montagem como de desmontagem terá uma variável associada. Essas variáveis serão incrementadas sempre que a atividade for realizada por fôrma. Sendo assim, no fim da simulação, as variáveis nos dará o quantitativo de vezes em que a atividade foi realizada, podendo gerar estatísticas associadas. Ademais, variáveis auxiliares relacionadas ao processo cognitivo são atualizadas com base na conclusão das atividades.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Estados da simulação.}
+	\includegraphics[width=0.3\textwidth]{Caps/Figs/simulationStates.png}
+	\fonte{Autoral.}
+	\label{fig:simulationStates}
+\end{figure}
+\FloatBarrier
+
+ A variável de Cognição (\textit{Cognition}) é incrementada sempre que qualquer atividade seja executada. No fim do processo, se todas as atividades forem realizadas, é incrementada a variável de Conformidade (\textit{Conformity}), e se pelo menos uma não foi executada, é incrementada a varíavel de Não Conformidade  (\textit{NonConformity}).
+ 
+ No AnyLogic, parâmetros são elementos que definem características constantes ou dados de entrada para agentes, ambientes ou blocos de processo, facilitando a alteração de cenários sem a necessidade de modificar a lógica do modelo. Neste trabalho, os parâmetros são definidos individualmente para cada trabalhador e utilizados no cálculo dos fatores de influência, conforme a Equação \ref{eq:prob_cognitiva}. Com base na coleta de dados e na literatura, os parâmetros selecionados foram: Treinamento (\textit{TrainingCycles}), Experiência (\textit{ProductionCycles}), Inspeção (\textit{InspectionCycles}), Feedback (\textit{FeedbackCycles}) e Estresse (\textit{StressCycles}).
+ 
+ \begin{figure}[!htb]
+ 	\centering
+ 	\caption{Parâmetros dos trabalhadores.}
+ 	\includegraphics[width=0.35\textwidth]{Caps/Figs/parameters.png}
+ 	\fonte{Autoral.}
+ 	\label{fig:parameters}
+ \end{figure}
+ \FloatBarrier
+ 
+ Cada fator de influência é calculado a partir da Equação \ref{eq:curva_aprendizado}. No AnyLogic, foram implementadas funções para realizar esses cálculos. As funções constituem elementos fundamentais da modelagem, pois permitem definir comportamentos personalizados, reutilizar código e encapsular a lógica dentro do modelo de simulação.
+ 
+ \begin{figure}[!htb]
+ 	\centering
+ 	\caption{Funções para cálculo dos fatores de influência.}
+ 	
+ 	\begin{minipage}{0.35\textwidth}
+ 		\centering
+ 		\includegraphics[width=\textwidth]{Caps/Figs/learningcurve.png}
+ 		\caption*{(a) Funções utilizadas no cálculo}
+ 		\label{fig:learningcurve}
+ 	\end{minipage}
+ 	\hfill
+ 	\begin{minipage}{0.5\textwidth}
+ 		\centering
+ 		\includegraphics[width=\textwidth]{Caps/Figs/calculateX1.png}
+ 		\caption*{(b) Exemplo de cálculo de um fator de influência}
+ 		\label{fig:calculatex1}
+ 	\end{minipage}
+ 	
+ 	\fonte{Autoral.}
+ 	
+ \end{figure}
+ \FloatBarrier
+ 
+ Na Figura \ref{fig:learningcurve}, são apresentadas as funções responsáveis pelo cálculo dos fatores de influência, sendo cada uma associada a um parâmetro específico. O parâmetro \textit{TrainingCycles} corresponde ao fator de influência $X_1$, \textit{ProductionCycles} a $X_2$, \textit{InspectionCycles} a $X_3$, \textit{FeedbackCycles} a $X_4$ e \textit{StressCycles} a $X_5$.
+ 
+ Na Figura \ref{fig:calculatex1}, apresenta-se um exemplo do cálculo do fator de influência associado ao \textit{TrainingCycles}, baseado na Equação \ref{eq:curva_aprendizado}. O valor inicial foi modelado por meio de uma distribuição normal truncada, com média igual a 0{,}85 e desvio padrão de 0{,}1, limitada ao intervalo unitário. O parâmetro $\theta$, presente na Equação \ref{eq:taxa_aprendizado}, foi definido como 0{,}734. Esses valores foram selecionados com base na literatura e validados por meio de testes experimentais no modelo.
+ 
+Como visto anteriormente, no diagrama de estados, o trabalhador inicia no estado \textit{Idle} e transiciona para \textit{Locomotion} por meio do evento \textit{MorningShift}. O estado \textit{Locomotion} é responsável por controlar o estado operacional do trabalhador, verificando se ele se encontra na fase de montagem, desmontagem ou se já concluiu todas as atividades.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Lógica do estado \textit{Locomotion}.}
+	\includegraphics[width=0.6\textwidth]{Caps/Figs/locomotion.png}
+	\fonte{Autoral.}
+	\label{fig:locomotion}
+\end{figure}
+\FloatBarrier
+Como apresentado na Figura \ref{fig:locomotion}, é realizada uma verificação sequencial do estado do trabalhador. Inicialmente, verifica-se se a montagem ainda não foi concluída e se o trabalhador se encontra em horário de serviço (\textit{ServiceHours}). Caso ambas as condições sejam satisfeitas, o trabalhador permanece na fase de montagem, criando uma nova fôrma por meio da função correspondente, calculando a probabilidade de execução com base nos fatores de influência e sendo direcionado para a execução das atividades de montagem.
+
+Caso a condição de montagem não seja satisfeita, é realizada a verificação da etapa de desmontagem. Se a desmontagem ainda não foi concluída e o trabalhador estiver em horário de serviço, ele é direcionado para a execução das atividades de desmontagem por meio da função \textit{FindFormwork}.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.6\linewidth]{Caps/Figs/findformwork}
+	\caption{Função \textit{FindFormwork} para auxiliar na desmontagem.}
+	\fonte{Autoral.}
+	\label{fig:findformwork}
+\end{figure}
+\FloatBarrier
+
+A função \textit{FindFormwork} é responsável por localizar a primeira fôrma disponível na população com base no identificador sequencial (\textit{IDFormwork}). Após a identificação, a fôrma é associada ao trabalhador responsável pelo seu transporte, por meio da atribuição do agente à variável correspondente do objeto. Em seguida, o identificador da fôrma é incrementado, permitindo que a próxima chamada da função selecione a fôrma subsequente, garantindo assim o processamento sequencial das unidades.
+
+Durante essas etapas, variáveis de controle são atualizadas para refletir o progresso do trabalhador, permitindo o acompanhamento do número de atividades concluídas em cada fase do processo. Quando o trabalhador se encontra no estado de montagem, ele envia para si mesmo a mensagem \textit{"assembling"}, que atua como gatilho para iniciar as etapas de montagem, realizando a transição para a primeira atividade do fluxo correspondente.
+De forma análoga, quando o trabalhador se encontra no estado de desmontagem, ele envia para si mesmo a mensagem \textit{"disassembling"}, responsável por iniciar as etapas de desmontagem e realizar a transição para a primeira atividade do fluxo de desmontagem.
+Caso nenhuma das condições anteriores seja satisfeita (quando tanto a montagem quanto a desmontagem já tenham sido concluídas ou o trabalhador não esteja em horário de serviço) o trabalhador envia para si mesmo a mensagem \textit{"EndUp"}, sendo então direcionado de volta ao estado \textit{Idle}, caracterizando o encerramento de suas atividades no ciclo atual de execução.
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/checkformwork}
+	\caption{Exemplo de lógica aplicada às atividades.}
+	\fonte{Autoral.}
+	\label{fig:checkformwork}
+\end{figure}
+\FloatBarrier
+
+A Figura \ref{fig:checkformwork} apresenta um exemplo da lógica aplicada às atividades de montagem e desmontagem. Inicialmente, são calculados os valores dos fatores de influência utilizando os parâmetros previamente definidos para o trabalhador. A partir desses fatores, é possível calcular a probabilidade de o trabalhador ignorar determinada etapa, por meio da função \textit{CalculateProbability}, que recebe os fatores de influência como argumentos.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/calculateprobability}
+	\caption{Função para cálculo da probabilidade de pular a etapa.}
+	\fonte{Autoral.}
+	\label{fig:calculateprobability}
+\end{figure}
+\FloatBarrier
+
+Como observado na Figura \ref{fig:calculateprobability}, a função aplica a Equação \ref{eq:prob_cognitiva}, realizando o cálculo da probabilidade de determinada etapa ser ignorada pelo trabalhador.
+
+Após o cálculo da probabilidade, o valor obtido é armazenado em uma variável Estatística do Anylogic, denominada \textit{probabilityStats}. No AnyLogic, o objeto \textit{Statistics} (Estatística) é uma ferramenta projetada para coletar, calcular e exibir informações estatísticas descritivas sobre os dados gerados durante a simulação. Essa variável foi definida para receber os valores discretos da probabilidade.
+
+ Em seguida, utiliza-se a função \textit{randomFalse} do AnyLogic, que, com base no valor da probabilidade calculada, retorna os valores booleanos \textit{True} ou \textit{False}. Quanto maior a probabilidade calculada, maior a chance de a função retornar \textit{False}, indicando que a etapa foi ignorada.
+
+Caso o trabalhador execute corretamente a etapa, a variável \textit{cognition} é incrementada e o atraso (\textit{Delay}) associado à atividade é acumulado. O tempo de execução de cada atividade foi definido com base nos tempos médios observados na Figura \ref{fig:tempo_atividade}. Além disso, a variável \textit{CognitionCount} é incrementada, funcionando como um contador da quantidade total de etapas executadas corretamente.
+
+Por outro lado, caso o trabalhador ignore a etapa, é incrementada a variável associada especificamente à atividade em questão. No exemplo apresentado, referente à etapa \textit{CheckFormworkCondition}, a variável incrementada é \textit{FormworkCondition}. De forma análoga, a variável \textit{NoCognitionCount} é utilizada para contabilizar o número total de etapas ignoradas durante a execução do processo.
+
+O diagrama executa as etapas do fluxo de forma sequencial. Ao final de todos os estados de atividade, tanto para a montagem quanto para a desmontagem, o trabalhador é direcionado para um estado de cognição.
+\begin{figure}[!htb]
+	\centering
+	\caption{Estados de cognição.}
+	\begin{minipage}{0.4\textwidth}	\centering	\includegraphics[width=\textwidth]{Caps/Figs/cognitionA.png}	\caption*{(a) Cognição para montagem.}	\label{fig:cognitionA}\end{minipage}\hfill\begin{minipage}{0.4\textwidth}	\centering	\includegraphics[width=\textwidth]{Caps/Figs/cognitionD.png}	\caption*{(b) Cognição para desmontagem.}	\label{fig:cognitionD}\end{minipage}\fonte{Autoral.}
+\end{figure}
+\FloatBarrier
+A lógica do estado de cognição consiste inicialmente em verificar se alguma atividade do fluxo foi executada. Essa verificação é realizada por meio da variável \textit{CountDelay}, que será maior que zero caso pelo menos uma atividade tenha sido concluída. Quando essa condição é satisfeita, a variável booleana \textit{IsNeedDelay} é configurada como \textit{True}, indicando que o atraso (\textit{Delay}) acumulado deverá ser aplicado à montagem ou desmontagem das fôrmas.
+Além disso, é calculada a variável \textit{cognitionRate}, responsável por representar a porcentagem de atividades executadas pelo trabalhador durante o ciclo atual. Essa taxa é obtida pela razão entre a quantidade de atividades realizadas (\textit{Cognition}) e o número total de atividades existentes no fluxo correspondente, sendo seis atividades para o processo de montagem e quatro atividades para o processo de desmontagem.
+Por fim, é utilizada uma variável estatística denominada \textit{cognitionStats}, responsável por armazenar os valores da taxa de cognição calculados ao longo da simulação. Dessa forma, torna-se possível analisar estatisticamente o desempenho cognitivo do trabalhador durante a execução das atividades.
+
+A partir dos estados de cognição, o trabalhador pode transicionar para o estado de comportamento adequado (\textit{AdeqBehavior}) ou para o estado de comportamento inadequado (\textit{InadeqBehavior}).
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.4\linewidth]{Caps/Figs/transictions}
+	\caption{Transições dos estados de cognição.}
+	\fonte{Autoral.}
+	\label{fig:transictions}
+\end{figure}
+\FloatBarrier
+
+A transição entre os estados ocorre com base na quantidade de atividades executadas durante o fluxo. Caso o trabalhador cumpra todas as atividades previstas — seis atividades para a montagem e quatro atividades para a desmontagem — ele é direcionado para o estado de comportamento adequado (\textit{AdeqBehavior}).
+
+Nesse estado, a variável de conformidade (\textit{Conformity}) é incrementada, representando a execução completa e correta das atividades previstas no ciclo. Além disso, a variável \textit{cognition} é redefinida para zero, permitindo o início de um novo ciclo de execução.
+
+Por outro lado, caso o trabalhador deixe de executar pelo menos uma atividade do fluxo, ele é direcionado para o estado de comportamento inadequado (\textit{InadeqBehavior}). Nesse estado, a variável de não conformidade (\textit{NonConformity}) é incrementada, indicando a ocorrência de falhas cognitivas durante a execução das tarefas. Da mesma forma, a variável \textit{cognition} é redefinida para zero ao final do ciclo.
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Estados de comportamento adequado e inadequado.}
+	
+	\begin{minipage}{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/adeqBehavior.png}
+		\label{fig:adeqBehavior}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/inadeqBehavior.png}
+		\label{fig:inadeqBehavior}
+	\end{minipage}
+	
+	\fonte{Autoral.}
+	
+\end{figure}
+\FloatBarrier
+
+A partir de ambos os estados, o trabalhador retorna ao estado \textit{Locomotion}, reiniciando o ciclo operacional e permitindo a continuidade das atividades no ambiente de simulação.
+
+ 
 
 \subsection{ Visualização no NVIDIA Omniverse}
 % Descrição: Apresente os resultados visuais e os insights que o 3D trouxe.
