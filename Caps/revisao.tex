@@ -90,15 +90,15 @@ Os SED são sistemas dinâmicos de estados discretos cuja transição se dá por
 
 Embora seja possível modelar praticamente qualquer sistema físico como um SED, dependendo do grau de abstração adotado, determinados ambientes operacionais são naturalmente discretos e têm sua evolução determinada estritamente pela ocorrência de eventos \cite{mestradoDudu}. Nesse sentido, as etapas de trabalho em um canteiro de obras enquadram-se perfeitamente nesse paradigma, uma vez que o avanço físico da montagem ou desmontagem de formas dependem de transições pontuais e sequenciais do processo de construção.
 
-Ao se considerar a evolução de um SED, a maior preocupação da modelagem reside na sequência de estados visitados e nos eventos que causaram as correspondentes transições \cite{mestradoDudu}. Conforme fundamentado pela teoria clássica de \cite{cassandra2008}, o modelo formal de um SED é composto basicamente por esses dois elementos fundamentais: estados e eventos.
+Ao se considerar a evolução de um SED, a maior preocupação da modelagem reside na sequência de estados visitados e nos eventos que causaram as correspondentes transições \cite{mestradoDudu}. Conforme fundamentado pela teoria clássica de \cite{cassandra2008}, o modelo formal de um SED é composto basicamente por esses dois elementos fundamentais: Estados e Eventos.
 
 \subsection{Estados e Eventos}
 \label{subsec:estados_eventos}
 
-O estado de um sistema num instante deve descrever o seu comportamento
-nesse instante de alguma forma mensurável \cite{cassandra2008}. Ele funciona como a memória do sistema naquele momento, assumindo valores discretos e simbólicos. No contexto de um canteiro de obras, cada processo da montagem ou desmontagem de uma forma pode ser definido como um estado.
+O Estado de um sistema num instante deve descrever o seu comportamento
+nesse instante de alguma forma mensurável \cite{cassandra2008}. Ele funciona como a memória do sistema naquele momento, assumindo valores discretos e simbólicos. No contexto de um canteiro de obras, cada processo da montagem ou desmontagem de uma forma pode ser definido como um Estado.
 
-Os eventos, por sua vez, são as ocorrências instantâneas responsáveis por causar a transição do sistema de um estado para outro \cite{cassandra2008}. Um evento pode estar associado a uma ação específica iniciada por um agente ou ser o resultado do cumprimento de uma condição física no sistema. A evolução de um SED é ditada estritamente pela sequência em que esses eventos ocorrem \cite{basilio2010}.
+Os Eventos, por sua vez, são as ocorrências instantâneas responsáveis por causar a transição do sistema de um estado para outro \cite{cassandra2008}. Um Evento pode estar associado a uma ação específica iniciada por um agente ou ser o resultado do cumprimento de uma condição física no sistema. A evolução de um SED é ditada estritamente pela sequência em que esses Eventos ocorrem \cite{basilio2010}.
 
 \subsection{Eventos Observáveis, Não Observáveis e a Diagnose de Falhas}
 \label{subsec:observabilidade_falhas}
@@ -111,37 +111,12 @@ Para que seja possível aplicar a teoria de SED na identificação de problemas 
 
 Dessa forma, o problema da diagnose de falhas consiste em inferir a ocorrência de um evento de falha não observável baseando-se exclusivamente no histórico dos eventos regulares que foram Observáveis. De maneira informal, diz-se que um evento de falha pode ser diagnosticado se a sua ocorrência puder ser detetada com exatidão após a ocorrência de um número finito de Eventos Observáveis subsequentes \cite{basilio2010}.
 
-Para atingir esse objetivo, constroem-se sistemas de diagnose de falhas atuando como "sensores virtuais". O projeto destes sistemas requer a construção prévia de um modelo a eventos discretos que capture tanto o comportamento normal quanto o comportamento falho do sistema \cite{basilio2010}.
+Para atingir esse objetivo, constroem-se sistemas de diagnose de falhas atuando como "sensores virtuais". O projeto destes sistemas requer a construção prévia de um SED que capture tanto o comportamento normal quanto o comportamento falho do sistema \cite{basilio2010}.
 
-\subsection{Linguagens}
-\label{subsec:linguagens}
-
-Embora os conceitos de estados e eventos determinem a natureza de um SED, a modelagem rigorosa e o estudo do comportamento desse sistema exigem uma base matemática sólida. Um dos caminhos formais mais utilizados para essa finalidade fundamenta-se na teoria de linguagens e autômatos \cite{mestradoDudu}.
-
-O ponto de partida dessa formulação é a definição do conjunto de todos os eventos possíveis no sistema, tipicamente denotado por $\Sigma$. Neste contexto formal, o conjunto de eventos $\Sigma$ atua como o "alfabeto"\ da linguagem, enquanto uma sequência finita de eventos executada pelo sistema é tratada como uma "palavra" \cite{mestradoDudu}. 
-
-Considerando que $\Sigma$ seja um conjunto finito, o comprimento de uma palavra, ou seja, o número de eventos contidos nela, é denotado por $|s|$, onde $s$ representa a palavra em questão. Destaca-se também a existência fundamental de uma palavra que não contém nenhum evento, denominada "palavra vazia" e classicamente denotada pelo símbolo $\varepsilon$. A operação matemática chave para a construção dessas sequências é a concatenação, onde a palavra vazia $\varepsilon$ atua como o elemento identidade \cite{mestradoDudu}.
-\begin{align}
-	\varepsilon s = s \varepsilon = s
-\end{align}
-
-
-Para mapear todas as possibilidades do sistema, define-se $\Sigma^*$ como o conjunto de todas as sequências finitas que podem ser formadas a partir do alfabeto $\Sigma$, incluindo a palavra vazia $\varepsilon$. Dessa forma, define-se formalmente o conceito de linguagem em um SED: uma linguagem $L$ é simplesmente um subconjunto de $\Sigma^*$ ($L \subseteq \Sigma^*$), formada exclusivamente por sequências de eventos que o sistema é fisicamente ou logicamente capaz de executar.
-
-No formalismo de SED, um autômato atua como o dispositivo matemático capaz de representar e gerar essa linguagem de acordo com regras lógicas de transição \cite{basilio2010}. Para que o sistema processe as palavras, a função de transição de estados $f$ é estendida recursivamente para lidar com palavras inteiras pertencentes a $\Sigma^*$:
-\begin{align}
-	f(x, \varepsilon) &:= x \\
-	f(x, se) &:= f(f(x, s), e) \quad \text{para } s \in \Sigma^* \text{ e } e \in \Sigma
-\end{align}
-
-Essa formulação garante que a leitura da palavra vazia $\varepsilon$ mantenha o sistema no mesmo estado, enquanto a leitura de uma palavra composta $se$ consiste em processar primeiro a sequência $s$ e, em seguida, aplicar a transição referente ao último evento $e$ \cite{basilio2010}. 
-
-A totalidade dos caminhos que podem ser seguidos no sistema, partindo do seu estado inicial $x_0$, caracteriza a sua linguagem gerada. Para o escopo de monitoramento e diagnose de falhas, uma propriedade fundamental dessa linguagem é que ela é estritamente **prefixo-fechada** \cite{basilio2010}. Na prática de um canteiro de obras, isso significa que se uma determinada sequência de eventos (normal ou de falha) é capaz de ser executada e pertence à linguagem do sistema, obrigatoriamente todos os eventos intermediários que a precederam (seus prefixos) também ocorreram e pertencem à linguagem.
-
-\subsection{Autômatos Finitos Determinísticos}
+\subsection{Autômatos Finitos Determinísticos ($G$)}
 \label{subsec:automatos}
 
-Uma das maneiras mais eficientes e rigorosas de se modelar e visualizar um Sistema a Eventos Discretos é através de Autômatos Finitos Determinísticos. Um autômato é um dispositivo matemático capaz de representar a linguagem de um sistema de acordo com regras bem definidas, sendo frequentemente ilustrado por diagramas de transição de estados \cite{basilio2010}.
+Uma das maneiras mais eficientes e rigorosas de se modelar e visualizar um SED é através de Autômatos Finitos Determinísticos. Um autômato é um dispositivo matemático capaz de representar a linguagem de um sistema de acordo com regras bem definidas, sendo frequentemente ilustrado por diagramas de transição de estados \cite{basilio2010}.
 
 
 \begin{figure}[!htb]
@@ -167,12 +142,12 @@ onde:
 	\item $X_m \subseteq X$ é o subconjunto de estados marcados (geralmente associados à conclusão de tarefas ou ciclos operacionais).
 \end{itemize}
 
-Para complementar a dinâmica do modelo, define-se $\Gamma(x) \subseteq \Sigma$ como o conjunto de eventos ativos no estado $x$, ou seja, o subconjunto de eventos que estão fisicamente ou logicamente habilitados a ocorrer quando o sistema se encontra naquele estado específico.
+Para complementar a dinâmica do modelo, define-se $\Gamma(x) \subseteq \Sigma$ como o conjunto de Eventos ativos no estado $x$, ou seja, o subconjunto de eventos que estão fisicamente ou logicamente habilitados a ocorrer quando o sistema se encontra naquele estado específico.
 
 Para que seja possível aplicar a teoria de diagnose de falhas sobre o modelo $G$, a literatura clássica estabelece três premissas fundamentais que o sistema deve respeitar \cite{basilio2010}. No contexto da modelagem logística de um canteiro de obras, essas hipóteses traduzem-se da seguinte forma:
 
 \begin{enumerate}
-	\item \textbf{A1 - Sistema Vivo ($\Gamma(x) \neq \emptyset$ para todo $x \in X$):} Assume-se que o autômato gerado por $G$ não possui estados de travamento irreversível (deadlocks). Na prática, isso significa que a obra está em contínua operação; mesmo que ocorra uma falha logística ou um atraso, o sistema sempre terá algum evento possível para dar sequência ao processo.
+	\item \textbf{A1 - Sistema Vivo ($\Gamma(x) \neq \emptyset$ para todo $x \in X$):} Assume-se que o autômato gerado por $G$ não possui Estados de travamento irreversível (deadlocks). Na prática, isso significa que a obra está em contínua operação, mesmo que ocorra uma falha logística ou um atraso, o sistema sempre terá algum Evento possível para dar sequência ao processo.
 	\item \textbf{A2 - Ausência de ciclos não Observáveis:} O modelo não pode possuir nenhum ciclo de estados formado exclusivamente por Eventos Não Observáveis. Essa hipótese garante que, caso uma falha oculta ocorra, o sistema não ficará preso em um \textit{loop} invisível aos sensores. O processo de construção continuará avançando até gerar um evento observável, permitindo que o Gêmeo Digital detecte a falha pregressa.
 	\item \textbf{A3 - Único tipo de falha ($\Sigma_f = \{\sigma_f\}$):} Embora tutoriais clássicos muitas vezes assumam um único tipo de falha por simplicidade didática, a teoria permite a modelagem de múltiplos eventos anômalos. Para isso, o conjunto de falhas $\Sigma_f$ é particionado em $m$ classes disjuntas. No escopo deste trabalho, o sistema contemplará diferentes tipos de falha (como, por exemplo, problemas na montagem ou atrasos na concretagem), sendo os fundamentos de diagnosticabilidade aplicados para identificar a ocorrência de cada classe de falha de maneira independente 
 \end{enumerate}
@@ -181,11 +156,11 @@ Para que seja possível aplicar a teoria de diagnose de falhas sobre o modelo $G
 \subsection{Diagnose Centralizada sob Observação Parcial}
 \label{subsec:diagnosticador}
 
-A essência da diagnose de falhas em um SED reside na capacidade de inferir a ocorrência de Eventos Não Observáveis a partir da sequência de Eventos Observáveis gerada pelo sistema. Para formalizar essa restrição de visibilidade, define-se o conjunto de eventos do sistema como a união disjunta $\Sigma = \Sigma_o \cup \Sigma_{uo}$, onde $\Sigma_o$ representa os Eventos Observáveis (registrados pelos sensores ou apontamentos no canteiro) e $\Sigma_{uo}$ os Eventos Não Observáveis (que incluem o subconjunto de eventos de falha $\Sigma_f$).
-
-A relação entre o que o sistema efetivamente executa e o que o observador capta é matematicamente descrita pela função de Projeção $P_o: \Sigma^* \to \Sigma_o^*$. Essa função atua "apagando" os eventos não observáveis de uma sequência, mantendo intacto apenas o rastro visível da operação \cite{basilio2010}. 
+A essência da diagnose de falhas em um SED reside na capacidade de inferir a ocorrência de Eventos Não Observáveis a partir da sequência de Eventos Observáveis gerada pelo sistema. Para formalizar essa restrição de visibilidade, define-se o conjunto de eventos do sistema como a união disjunta $\Sigma = \Sigma_o \cup \Sigma_{uo}$, onde $\Sigma_o$ representa os Eventos Observáveis (registrados pelos sensores ou apontamentos no canteiro) e $\Sigma_{uo}$ os Eventos Não Observáveis (que incluem o subconjunto de eventos de falha $\Sigma_f$). 
 
 Para que a tomada de decisão sobre a ocorrência ou não de uma falha seja realizada por um único agente analítico, utiliza-se a abordagem de diagnose centralizada. O projeto desse agente é dividido metodologicamente em duas etapas de modelagem: o Autômato Rotulador ($G_{al}$) e o Autômato Diagnosticador ($G_d$).
+
+
 
 \subsubsection{Autômato Rotulador ($G_{al}$)}
 
@@ -200,22 +175,106 @@ Para rastrear o impacto das falhas ao longo das transições do sistema, o prime
 \end{figure}
 
 \FloatBarrier
-Dessa forma, os estados do autômato rotulador assumem a forma de pares ordenados $(x, l)$, onde $x \in X$ é o estado da planta e $l \in \Delta$ é a condição de falha associada. O $G_{al}$ processa todos os eventos (Observáveis e Não Observáveis). Quando um evento de falha ocorre, o autômato altera o rótulo de $N$ para $F_i$ e propaga essa etiqueta para todos os estados subsequentes, funcionando como uma memória permanente de que o sistema foi corrompido.
+Dessa forma, os estados do autômato rotulador assumem a forma de pares ordenados $(x, l)$, onde $x \in X$ é o estado da planta e $l \in \Delta$ é a condição de falha associada. O $G_{al}$ processa todos os Eventos (Observáveis e Não Observáveis). Quando um evento de falha ocorre, o autômato altera o rótulo de $N$ para $F_i$ e propaga essa etiqueta para todos os Estados subsequentes, funcionando como uma memória permanente de que o sistema foi corrompido.
+
+\subsection{Composição Paralela}
+
+A operação de composição paralela é fundamental na teoria de SED quando se deseja modelar o comportamento conjunto e interativo de múltiplos subsistemas \cite{mestradoDudu}. Segundo \cite{basilio2010}, essa operação estabelece as regras de sincronização entre dois autômatos, definindo como os eventos comuns e os eventos privados devem se comportar.
+
+Suponha dois autômatos distintos definidos por $G_1 = (X_1, \Sigma_1, f_1, \Gamma_1, x_{01}, X_{m1})$ e $G_2 = (X_2, \Sigma_2, f_2, \Gamma_2, x_{02}, X_{m2})$. O autômato resultante que modela o comportamento síncrono de $G_1$ e $G_2$ é obtido através da composição paralela, denotada por $G_1 \parallel G_2$. Nesse novo modelo, duas regras fundamentais de execução são estabelecidas:
+\begin{itemize}
+	\item \textbf{Eventos comuns:} Um evento pertencente a ambos os alfabetos ($\sigma \in \Sigma_1 \cap \Sigma_2$) somente poderá ocorrer de forma sincronizada, ou seja, quando ambos os autômatos estiverem em estados cujos conjuntos de Eventos ativos possuam esse Evento de forma simultânea.
+	\item \textbf{Eventos privados:} Eventos pertencentes exclusivamente a um dos sistemas, definidos matematicamente por $\Sigma_1 \setminus \Sigma_2$ ou $\Sigma_2 \setminus \Sigma_1$, não requerem sincronização e podem ser executados de forma independente sempre que estiverem ativos no seu respectivo autômato.
+\end{itemize}
+
+Formalmente, a composição paralela de $G_1$ e $G_2$ é definida pela seguinte estrutura:
+$$G_1 \parallel G_2 = Ac(X_1 \times X_2, \Sigma_1 \cup \Sigma_2, f_{1 \parallel 2}, \Gamma_{1 \parallel 2}, (x_{01}, x_{02}), X_{m1} \times X_{m2})$$
+
+onde $\times$ denota o produto cartesiano e $Ac(\cdot)$ representa a operação que extrai a parte acessível do autômato, filtrando e mantendo apenas os estados que podem ser alcançados a partir do estado inicial $(x_{01}, x_{02})$ por meio de uma sequência válida de eventos em $(\Sigma_1 \cup \Sigma_2)^*$.
+
+A evolução da dinâmica desse sistema composto é governada pela sua função de transição parcial, $f_{1 \parallel 2} : (X_1 \times X_2) \times (\Sigma_1 \cup \Sigma_2) \to (X_1 \times X_2)$, definida por \cite{basilio2010} da seguinte forma:
+$$f_{1 \parallel 2}((x_1, x_2), \sigma) = \begin{cases}
+	(f_1(x_1, \sigma), f_2(x_2, \sigma)), & \text{se } \sigma \in \Gamma_1(x_1) \cap \Gamma_2(x_2) \\
+	(f_1(x_1, \sigma), x_2), & \text{se } \sigma \in \Gamma_1(x_1) \setminus \Sigma_2 \\
+	(x_1, f_2(x_2, \sigma)), & \text{se } \sigma \in \Gamma_2(x_2) \setminus \Sigma_1
+\end{cases}$$
+
+
+
+\subsection{Autômato Observador}
+
+O comportamento dinâmico de um autômato que possui Eventos Não Observáveis pode ser descrito por um novo autômato determinístico, denominado \textit{Observador}, cujo conjunto de eventos é formado exclusivamente pelos Eventos Observáveis do sistema original. Os Estados do Observador correspondem a todos os Estados possíveis em que o autômato com Eventos Não Observáveis poderia estar após a ocorrência de uma dada sequência de Eventos Observáveis \cite{basilio2010}.
+
+O Observador para um autômato $G$, denotado por $Obs(G)$, é formalmente definido pela seguinte quíntupla:
+$$Obs(G) = (X_{obs}, \Sigma_{obs}, f_{obs}, \Gamma_{obs}, x_{0,obs}, X_{m,obs})$$
+
+sendo que o conjunto de Estados do Observador pertence ao conjunto das partes de $X$, isto é, $X_{obs} \subseteq 2^X$. Os Estados marcados do Observador são definidos como $X_{m,obs} = \{q \in X_{obs} : q \cap X_m \neq \emptyset\}$. 
+
+Para a definição formal do estado inicial $x_{0,obs}$, da função de Eventos ativos $\Gamma_{obs}$ e da função de transição $f_{obs}$, é necessário introduzir o conceito de \textbf{Alcance Não-Observável} (\textit{Unobservable Reach}). O Alcance Não Observável de um Estado $x \in X$, denotado por $UR(x)$, é o conjunto de Estados que podem ser alcançados a partir de $x$ por meio da ocorrência exclusiva de Eventos Não Observáveis:
+$$UR(x) = \{x' \in X : (\exists s \in \Sigma_{uo}^*)[f(x, s) = x']\}$$
+
+De forma análoga, o Alcance Não Observável de um subconjunto de Estados $q \in 2^X$ é definido como a união dos alcances individuais de cada Estado contido em $q$:
+$$UR(q) = \bigcup_{x \in q} UR(x)$$
+
+Utilizando essas definições, os elementos de $Obs(G)$ podem ser construídos sistematicamente por meio do algoritmo da Figura \ref{fig:algoritmoobservador}.
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/algoritmoObservador}
+	\caption{Algoritmo de construção do Autômato Observador}
+	\fonte{\cite{mestradoDudu}}
+	\label{fig:algoritmoobservador}
+\end{figure}
+\FloatBarrier
+
+A lógica fundamental desse algoritmo consiste em calcular o alcance não observável para cada Estado de $G$ que é atingido logo após a ocorrência de um evento Observável. Assim, no Passo 1, calcula-se o Alcance Não Observável do estado inicial $x_0$, formando o Estado inicial do Observador. No Passo 3, determinam-se os Eventos ativos dos Estados do Observador obtidos na iteração anterior. Além disso, calculam-se os próximos Estados do Observador, que correspondem aos Alcances Não Observáveis dos Estados de $G$ atingidos a partir do Estado atual do Observador por meio de Eventos Observáveis. Essa sequência iterativa é repetida até que todos os Estados acessíveis do Observador tenham sido mapeados (Cassandras e Lafortune, 2008).
 
 
 \subsubsection{Autômato Diagnosticador ($G_d$)}
 
-Na prática, o sistema de monitoramento não tem acesso direto aos estados e eventos internos do $G_{al}$, uma vez que está submetido à observação parcial ($P_o$). Para superar essa limitação, constrói-se o Autômato Diagnosticador Centralizado ($G_d$). O diagnosticador é, essencialmente, um observador determinístico construído a partir do $G_{al}$, cuja função de transição é acionada exclusivamente pela ocorrência de Eventos Observáveis ($\Sigma_o$) \cite{basilio2010}.
 
-Devido à ausência de informações completas, cada estado $q$ do diagnosticador $G_d$ é composto por um conjunto de estimativas de estado do rotulador, assumindo a forma $q = \{(x_1, l_1), (x_2, l_2), \dots, (x_n, l_n)\}$. Baseando-se nas etiquetas contidas no estado atual $q$, o diagnosticador classifica a condição operacional do sistema em três categorias principais:
+O diagnosticador centralizado, comumente denotado por $G_d$, é um autômato construído especificamente para realizar o rastreamento de falhas do sistema em tempo real. O seu conjunto de Eventos é estritamente igual ao conjunto dos Eventos Observáveis do modelo da planta $G$. A principal característica do diagnosticador é que seus estados são formados pela adição de rótulos (tipicamente $N$ (\textit{Normal}) e $F$ (\textit{Falha})) aos Estados originais de $G$, com o objetivo de indicar se um determinado Evento de falha Não Observável ($\sigma_f$) já ocorreu ou não.
 
-\begin{itemize}
-	\item \textbf{Normal:} Todos os pares no estado $q$ possuem o rótulo $N$. O sistema opera sem indícios de falhas.
-	\item \textbf{Incerteza:} O estado $q$ contém simultaneamente pares com o rótulo $N$ e pares com rótulos de falha ($F_1$ ou $F_2$). O sistema suspeita de uma anomalia (pois um caminho falho é possível), mas requer a observação de eventos futuros para confirmar o diagnóstico.
-	\item \textbf{Falha Diagnosticada (Certeza):} Todos os pares no estado $q$ possuem o mesmo rótulo de falha (ex: $F_1$). Neste momento, independentemente do caminho oculto que o sistema tomou, a falha é matematicamente certa.
-\end{itemize}
+Formalmente, o diagnosticador $G_d$ é definido pela seguinte estrutura de autômato:
+$$G_d = (X_d, \Sigma_d, f_d, \Gamma_d, x_{0,d}, X_{m,d})$$
 
-No escopo do Gêmeo Digital proposto, o AnyLogic atuará como o motor de execução deste diagnosticador centralizado ($G_d$). Ao receber os \textit{inputs} observáveis do avanço logístico das fôrmas, o autômato processará as transições e calculará as estimativas de estado $q$ em tempo real. Caso o diagnóstico atinja um estado de Certeza de Falha, a plataforma acionará um alerta visual integrado, garantindo uma resposta preditiva por parte da gestão da obra.
+sendo que o espaço de Estados do diagnosticador é um subconjunto das partes do produto cartesiano entre os Estados do sistema e o conjunto de rótulos, isto é, $X_d \subseteq 2^{X \times \{N, F\}}$. O conjunto de Eventos ativos no diagnosticador corresponde unicamente aos Eventos Observáveis do sistema ($\Sigma_d = \Sigma_{obs}$).
+
+A síntese matemática do diagnosticador $G_d$ pode ser realizada de forma sistemática por meio de dois passos operacionais fundamentais:
+\begin{enumerate}
+	\item[(i)] Obtenha a composição paralela $G \parallel A_l$, sendo $A_l$ o autômato rotulador de dois Estados, projetado para alterar seu Estado de "Normal" para "Falha" irreversivelmente após a ocorrência de $\sigma_f$, conforme ilustrado na Figura \ref{fig:automato_rotulador};
+	\item[(ii)] Calcule o autômato Observador para essa composição paralela gerada no passo anterior, ou seja, construa $Obs(G \parallel A_l)$ utilizando o Algoritmo de Alcance Não Observável previamente definido.
+\end{enumerate}
+
+\begin{figure}[!htb]
+	\centering
+	\caption{Exemplo de construção de um autômato diagnosticador $G_d$.}
+	
+	\begin{minipage}{0.34\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/automatoBasilio.png}
+		\caption*{(a) Exemplo de Autômato G.}
+		\label{fig:automatoG}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/composicaoParalela.png}
+		\caption*{(b) Composição paralela entre $G$ e $A_l$.}
+		\label{fig:composicaoParalela}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/observador.png}
+		\caption*{(c) $G_d = Obs(G \parallel A_l)$.}
+		\label{fig:observador}
+	\end{minipage}
+	
+	\fonte{\citeonline{basilio2010}.}
+	
+\end{figure}
+\FloatBarrier
+
 
 \subsection{Diagnosticabilidade}
 \label{subsec:diagnosticabilidade}

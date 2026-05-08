@@ -161,7 +161,7 @@ A abordagem ABM foi responsável por descrever o modelo cognitivo do trabalhador
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Diagrama de estados na ABM.}
+	\caption{Diagrama de Estados na ABM.}
 	\includegraphics[width=0.8\textwidth]{Caps/Figs/stateChart.png}
 	\fonte{Autoral.}
 	\label{fig:statechart}
@@ -450,14 +450,29 @@ A partir do arquivo USD gerado, torna-se possível aplicar materiais, iluminaç�
 % - Discussão sobre como ver os avatares (agentes) se movendo ajuda o gestor da obra a validar o modelo comportamental de forma muito mais intuitiva que apenas olhando gráficos 2D.
 
 \subsection{Diagnóstico de Falhas por Sistemas a Eventos Discretos (SED)}
-% Descrição: Faça uma ponte com a seção anterior. Diga que, como a simulação mostrou que as falhas ocorrem de forma velada, agora você aplicará o SED para detectá-las matematicamente.
+
+A Simulação Híbrida desenvolvida anteriormente demonstrou que o trabalhador nem sempre executa todas as atividades previstas durante os processos de montagem e desmontagem das fôrmas. Entretanto, parte dessas Falhas pode ocorrer de maneira não explícita, é preciso aplicar a teoria do SED para estuda-las.
+
 
 \subsection{Autômato Gerador do Canteiro de Obras ($G$)}
-% Descrição: É aqui que entra o grafo que desenha a tabela da metodologia.
-% O que abordar:
-% - Apresente a figura do grafo do autômato (as bolinhas de E0 a E11 e as setas das transições).
-% - Discuta como as ramificações de falha (F1 a F5) criam caminhos paralelos que terminam no mesmo estado físico, ilustrando a "cegueira" do sistema de verificação tradicional.
 
+A partir do mapeamento apresentado na Tabela \ref{tab:funcao_transicao}, em conjunto com o Diagrama de Estados ilustrado na Figura \ref{fig:statechart}, foi possível construir o autômato gerador $G$ do sistema.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/automatoG}
+	\caption{Autômato gerador $G$ do sistema.}
+	\fonte{Autoral.}
+	\label{fig:automatog}
+\end{figure}
+\FloatBarrier
+
+O autômato representa formalmente os estados operacionais do processo de montagem e desmontagem das fôrmas, bem como os eventos responsáveis pelas transições entre esses estados. Os símbolos associados aos estados, eventos observáveis, eventos não observáveis e eventos de falha são apresentados nas Figuras \ref{fig:estados-sed} e \ref{fig:eventos}.
+
+A análise do autômato permite observar que diferentes caminhos de execução podem conduzir o sistema ao mesmo estado físico do processo. No caso do estado $E1$ (Fôrmas em Checagem), por exemplo, a transição para o estado $E2$ (Desmoldante em Aplicação) pode ocorrer tanto por meio de um evento não observável quanto pela ocorrência de uma falha associada à atividade. De maneira semelhante, os estados $E0$, $E2$, $E5$ e $E8$ podem transicionar para seus respectivos estados subsequentes através de eventos observáveis ou por meio de eventos de falha ($F1$, $F3$, $F4$ e $F5$, respectivamente).
+
+Essas ramificações de falha criam trajetórias paralelas dentro do autômato que convergem para os mesmos estados operacionais do sistema. Como consequência, diferentes sequências de execução podem produzir o mesmo comportamento observável externamente, mesmo quando determinadas atividades não foram corretamente realizadas. Esse comportamento evidencia a dificuldade de identificar falhas apenas pela observação direta da evolução do processo produtivo, justificando a necessidade da modelagem formal por Sistemas a Eventos Discretos para fins de diagnóstico.
+\subsection{Autômato Observador $G$)}
 \subsection{Síntese do Autômato Diagnosticador ($G_d$)}
 % Descrição: Onde a mágica acontece. Você mostra o autômato observador que rastreia os eventos.
 % O que abordar:
