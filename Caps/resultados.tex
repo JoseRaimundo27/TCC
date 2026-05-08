@@ -402,9 +402,47 @@ Por outro lado, caso o trabalhador deixe de executar pelo menos uma atividade do
 
 A partir de ambos os estados, o trabalhador retorna ao estado \textit{Locomotion}, reiniciando o ciclo operacional e permitindo a continuidade das atividades no ambiente de simulação.
 
- 
 
-\subsection{ Visualização no NVIDIA Omniverse}
+\subsection{Visualização da simulação}
+
+A Figura \ref{fig:simulation2d} apresenta a simulação em execução e seu funcionamento no ambiente 2D do AnyLogic. Durante o turno da manhã, os trabalhadores deixam suas posições iniciais, deslocam-se até a posição inicial das fôrmas e realizam o transporte necessário para a execução da montagem. Após a conclusão da montagem de todas as paredes, os trabalhadores entram no período de descanso (\textit{Break}) e retornam no turno da tarde para executar a desmontagem das fôrmas, encerrando assim o ciclo da simulação. 
+
+A Figura \ref{fig:simulation3d} apresenta a execução da simulação utilizando a opção de visualização 3D do AnyLogic.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/simulation2d}
+	\caption{Visualização da simulação em 2D no AnyLogic.}
+	\fonte{Autoral.}
+	\label{fig:simulation2d}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/simulation3d}
+	\caption{Visualização da simulação em 3D no AnyLogic.}
+	\fonte{Autoral.}
+	\label{fig:simulation3d}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Visualização no NVIDIA Omniverse}
+
+Para realizar a comunicação entre o AnyLogic e o NVIDIA Omniverse, foi criado um botão denominado \textit{OmniverseConnector}. O \textit{Omniverse Connector} no AnyLogic é um elemento responsável por estabelecer uma conexão direta entre a simulação desenvolvida no AnyLogic e a plataforma NVIDIA Omniverse. Essa integração permite transformar as visualizações tridimensionais básicas do AnyLogic em ambientes interativos e fotorrealistas renderizados em tempo real.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/omniverseconnector}
+	\caption{Botão para conexão entre o AnyLogic e o NVIDIA Omniverse.}
+	\fonte{Autoral.}
+	\label{fig:omniverseconnector}
+\end{figure}
+\FloatBarrier
+
+O modelo desenvolvido no AnyLogic é renderizado e armazenado localmente em um arquivo no formato \textit{USD} (\textit{Universal Scene Description}), utilizado pelo NVIDIA Omniverse. O formato USD é um padrão aberto para descrição de cenas tridimensionais, permitindo interoperabilidade entre diferentes ferramentas de modelagem e renderização, além de possibilitar colaboração e visualização em tempo real.
+
+A partir do arquivo USD gerado, torna-se possível aplicar materiais, iluminação, texturas e demais elementos visuais avançados à simulação, permitindo sua execução integrada ao ambiente do NVIDIA Omniverse com maior nível de realismo visual.
 % Descrição: Apresente os resultados visuais e os insights que o 3D trouxe.
 % O que abordar:
 % - Imagens/prints do modelo renderizado no Omniverse.
