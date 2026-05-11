@@ -272,7 +272,7 @@ sendo que o espaço de Estados do diagnosticador é um subconjunto das partes do
 
 A síntese matemática do diagnosticador $G_d$ pode ser realizada de forma sistemática por meio de dois passos operacionais fundamentais:
 \begin{enumerate}
-	\item[(i)] Obtenha a composição paralela $G \parallel A_l$, sendo $A_l$ o autômato rotulador de dois Estados, projetado para alterar seu Estado de "Normal" para "Falha" irreversivelmente após a ocorrência de $\sigma_f$, conforme ilustrado na Figura \ref{fig:automato_rotulador};
+	\item[(i)] Obtenha a composição paralela $G \parallel A_l$, sendo $A_l$ o autômato rotulador de dois Estados, projetado para alterar seu Estado de "Normal" para "Falha" irreversivelmente após a ocorrência de $\sigma_f$, conforme ilustrado na Figura \ref{fig:exemplo-rotulador};
 	\item[(ii)] Calcule o autômato Observador para essa composição paralela gerada no passo anterior, ou seja, construa $Obs(G \parallel A_l)$ utilizando o Algoritmo de Alcance Não Observável previamente definido.
 \end{enumerate}
 
@@ -324,8 +324,8 @@ Por outro lado, um sistema é classificado como Não Diagnosticável quando exis
 
 A compreensão do canteiro de obras, a análise do comportamento humano por meio da ABM e o fluxo físico da construção da parede de concreto realizada pela DES evidenciam uma realidade crítica: as decisões diárias dos trabalhadores são a causa raiz de diversos defeitos construtivos nas paredes de concreto. Essa dinâmica comportamental gera uma necessidade constante de retrabalho, o que compromete severamente a produtividade global e o planejamento da obra. A não execução de qualquer atividade essencial resulta, portanto, na consolidação de uma não conformidade.
 
-Contudo, a simples observação física ou o uso de formulários de verificação tradicionais não são suficientes para capturar essas infrações, uma vez que elas ocorrem, na maioria das vezes, de forma silenciosa. O trabalhador burla os mecanismos de controle sem deixar rastros imediatos, o que faz com que esses erros se comportem, na ótica da simulação, como Eventos de Falha Não Observáveis.
+Contudo, a simples observação física não é suficiente para capturar essas infrações, uma vez que elas ocorrem, na maioria das vezes, de forma silenciosa. O trabalhador burla os mecanismos de controle sem deixar rastros imediatos, o que faz com que esses erros se comportem, na ótica da simulação, como Eventos de Falha Não Observáveis.
 
-É exatamente para solucionar essa lacuna de rastreabilidade percebida pela Simulação Híbrida que surge a necessidade da aplicação da teoria de Sistemas a Eventos Discretos (SED), cujo arcabouço lógico será detalhado nos próximos capítulos. O estudo do SED é uma alternativa para este trabalho porque permite avançar da simples constatação do problema para o diagnóstico formal. O mapeamento das atividades do canteiro servirá como base para a construção de um modelo capaz de rastrear o fluxo visível (Observável) da obra e inferir, matematicamente, a ocorrência dessas anomalias ocultas, conectando o comportamento operário à detecção analítica de falhas no processo produtivo.
+É exatamente para estudar essa lacuna de rastreabilidade percebida pela Simulação Híbrida que surge a necessidade da aplicação da teoria de SED,. O estudo do SED é uma alternativa para este trabalho porque permite avançar da simples constatação do problema para o diagnóstico formal. O mapeamento das atividades realizadas ou não do canteiro servirá como base para a construção de um modelo capaz de rastrear o fluxo visível (Observável) da obra e inferir, matematicamente, a ocorrência dessas anomalias ocultas, conectando as decisões do trabalhador à detecção analítica de falhas no processo produtivo.
  %Não consegui correlacionar com Gêmeos Digitais, falei de simulação hibrida aliada a SED
  
