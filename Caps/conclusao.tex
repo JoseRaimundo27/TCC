@@ -1,12 +1,47 @@
 \chapter{Conclusão}
+
 \label{chap:conclusao}
-Retomando o objetivo principal, dizendo que foi alcançado; o que deu certo
+
+Este trabalho teve como objetivo principal desenvolver um modelo híbrido baseado em Simulação a Eventos Discretos (DES), Modelagem Baseada em Agentes (ABM) e Sistemas a Eventos Discretos (SED) para análise do comportamento humano e diagnóstico de falhas em processos de montagem e desmontagem de fôrmas em um contexto de construção civil.
+
+Os resultados obtidos demonstraram que o objetivo proposto foi alcançado de forma satisfatória. A modelagem híbrida desenvolvida no AnyLogic permitiu representar tanto os aspectos operacionais do processo produtivo quanto os fatores cognitivos associados ao comportamento do trabalhador. A utilização da abordagem ABM possibilitou incorporar parâmetros humanos, como treinamento, experiência, inspeção, feedback e estresse, permitindo simular a influência desses fatores na probabilidade de omissão de atividades durante o processo construtivo. 
+
+As análises realizadas mostraram que o aumento dos fatores de influência reduz significativamente a ocorrência de falhas cognitivas no sistema. Os experimentos de \textit{Compare Runs} e \textit{Sensitivity Analysis} evidenciaram que melhorias simultâneas em treinamento e experiência produzem impactos mais relevantes na redução da probabilidade de omissão de etapas do que o aumento isolado de um único parâmetro.
+
+Além disso, a integração entre AnyLogic e NVIDIA Omniverse permitiu obter visualizações tridimensionais mais realistas do ambiente de simulação, contribuindo para melhor interpretação do comportamento do sistema e ampliando as possibilidades de análise visual do processo construtivo.
+
+No contexto de SED, foi possível modelar formalmente o processo através de autômatos, permitindo a construção do Autômato Diagnosticador $G_d$. Os resultados mostraram que o sistema originalmente modelado apresenta comportamento Não Diagnosticável, uma vez que determinadas falhas permanecem indistinguíveis apenas pela observação dos eventos disponíveis. Entretanto, ao tornar observável o Evento associado à omissão da verificação das condições iniciais, o sistema passou a apresentar comportamento diagnosticável.
+
+Os resultados do SED indicam que o evento relacionado à verificação das condições iniciais constitui um ponto crítico do processo sob a perspectiva de monitoramento e diagnóstico. Assim, torna-se recomendável que gestores adotem mecanismos adicionais de controle para essa etapa específica, como checklists digitais, formulários de inspeção, sensores de confirmação de atividade ou sistemas de validação operacional, visando aumentar a observabilidade do processo e reduzir a ocorrência de falhas não detectáveis no ambiente de obra.
+
+Dessa forma, o trabalho contribui tanto para a área de simulação híbrida aplicada à construção civil quanto para estudos relacionados à diagnosticabilidade de sistemas produtivos com influência do comportamento humano, demonstrando o potencial da integração entre técnicas de simulação e métodos formais para apoio à tomada de decisão e melhoria dos processos construtivos.
 
 \section{Limitações do Estudo}
+
 \label{sec:limitacoes}
-o que deu errado; o que a simulação não cobriu; analisar custo computacional;
+
+Apesar dos resultados satisfatórios obtidos, o presente trabalho apresenta algumas limitações que devem ser consideradas.
+
+A primeira limitação está relacionada à simplificação do comportamento humano no modelo. Embora fatores cognitivos tenham sido incorporados à simulação, o comportamento do trabalhador foi representado a partir de parâmetros probabilísticos e regras pré-definidas, não contemplando toda a complexidade das interações humanas presentes em um ambiente real de construção civil.
+
+Além disso, o modelo concentrou-se especificamente no processo de montagem e desmontagem de fôrmas, não abrangendo outros elementos importantes do canteiro de obras, como interferências entre múltiplas equipes, restrições climáticas, indisponibilidade de materiais, falhas de equipamentos ou alterações dinâmicas no cronograma da obra.
+
+Outra limitação refere-se aos dados utilizados para parametrização da simulação. Parte dos parâmetros foi baseada em literatura e em ajustes experimentais, não sendo provenientes de campanhas extensivas de coleta de dados reais em campo. Dessa forma, os resultados obtidos representam tendências comportamentais do modelo, mas não necessariamente refletem com precisão absoluta um ambiente real específico.
+
+No contexto dos SED, destaca-se também o crescimento da complexidade computacional durante a geração dos autômatos. A composição paralela e a construção do autômato diagnosticador aumentam significativamente a quantidade de estados e transições do sistema, fenômeno conhecido como explosão de estados. Esse comportamento pode dificultar a análise de sistemas maiores ou com maior quantidade de eventos e falhas modeladas.
+
+Por fim, embora a integração com o NVIDIA Omniverse tenha proporcionado melhorias visuais relevantes, o recurso exige maior capacidade computacional para renderização e execução da simulação em tempo real, podendo limitar sua utilização em máquinas com menor desempenho gráfico.
 
 \section{Indicação de Trabalhos Futuros}
+
 \label{sec:futtrab}
-% Deixe ideias para quem quiser continuar a sua pesquisa no semestre que vem.
-% Ex: Adicionar novos agentes, conectar com sensores reais da obra (IoT), etc.
+
+Como trabalhos futuros, sugere-se inicialmente a ampliação do Modelo Híbrido para contemplar outros agentes presentes no ambiente de construção, como supervisores, operadores de equipamentos, equipes de segurança e agentes logísticos, permitindo representar interações mais complexas dentro do canteiro de obras.
+
+Outra possibilidade consiste na integração do modelo com sensores reais e tecnologias de Internet das Coisas (IoT), permitindo coletar dados em tempo real do ambiente construtivo para alimentar dinamicamente a simulação e aumentar a precisão das análises comportamentais e operacionais, gerando um Gêmeo Digital.
+
+Também se recomenda aprofundar o estudo dos fatores humanos, incorporando variáveis adicionais relacionadas à fadiga acumulada, carga cognitiva, condições ambientais e interação social entre trabalhadores, buscando representar de forma mais fiel o comportamento humano em ambientes produtivos reais.
+
+No âmbito dos SED, futuros trabalhos podem explorar estratégias de redução de estados e otimização computacional para minimizar o problema de explosão de estados durante a construção do autômato diagnosticador. Além disso, podem ser investigadas técnicas de diagnóstico descentralizado ou distribuído para sistemas produtivos mais complexos.
+
+Outra direção relevante é o uso de algoritmos de aprendizado de máquina e inteligência artificial integrados à simulação, permitindo prever falhas cognitivas, adaptar parâmetros dinamicamente e auxiliar gestores na tomada de decisão em tempo real.

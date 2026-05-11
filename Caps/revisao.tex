@@ -188,17 +188,30 @@ Suponha dois autômatos distintos definidos por $G_1 = (X_1, \Sigma_1, f_1, \Gam
 \end{itemize}
 
 Formalmente, a composição paralela de $G_1$ e $G_2$ é definida pela seguinte estrutura:
-$$G_1 \parallel G_2 = Ac(X_1 \times X_2, \Sigma_1 \cup \Sigma_2, f_{1 \parallel 2}, \Gamma_{1 \parallel 2}, (x_{01}, x_{02}), X_{m1} \times X_{m2})$$
+\begin{equation}
+	G_1 \parallel G_2 =
+	Ac(X_1 \times X_2,\ \Sigma_1 \cup \Sigma_2,\ f_{1 \parallel 2},\ \Gamma_{1 \parallel 2},\ (x_{01},x_{02}),\ X_{m1} \times X_{m2})
+	\label{eq:composicao_paralela}
+\end{equation}
 
 onde $\times$ denota o produto cartesiano e $Ac(\cdot)$ representa a operação que extrai a parte acessível do autômato, filtrando e mantendo apenas os estados que podem ser alcançados a partir do estado inicial $(x_{01}, x_{02})$ por meio de uma sequência válida de eventos em $(\Sigma_1 \cup \Sigma_2)^*$.
 
 A evolução da dinâmica desse sistema composto é governada pela sua função de transição parcial, $f_{1 \parallel 2} : (X_1 \times X_2) \times (\Sigma_1 \cup \Sigma_2) \to (X_1 \times X_2)$, definida por \cite{basilio2010} da seguinte forma:
-$$f_{1 \parallel 2}((x_1, x_2), \sigma) = \begin{cases}
-	(f_1(x_1, \sigma), f_2(x_2, \sigma)), & \text{se } \sigma \in \Gamma_1(x_1) \cap \Gamma_2(x_2) \\
-	(f_1(x_1, \sigma), x_2), & \text{se } \sigma \in \Gamma_1(x_1) \setminus \Sigma_2 \\
-	(x_1, f_2(x_2, \sigma)), & \text{se } \sigma \in \Gamma_2(x_2) \setminus \Sigma_1
-\end{cases}$$
 
+\begin{equation}
+	f_{1 \parallel 2}((x_1, x_2), \sigma)=
+	\begin{cases}
+		(f_1(x_1, \sigma), f_2(x_2, \sigma)), 
+		& \text{se } \sigma \in \Gamma_1(x_1) \cap \Gamma_2(x_2)
+		\\[6pt]
+		(f_1(x_1, \sigma), x_2), 
+		& \text{se } \sigma \in \Gamma_1(x_1) \setminus \Sigma_2
+		\\[6pt]
+		(x_1, f_2(x_2, \sigma)), 
+		& \text{se } \sigma \in \Gamma_2(x_2) \setminus \Sigma_1
+	\end{cases}
+	\label{eq:funcao_transicao_paralela}
+\end{equation}
 
 
 \subsection{Autômato Observador}
@@ -206,15 +219,29 @@ $$f_{1 \parallel 2}((x_1, x_2), \sigma) = \begin{cases}
 O comportamento dinâmico de um autômato que possui Eventos Não Observáveis pode ser descrito por um novo autômato determinístico, denominado \textit{Observador}, cujo conjunto de eventos é formado exclusivamente pelos Eventos Observáveis do sistema original. Os Estados do Observador correspondem a todos os Estados possíveis em que o autômato com Eventos Não Observáveis poderia estar após a ocorrência de uma dada sequência de Eventos Observáveis \cite{basilio2010}.
 
 O Observador para um autômato $G$, denotado por $Obs(G)$, é formalmente definido pela seguinte quíntupla:
-$$Obs(G) = (X_{obs}, \Sigma_{obs}, f_{obs}, \Gamma_{obs}, x_{0,obs}, X_{m,obs})$$
+
+\begin{equation}
+	Obs(G)=
+	(X_{obs},\ \Sigma_{obs},\ f_{obs},\ \Gamma_{obs},\ x_{0,obs},\ X_{m,obs})
+	\label{eq:observador}
+\end{equation}
 
 sendo que o conjunto de Estados do Observador pertence ao conjunto das partes de $X$, isto é, $X_{obs} \subseteq 2^X$. Os Estados marcados do Observador são definidos como $X_{m,obs} = \{q \in X_{obs} : q \cap X_m \neq \emptyset\}$. 
 
 Para a definição formal do estado inicial $x_{0,obs}$, da função de Eventos ativos $\Gamma_{obs}$ e da função de transição $f_{obs}$, é necessário introduzir o conceito de \textbf{Alcance Não-Observável} (\textit{Unobservable Reach}). O Alcance Não Observável de um Estado $x \in X$, denotado por $UR(x)$, é o conjunto de Estados que podem ser alcançados a partir de $x$ por meio da ocorrência exclusiva de Eventos Não Observáveis:
-$$UR(x) = \{x' \in X : (\exists s \in \Sigma_{uo}^*)[f(x, s) = x']\}$$
+\begin{equation}
+	UR(x)=
+	\{x' \in X : (\exists s \in \Sigma_{uo}^{*})[f(x,s)=x']\}
+	\label{eq:unobservable_reach}
+\end{equation}
 
 De forma análoga, o Alcance Não Observável de um subconjunto de Estados $q \in 2^X$ é definido como a união dos alcances individuais de cada Estado contido em $q$:
-$$UR(q) = \bigcup_{x \in q} UR(x)$$
+
+\begin{equation}
+	UR(q)=
+	\bigcup_{x \in q} UR(x)
+	\label{eq:ur_conjunto}
+\end{equation}
 
 Utilizando essas definições, os elementos de $Obs(G)$ podem ser construídos sistematicamente por meio do algoritmo da Figura \ref{fig:algoritmoobservador}.
 \begin{figure}[!htb]
@@ -235,7 +262,11 @@ A lógica fundamental desse algoritmo consiste em calcular o alcance não observ
 O diagnosticador centralizado, comumente denotado por $G_d$, é um autômato construído especificamente para realizar o rastreamento de falhas do sistema em tempo real. O seu conjunto de Eventos é estritamente igual ao conjunto dos Eventos Observáveis do modelo da planta $G$. A principal característica do diagnosticador é que seus estados são formados pela adição de rótulos (tipicamente $N$ (\textit{Normal}) e $F$ (\textit{Falha})) aos Estados originais de $G$, com o objetivo de indicar se um determinado Evento de falha Não Observável ($\sigma_f$) já ocorreu ou não.
 
 Formalmente, o diagnosticador $G_d$ é definido pela seguinte estrutura de autômato:
-$$G_d = (X_d, \Sigma_d, f_d, \Gamma_d, x_{0,d}, X_{m,d})$$
+\begin{equation}
+	G_d=
+	(X_d,\ \Sigma_d,\ f_d,\ \Gamma_d,\ x_{0,d},\ X_{m,d})
+	\label{eq:diagnosticador}
+\end{equation}
 
 sendo que o espaço de Estados do diagnosticador é um subconjunto das partes do produto cartesiano entre os Estados do sistema e o conjunto de rótulos, isto é, $X_d \subseteq 2^{X \times \{N, F\}}$. O conjunto de Eventos ativos no diagnosticador corresponde unicamente aos Eventos Observáveis do sistema ($\Sigma_d = \Sigma_{obs}$).
 

@@ -150,4 +150,112 @@ Além disso, os gráficos apresentam comportamentos bastante semelhantes entre s
 
 Embora a análise tenha sido realizada apenas para os parâmetros \textit{WorkerTrainingCycles} e \textit{WorkerProductionCycles}, os resultados sugerem que os fatores de influência possuem comportamento semelhante dentro da formulação adotada no modelo.
 
+\subsection{Discussão dos Resultados do Autômato Diagnosticador $G_d$}
+
+Como discutido na Revisão da Literatura, na Seção \ref{subsec:diagnosticabilidade}, a construção do Autômato Diagnosticador $G_d$ por si só não garante que o sistema seja Diagnosticável. Para que um sistema seja considerado Diagnosticável, é necessário que, após a ocorrência de uma falha, exista um número finito de Eventos Observáveis capaz de permitir a identificação inequívoca da falha ocorrida.
+
+Por outro lado, um sistema é classificado como Não Diagnosticável quando o autômato Diagnosticador permanece em estados de incerteza, nos quais não é possível distinguir se o sistema se encontra em condição normal ou em condição de falha apenas pela observação dos eventos disponíveis. Em outras palavras, um sistema é Diagnosticável quando, nos estados finais do Diagnosticador $G_d$, torna-se possível diferenciar claramente estados rotulados como normais daqueles rotulados como falha.
+
+A partir do Autômato Diagnosticador apresentado na Figura \ref{fig:diagnosticador}, foram analisados os estados finais do sistema, conforme ilustrado na Figura \ref{fig:diagnosticadorestadosfinais}.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/diagnosticadorEstadosFinais}
+	\caption{Estados finais do Autômato Diagnosticador.}
+	\fonte{Autoral.}
+	\label{fig:diagnosticadorestadosfinais}
+\end{figure}
+\FloatBarrier
+
+Os estados finais do Diagnosticador $G_d$ correspondem ao estado de incerteza com $E11$ rotulado como $N$ (normal) e $E11$ rotulado como $Y$ (falha) e ao estado com $E11$ rotulado como $Y$ (falha). Dessa forma, verifica-se que o sistema modelado é \textbf{Não Diagnosticável}.
+
+Isso significa que, analisando apenas os eventos observáveis disponíveis no sistema, um gestor ou sistema de supervisão não conseguiria determinar com exatidão se determinadas atividades foram realmente executadas ou se alguma falha ocorreu durante o processo. Em termos práticos, o sistema pode evoluir para o mesmo estado operacional independentemente da ocorrência de falhas, produzindo sequências observáveis indistinguíveis.
+
+
+A não diagnosticabilidade observada está diretamente relacionada à existência de eventos não observáveis e às trajetórias paralelas geradas pelas transições de falha no autômato original. 
+
+\subsubsection{Análise de cenário}Para uma análise mais detalhada da diagnosticabilidade do sistema, foi construído um novo cenário para o Autômato Diagnosticador. Nesse cenário, em vez de considerar a entrada $U_1$ (omissão da verificação das condições iniciais) como um evento não observável, supõe-se que essa etapa possa ser monitorada e identificada pelo sistema supervisor, passando então a ser tratada como um Evento Observável, denominado $O_2$.
+
+A partir dessa modificação, um novo autômato $G$ foi gerado, conforme apresentado na Figura \ref{fig:automatogcenario}.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/automatoGcenario}
+	\caption{Cenário modificado do autômato $G$.}
+	\fonte{Autoral.}
+	\label{fig:automatogcenario}
+\end{figure}
+\FloatBarrier
+
+Com a alteração da observabilidade do evento associado à omissão da verificação inicial, foi realizada novamente a composição paralela entre o autômato do sistema $G$ e o autômato rotulador $G_{Al}$. O resultado dessa composição pode ser observado na Figura \ref{fig:resultadocomposicaoparalelacenario}.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=1\linewidth]{Caps/Figs/resultadocomposicaoparalelaCenario}
+	\caption{Resultado global da composição paralela para o cenário modificado.}
+	\fonte{Autoral.}
+	\label{fig:resultadocomposicaoparalelacenario}
+\end{figure}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelacenariop1}
+	
+	\caption{Resultado da composição paralela do cenário modificado (Parte 1).}
+	\fonte{Autoral.}
+	\label{fig:resultadocomposicaoparalelacenario1}
+\end{figure}
+
+\FloatBarrier
+\clearpage
+
+\begin{figure}[!htb]
+	\ContinuedFloat
+	\centering
+	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelacenariop2}
+	
+	\caption{Resultado da composição paralela do cenário modificado (Parte 2).}
+\end{figure}
+
+\FloatBarrier
+\clearpage
+
+\begin{figure}[!htb]
+	\ContinuedFloat
+	\centering
+	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelacenariop3}
+	
+	\caption{Resultado da composição paralela do cenário modificado (Parte 3).}
+\end{figure}
+
+\FloatBarrier
+\clearpage
+
+\begin{figure}[!htb]
+	\ContinuedFloat
+	\centering
+	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelacenariop4}
+	
+	\caption{Resultado da composição paralela do cenário modificado (Parte 4).}
+\end{figure}
+
+\FloatBarrier
+
+Após a aplicação do operador observador sobre a Composição Paralela, foi obtido o novo Autômato Diagnosticador apresentado na Figura \ref{fig:diagnosticadorCenario}.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/diagnosticadorCenario}
+	\caption{Autômato Diagnosticador do cenário modificado.}
+	\fonte{Autoral.}
+	\label{fig:diagnosticadorCenario}
+\end{figure}
+\FloatBarrier
+
+A análise dos estados finais do novo diagnosticador demonstra que o sistema passa a apresentar comportamento \textbf{Diagnosticável}. Nesse cenário, os estados finais permitem distinguir claramente entre o estado $E_{11}$ rotulado como $N$ (normal) e o estado $E_{11}$ rotulado como $Y$ (falha), eliminando a ambiguidade presente no modelo anterior.
+
+Dessa forma, conclui-se que a observabilidade do evento associado à omissão da verificação das condições iniciais é determinante para a Diagnosticabilidade do sistema. Quando essa etapa passa a ser monitorada explicitamente, o Diagnosticador consegue identificar em tempo finito a ocorrência da falha, tornando possível diferenciar trajetórias normais de trajetórias com falha.
+
+
+
 

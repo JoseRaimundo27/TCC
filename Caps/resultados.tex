@@ -1,9 +1,9 @@
-\section{Resultados}
-\label{sec:resultados}
+\chapter{Resultados}
+\label{chap:resultados}
 
 Neste capítulo, são apresentados e discutidos os resultados obtidos a partir da implementação dos modelos propostos. A análise é dividida em duas grandes etapas: primeiramente, avalia-se o comportamento do sistema produtivo por meio da simulação computacional híbrida e sua respectiva visualização avançada, em seguida, apresenta-se a síntese do SED capaz de rastrear as falhas comportamentais observadas na simulação.
 
-\subsection{Simulação Híbrida no AnyLogic}
+\section{Simulação Híbrida no AnyLogic}
 
 A simulação híbrida, combinando a Modelagem Baseada em Agentes (ABM) e a Simulação a Eventos Discretos (DES), foi implementada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado, as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas e a disposição física da obra.
 
@@ -53,7 +53,7 @@ Por serem os agentes centrais da arquitetura ABM, os trabalhadores carregam par�
 
 Diferentemente das fôrmas, os trabalhadores possuem mobilidade autônoma. A velocidade inicial de deslocamento desses agentes não é um valor constante, mas sim modelada por meio de uma distribuição probabilística triangular de parâmetros (1, 2, 4) representando a variabilidade da locomoção humana. Neste contexto, o valor 1 define a velocidade mínima, o valor 4 representa a velocidade máxima alcançável, e o valor 2 indica a moda, ou seja, a velocidade de caminhada mais provável e frequente durante a jornada de trabalho. Trabalhadores não têm um ID associado, haja visto que não é necessário identifica-los individualmente.
 
-\subsubsection{DES no AnyLogic}
+\subsection{DES no AnyLogic}
 
 A abordagem DES foi responsável por definir a representação geométrica do espaço físico, delimitando as fronteiras de atuação dentro do ambiente \textit{Main} do AnyLogic. Para o dimensionamento e o posicionamento espacial dos elementos da simulação, foram utilizados os blocos construtivos \textit{Storage} e \textit{Rectangular Node}. Como mencionado previamente, a disposição espacial foi baseada nas obras do canteiro de obras A.
 
@@ -155,7 +155,7 @@ Para concluir a etapa de DES, foram definidas duas \textit{flags} na função \t
 
 Como as etapas são sequenciais, somente após a conclusão da montagem (\textit{qAssembly} = 1) é que se avalia o estado de \textit{qDissassembly}. Nesse caso, se \textit{qDissassembly} for igual a 0, a simulação está na etapa de desmontagem. Quando assume o valor 1, indica que ambas as etapas (montagem e desmontagem) foram concluídas.
 
-\subsubsection{ABM no AnyLogic}
+\subsection{ABM no AnyLogic}
 
 A abordagem ABM foi responsável por descrever o modelo cognitivo do trabalhador. A Figura \ref{fig:statechart} apresenta o diagrama de estados, representando os possíveis estados do trabalhador no processo de montagem e desmontagem. O agente trabalhador inicia no estado Ocioso (\textit{Idle}). No estado de Locomoção (\textit{Locomotion}) encontra-se a lógica principal do comportamento do trabalhador, seguido pelas etapas de montagem, à esquerda, e de desmontagem, à direita, cuja execução é influenciada pelos parâmetros de influência. Os estados finais definem se o comportamento do trabalhador foi adequado (\textit{AdeqBehaviorA}), quando todas as atividades são concluídas, ou inadequado (\textit{InadeqBehavior}), quando pelo menos uma atividade é ignorada.
 
@@ -449,12 +449,12 @@ A partir do arquivo USD gerado, torna-se possível aplicar materiais, iluminaç�
 % - Como a conexão dos dados do AnyLogic com o Omniverse facilitou a percepção espacial do canteiro.
 % - Discussão sobre como ver os avatares (agentes) se movendo ajuda o gestor da obra a validar o modelo comportamental de forma muito mais intuitiva que apenas olhando gráficos 2D.
 
-\subsection{Diagnóstico de Falhas por Sistemas a Eventos Discretos (SED)}
+\section{Diagnóstico de Falhas por SED}
 
 A Simulação Híbrida desenvolvida anteriormente demonstrou que o trabalhador nem sempre executa todas as atividades previstas durante os processos de montagem e desmontagem das fôrmas. Entretanto, parte dessas Falhas pode ocorrer de maneira não explícita, é preciso aplicar a teoria do SED para estuda-las.
 
 
-\subsection{Autômato Gerador do Canteiro de Obras ($G$)}
+\subsection{Autômato $G$ do Canteiro de Obras}
 
 A partir do mapeamento apresentado na Tabela \ref{tab:funcao_transicao}, em conjunto com o Diagrama de Estados ilustrado na Figura \ref{fig:statechart}, foi possível construir o autômato gerador $G$ do sistema.
 
@@ -471,16 +471,95 @@ O autômato representa formalmente os estados operacionais do processo de montag
 
 A análise do autômato permite observar que diferentes caminhos de execução podem conduzir o sistema ao mesmo estado físico do processo. No caso do estado $E1$ (Fôrmas em Checagem), por exemplo, a transição para o estado $E2$ (Desmoldante em Aplicação) pode ocorrer tanto por meio de um evento não observável quanto pela ocorrência de uma falha associada à atividade. De maneira semelhante, os estados $E0$, $E2$, $E5$ e $E8$ podem transicionar para seus respectivos estados subsequentes através de eventos observáveis ou por meio de eventos de falha ($F1$, $F3$, $F4$ e $F5$, respectivamente).
 
-Essas ramificações de falha criam trajetórias paralelas dentro do autômato que convergem para os mesmos estados operacionais do sistema. Como consequência, diferentes sequências de execução podem produzir o mesmo comportamento observável externamente, mesmo quando determinadas atividades não foram corretamente realizadas. Esse comportamento evidencia a dificuldade de identificar falhas apenas pela observação direta da evolução do processo produtivo, justificando a necessidade da modelagem formal por Sistemas a Eventos Discretos para fins de diagnóstico.
-\subsection{Autômato Observador $G$)}
-\subsection{Síntese do Autômato Diagnosticador ($G_d$)}
-% Descrição: Onde a mágica acontece. Você mostra o autômato observador que rastreia os eventos.
-% O que abordar:
-% - Apresente o grafo ou a tabela do Diagnosticador gerado.
-% - Mostre como os estados agora carregam os rótulos (Normal, F1, F2, etc.).
+Essas ramificações de falha criam trajetórias paralelas dentro do autômato que convergem para os mesmos estados operacionais do sistema. Como consequência, diferentes sequências de execução podem produzir o mesmo comportamento observável externamente, mesmo quando determinadas atividades não foram corretamente realizadas. Esse comportamento evidencia a dificuldade de identificar falhas apenas pela observação direta da evolução do processo produtivo, justificando a necessidade da modelagem formal por SED para fins de diagnóstico.
+
+\subsection{Composição Paralela entre $G$ e $G_{Al}$}
+
+Com o objetivo de construir o Autômato Diagnosticador $G_d$, torna-se necessário realizar a composição paralela entre o autômato do sistema $G$ e o Autômato Rotulador $G_{Al}$. O autômato rotulador de dois estados definido por \citeonline{basilio2010}, apresentado na Figura \ref{fig:exemplo-rotulador}, foi adotado neste trabalho para representar a ocorrência de falhas no sistema.
+
+A composição paralela foi realizada com base na Equação \ref{eq:composicao_paralela}, permitindo combinar os estados e eventos do sistema produtivo com os estados de rotulação de falha do autômato $G_{Al}$. Dessa forma, o modelo resultante passa a representar simultaneamente o comportamento operacional do sistema e a informação referente à ocorrência ou não de falhas ao longo da execução das atividades.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{Caps/Figs/resultadocomposicaoparalela}
+	\caption{Resultado global da composição paralela entre $G$ e $G_{Al}$.}
+	\fonte{Autoral.}
+	\label{fig:resultadocomposicaoparalelageral}
+\end{figure}
+\FloatBarrier
+
+O resultado da composição paralela pode ser observado de forma completa na Figura \ref{fig:resultadocomposicaoparalelageral}. Entretanto, devido à quantidade de estados e transições geradas, o autômato também foi dividido em partes para facilitar sua visualização e análise, conforme apresentado na Figura \ref{fig:resultadocomposicaoparalela}.
+
+A composição paralela gera um novo espaço de estados no qual cada estado passa a representar simultaneamente o estado operacional do sistema e a condição de falha associada ao autômato rotulador. Assim, o modelo torna-se capaz de distinguir trajetórias em que falhas ocorreram daquelas em que todas as atividades foram executadas corretamente, mesmo quando ambas conduzem ao mesmo comportamento observável.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelap1}
+	
+	\caption{Resultado da composição paralela (Parte 1).}
+	\fonte{Autoral.}
+	\label{fig:resultadocomposicaoparalela}
+\end{figure}
+
+\FloatBarrier
+\clearpage
+
+\begin{figure}[!htb]
+	\ContinuedFloat
+	\centering
+	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelap2}
+	
+	\caption{Resultado da composição paralela (Parte 2).}
+\end{figure}
+
+\FloatBarrier
+\clearpage
+
+\begin{figure}[!htb]
+	\ContinuedFloat
+	\centering
+	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelap3}
+	
+	\caption{Resultado da composição paralela (Parte 3).}
+\end{figure}
+
+\FloatBarrier
+\clearpage
+
+\begin{figure}[!htb]
+	\ContinuedFloat
+	\centering
+	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelap4}
+	
+	\caption{Resultado da composição paralela (Parte 4).}
+\end{figure}
+
+\FloatBarrier
+
+
+
+
+\subsection{Síntese do Autômato Diagnosticador $G_d$}
+
+A partir da composição paralela entre o autômato do sistema $G$ e o Autômato Rotulador $G_{Al}$, torna-se possível aplicar o operador observador para a construção do Autômato Diagnosticador $G_d$.
+
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/diagnosticador}
+	\caption{Resultado do Autômato Diagnosticador $G_d$.}
+	\fonte{Autoral.}
+	\label{fig:diagnosticador}
+\end{figure}
+\FloatBarrier
+
+A Figura \ref{fig:diagnosticador} apresenta o Autômato Diagnosticador gerado para o sistema modelado. Diferentemente do autômato original, os estados do diagnosticador passam a carregar informações associadas às condições de falha do sistema. Assim, cada estado representa não apenas a posição operacional do processo, mas também o conjunto de hipóteses de falha compatíveis com a sequência de eventos observada.
+
+Os estados do diagnosticador podem conter rótulos associados ao funcionamento normal do sistema (rótulo \textit{N}) ou a diferentes modos de falha, representados pelos eventos $F1$, $F2$, $F3$, $F4$ e $F5$ (rótulo \textit{Y}). Esses rótulos permitem identificar quais falhas podem ter ocorrido com base apenas na observação parcial do comportamento do sistema.
+
 % - Explique a evolução do diagnóstico: por exemplo, como o sistema percebe que a "Falha 3 (Omissão do desmoldante)" aconteceu logo após a leitura do evento observável O4.
 
-\subsection{Análise de Diagnosticabilidade e Impactos na Gestão}
+
 % Descrição: O fechamento de ouro juntando a engenharia com a matemática.
 % O que abordar:
 % - Confirme se o sistema é diagnosticável (se todas as falhas são descobertas antes que o ciclo da parede termine). Como o fluxo é finito (termina em E11), não deve haver ciclos indeterminados.
