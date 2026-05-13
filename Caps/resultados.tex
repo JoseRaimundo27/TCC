@@ -442,12 +442,100 @@ Para realizar a comunicação entre o AnyLogic e o NVIDIA Omniverse, foi criado 
 
 O modelo desenvolvido no AnyLogic é renderizado e armazenado localmente em um arquivo no formato \textit{USD} (\textit{Universal Scene Description}), utilizado pelo NVIDIA Omniverse. O formato USD é um padrão aberto para descrição de cenas tridimensionais, permitindo interoperabilidade entre diferentes ferramentas de modelagem e renderização, além de possibilitar colaboração e visualização em tempo real.
 
-A partir do arquivo USD gerado, torna-se possível aplicar materiais, iluminação, texturas e demais elementos visuais avançados à simulação, permitindo sua execução integrada ao ambiente do NVIDIA Omniverse com maior nível de realismo visual.
-% Descrição: Apresente os resultados visuais e os insights que o 3D trouxe.
-% O que abordar:
-% - Imagens/prints do modelo renderizado no Omniverse.
-% - Como a conexão dos dados do AnyLogic com o Omniverse facilitou a percepção espacial do canteiro.
-% - Discussão sobre como ver os avatares (agentes) se movendo ajuda o gestor da obra a validar o modelo comportamental de forma muito mais intuitiva que apenas olhando gráficos 2D.
+A estilização foi realizada utilizando o NVIDIA Omniverse USD Composer, que é uma aplicação avançada do NVIDIA Omniverse voltada para a construção de mundos 3D, simulação, iluminação e renderização em tempo real. 
+
+Para a composição visual da simulação, foi utilizada a biblioteca \textit{NVIDIA Assets}, que disponibiliza diversos elementos tridimensionais prontos para uso. Foram selecionados modelos relacionados ao contexto da construção civil, como cones de sinalização, escadas, baldes de tinta, veículos de transporte de cargas e elementos de vegetação. As Figuras \ref{fig:assetsomniverse1} e \ref{fig:assetsomniverse2} apresentam alguns dos objetos utilizados na construção do ambiente virtual da simulação.
+ 
+
+\begin{figure}[!htb]
+	\centering
+	
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/escadasOmniverse}
+		\caption*{(a) Modelo de escadas utilizado no ambiente virtual.}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/baldesOmniverse}
+		\caption*{(b) Modelo de baldes utilizado no ambiente virtual.}
+	\end{minipage}
+	
+	\caption{Elementos tridimensionais utilizados na composição do ambiente virtual (Parte 1).}
+	\fonte{Autoral.}
+	\label{fig:assetsomniverse1}
+\end{figure}
+\FloatBarrier
+
+
+
+\begin{figure}[!htb]
+	\centering
+	
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/conesOmniverse}
+		\caption*{(a) Modelo de cones utilizado no ambiente virtual.}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Caps/Figs/arvoresOmniverse}
+		\caption*{(b) Modelos de vegetação utilizados no ambiente virtual.}
+	\end{minipage}
+	
+	\caption{Elementos tridimensionais utilizados na composição do ambiente virtual (Parte 2).}
+	\fonte{Autoral.}
+	\label{fig:assetsomniverse2}
+\end{figure}
+\FloatBarrier
+
+Como não foi encontrada uma \textit{asset} específica que representasse adequadamente as fôrmas utilizadas na obra, optou-se pela utilização do objeto \textit{wireSecurity}, por apresentar características visuais semelhantes às estruturas das fôrmas reais. Dessa forma, o objeto foi adaptado para representar as fôrmas no ambiente virtual da simulação.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/formworkOmniverse}
+	\caption{Representação das fôrmas no NVIDIA Omniverse.}
+	\fonte{Autoral.}
+	\label{fig:formwork}
+\end{figure}
+\FloatBarrier
+
+Para representar o solo do canteiro de obras no ambiente virtual, foram utilizados os \textit{Materials} disponibilizados pelo NVIDIA USD Composer. Mais especificamente, foi aplicado o material \textit{Sandstone\_Brick\_Vintage}, escolhido por apresentar características visuais semelhantes a um terreno arenoso e irregular, proporcionando uma percepção mais próxima do ambiente real de obra.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/sandOmniverse}
+	\caption{Aplicação de material para representação do solo do canteiro de obras no NVIDIA Omniverse.}
+	\fonte{Autoral.}
+	\label{fig:areia}
+\end{figure}
+\FloatBarrier
+
+A Figura \ref{fig:resultadoomniverse} apresenta o resultado final da estilização do canteiro de obras no NVIDIA Omniverse. Os elementos tridimensionais foram distribuídos pelo ambiente de forma a representar a organização dinâmica e, muitas vezes, caótica presente em um canteiro de obras real, incluindo materiais, equipamentos e objetos espalhados ao longo da área operacional.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/resultadoGeral}
+	\caption{Resultado final da estilização do ambiente virtual no NVIDIA Omniverse.}
+	\fonte{Autoral.}
+	\label{fig:resultadoomniverse}
+\end{figure}
+\FloatBarrier
+
+Por fim, o NVIDIA Omniverse permite estabelecer uma sessão sincronizada com o AnyLogic, possibilitando a execução da simulação em tempo real dentro do ambiente virtual estilizado. Dessa forma, foi possível visualizar os agentes, equipamentos e movimentações ocorrendo dinamicamente em um cenário tridimensional com maior nível de realismo visual. A Figura \ref{fig:resultadoOmniverseRodando} apresenta a simulação em execução no ambiente desenvolvido no NVIDIA Omniverse.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/resultadoOmniverseRodando}
+	\caption{Execução da simulação no ambiente virtual desenvolvido no NVIDIA Omniverse.}
+	\fonte{Autoral.}
+	\label{fig:resultadoOmniverseRodando}
+\end{figure}
+\FloatBarrier
+
+
 
 \section{Diagnóstico de Falhas por SED}
 

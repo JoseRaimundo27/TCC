@@ -1,7 +1,7 @@
 \chapter{Discussão dos Resultados}
 \label{chap:discussao}
 
-\subsection{Discussão dos Resultados da Simulação}
+\section{Discussão dos Resultados da Simulação}
 
 Para a geração dos cenários de simulação, estabeleceram-se diferentes configurações para os parâmetros cognitivos e operacionais do trabalhador (\textit{TrainingCycles}, \textit{ProductionCycles}, \textit{InspectionCycles}, \textit{FeedbackCycles} e \textit{StressCycles}). Durante as rodadas de testes, os fatores de influência variaram em uma escala de 1 a 10, com exceção do parâmetro \textit{ProductionCycles}, cujo domínio de variação foi de 1 a 100.O incremento numérico desses parâmetros representa uma melhoria progressiva nas condições do trabalhador, exceto para o \textit{StressCycles}, que possui uma correlação inversamente proporcional: o valor 1 representa uma condição de estresse máximo, enquanto o valor 10 indica uma condição totalmente livre de estresse.
 
@@ -150,7 +150,19 @@ Além disso, os gráficos apresentam comportamentos bastante semelhantes entre s
 
 Embora a análise tenha sido realizada apenas para os parâmetros \textit{WorkerTrainingCycles} e \textit{WorkerProductionCycles}, os resultados sugerem que os fatores de influência possuem comportamento semelhante dentro da formulação adotada no modelo.
 
-\subsection{Discussão dos Resultados do Autômato Diagnosticador $G_d$}
+\subsection{Discussão dos Resultados da Visualização Gráfica}
+
+A integração entre o AnyLogic e o NVIDIA Omniverse permitiu ampliar a capacidade de visualização da simulação desenvolvida. Diferentemente da visualização tridimensional padrão do AnyLogic, o ambiente construído no NVIDIA Omniverse proporcionou maior realismo visual, permitindo representar elementos característicos do canteiro de obras, como vegetação, materiais espalhados, equipamentos e condições do terreno.
+
+Os resultados demonstraram que a estilização gráfica contribuiu para uma melhor interpretação espacial das atividades executadas pelos trabalhadores durante o processo de montagem e desmontagem das fôrmas. A visualização em tempo real permitiu acompanhar deslocamentos, interações entre agentes e organização do ambiente de trabalho de forma mais intuitiva.
+
+Além do aspecto visual, a integração também auxiliou na validação qualitativa do modelo de simulação. A reprodução do ambiente de obra com características semelhantes às observadas nas visitas técnicas permitiu verificar se os fluxos de movimentação, posicionamento de objetos e dinâmica operacional estavam coerentes com o cenário real analisado.
+
+Entretanto, observou-se que a utilização do NVIDIA Omniverse aumenta o custo computacional da simulação, especialmente devido à renderização em tempo real dos elementos tridimensionais e efeitos de iluminação. Além disso, algumas adaptações visuais precisaram ser realizadas devido à indisponibilidade de determinados modelos específicos na biblioteca de \textit{assets}, como ocorreu na representação das fôrmas. Também foram observados alguns \textit{bugs} durante o processo de sincronização e renderização entre o AnyLogic e o NVIDIA Omniverse. Em determinados momentos, algumas fôrmas deixavam de ser corretamente renderizadas no ambiente virtual, ocasionando inconsistências visuais na simulação. Como consequência, alguns trabalhadores apareciam executando movimentações sem transportar as respectivas fôrmas, gerando divergências entre o estado lógico da simulação e sua representação gráfica no Omniverse.
+
+Mesmo com essas limitações, os resultados indicam que a integração entre simulação híbrida e ambientes virtuais imersivos possui elevado potencial para aplicações na construção civil, principalmente em atividades relacionadas à análise operacional, treinamento, validação de processos e apoio à tomada de decisão.
+
+\section{Discussão dos Resultados do Autômato Diagnosticador $G_d$}
 
 Como discutido na Revisão da Literatura, na Seção \ref{subsec:diagnosticabilidade}, a construção do Autômato Diagnosticador $G_d$ por si só não garante que o sistema seja Diagnosticável. Para que um sistema seja considerado Diagnosticável, é necessário que, após a ocorrência de uma falha, exista um número finito de Eventos Observáveis capaz de permitir a identificação inequívoca da falha ocorrida.
 
@@ -174,7 +186,9 @@ Isso significa que, analisando apenas os eventos observáveis disponíveis no si
 
 A não diagnosticabilidade observada está diretamente relacionada à existência de eventos não observáveis e às trajetórias paralelas geradas pelas transições de falha no autômato original. 
 
-\subsubsection{Análise de cenário}Para uma análise mais detalhada da diagnosticabilidade do sistema, foi construído um novo cenário para o Autômato Diagnosticador. Nesse cenário, em vez de considerar a entrada $U_1$ (omissão da verificação das condições iniciais) como um evento não observável, supõe-se que essa etapa possa ser monitorada e identificada pelo sistema supervisor, passando então a ser tratada como um Evento Observável, denominado $O_2$.
+\subsection{Análise de cenário}
+
+Para uma análise mais detalhada da diagnosticabilidade do sistema, foi construído um novo cenário para o Autômato Diagnosticador. Nesse cenário, em vez de considerar a entrada $U_1$ (omissão da verificação das condições iniciais) como um evento não observável, supõe-se que essa etapa possa ser monitorada e identificada pelo sistema supervisor, passando então a ser tratada como um Evento Observável, denominado $O_2$.
 
 A partir dessa modificação, um novo autômato $G$ foi gerado, conforme apresentado na Figura \ref{fig:automatogcenario}.
 
@@ -255,6 +269,8 @@ Após a aplicação do operador observador sobre a Composição Paralela, foi ob
 A análise dos estados finais do novo diagnosticador demonstra que o sistema passa a apresentar comportamento \textbf{Diagnosticável}. Nesse cenário, os estados finais permitem distinguir claramente entre o estado $E_{11}$ rotulado como $N$ (normal) e o estado $E_{11}$ rotulado como $Y$ (falha), eliminando a ambiguidade presente no modelo anterior.
 
 Dessa forma, conclui-se que a observabilidade do evento associado à omissão da verificação das condições iniciais é determinante para a Diagnosticabilidade do sistema. Quando essa etapa passa a ser monitorada explicitamente, o Diagnosticador consegue identificar em tempo finito a ocorrência da falha, tornando possível diferenciar trajetórias normais de trajetórias com falha.
+
+Nesse sentido, o Evento relacionado à verificação das condições iniciais constitui um ponto crítico do processo sob a perspectiva de monitoramento e diagnóstico. Assim, torna-se recomendável que gestores adotem mecanismos adicionais de controle para essa etapa específica, como checklists digitais, formulários de inspeção, sensores de confirmação de atividade ou sistemas de validação operacional, visando aumentar a observabilidade do processo e reduzir a ocorrência de falhas não detectáveis no ambiente de obra.
 
 
 
