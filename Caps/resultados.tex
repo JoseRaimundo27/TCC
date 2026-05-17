@@ -11,7 +11,7 @@ Primeiramente, foram estruturados os agentes da simulação: as fôrmas (\textit
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Propriedades do Agente fôrma.}
+	\caption{Propriedades do Agente Fôrma.}
 	\includegraphics[width=0.8\textwidth]{Caps/Figs/formworks.jpeg}
 	\fonte{Autoral.}
 	\label{fig:formworks}
@@ -55,11 +55,11 @@ Diferentemente das fôrmas, os trabalhadores possuem mobilidade autônoma. A vel
 
 \subsection{DES no AnyLogic}
 
-A abordagem DES foi responsável por definir a representação geométrica do espaço físico, delimitando as fronteiras de atuação dentro do ambiente \textit{Main} do AnyLogic. Para o dimensionamento e o posicionamento espacial dos elementos da simulação, foram utilizados os blocos construtivos \textit{Storage} e \textit{Rectangular Node}. Como mencionado previamente, a disposição espacial foi baseada nas obras do canteiro de obras A.
+A abordagem DES foi responsável por definir a representação geométrica do espaço físico, delimitando as fronteiras de atuação dentro do ambiente \textit{Main} do AnyLogic. Para o dimensionamento e o posicionamento espacial dos elementos da simulação, foram utilizados os blocos construtivos \textit{Storage} e \textit{Rectangular Node}. Como mencionado previamente, a disposição espacial foi baseada nas obras do "Minha Casa, Minha Vida". Essa disposição pode ser observada na Figura \ref{fig:layout-des}.
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Representação geométrica do cômodo e blocos no ambiente do AnyLogic.}
+	\caption{Representação geométrica da planta no ambiente do AnyLogic.}
 	\includegraphics[width=0.8\textwidth]{Caps/Figs/des-vision.png} 
 	\fonte{Autoral.}
 	\label{fig:layout-des}
@@ -309,8 +309,8 @@ Caso a condição de montagem não seja satisfeita, é realizada a verificação
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.6\linewidth]{Caps/Figs/findformwork}
 	\caption{Função \textit{FindFormwork} para auxiliar na desmontagem.}
+	\includegraphics[width=0.6\linewidth]{Caps/Figs/findformwork}
 	\fonte{Autoral.}
 	\label{fig:findformwork}
 \end{figure}
@@ -323,8 +323,8 @@ De forma análoga, quando o trabalhador se encontra no estado de desmontagem, el
 Caso nenhuma das condições anteriores seja satisfeita (quando tanto a montagem quanto a desmontagem já tenham sido concluídas ou o trabalhador não esteja em horário de serviço) o trabalhador envia para si mesmo a mensagem \textit{"EndUp"}, sendo então direcionado de volta ao estado \textit{Idle}, caracterizando o encerramento de suas atividades no ciclo atual de execução.
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/checkformwork}
 	\caption{Exemplo de lógica aplicada às atividades.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/checkformwork}
 	\fonte{Autoral.}
 	\label{fig:checkformwork}
 \end{figure}
@@ -334,8 +334,8 @@ A Figura \ref{fig:checkformwork} apresenta um exemplo da lógica aplicada às at
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/calculateprobability}
 	\caption{Função para cálculo da probabilidade de pular a etapa.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/calculateprobability}	
 	\fonte{Autoral.}
 	\label{fig:calculateprobability}
 \end{figure}
@@ -366,8 +366,8 @@ A partir dos estados de cognição, o trabalhador pode transicionar para o estad
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.4\linewidth]{Caps/Figs/transictions}
 	\caption{Transições dos estados de cognição.}
+	\includegraphics[width=0.4\linewidth]{Caps/Figs/transictions}
 	\fonte{Autoral.}
 	\label{fig:transictions}
 \end{figure}
@@ -411,8 +411,8 @@ A Figura \ref{fig:simulation3d} apresenta a execução da simulação utilizando
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/simulation2d}
 	\caption{Visualização da simulação em 2D no AnyLogic.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/simulation2d}
 	\fonte{Autoral.}
 	\label{fig:simulation2d}
 \end{figure}
@@ -420,8 +420,8 @@ A Figura \ref{fig:simulation3d} apresenta a execução da simulação utilizando
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/simulation3d}
 	\caption{Visualização da simulação em 3D no AnyLogic.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/simulation3d}
 	\fonte{Autoral.}
 	\label{fig:simulation3d}
 \end{figure}
@@ -433,8 +433,8 @@ Para realizar a comunicação entre o AnyLogic e o NVIDIA Omniverse, foi criado 
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/omniverseconnector}
 	\caption{Botão para conexão entre o AnyLogic e o NVIDIA Omniverse.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/omniverseconnector}
 	\fonte{Autoral.}
 	\label{fig:omniverseconnector}
 \end{figure}
@@ -449,7 +449,7 @@ Para a composição visual da simulação, foi utilizada a biblioteca \textit{NV
 
 \begin{figure}[!htb]
 	\centering
-	
+	\caption{Elementos tridimensionais utilizados na composição do ambiente virtual (Parte 1).}
 	\begin{minipage}{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Caps/Figs/escadasOmniverse}
@@ -461,8 +461,7 @@ Para a composição visual da simulação, foi utilizada a biblioteca \textit{NV
 		\includegraphics[width=\textwidth]{Caps/Figs/baldesOmniverse}
 		\caption*{(b) Modelo de baldes utilizado no ambiente virtual.}
 	\end{minipage}
-	
-	\caption{Elementos tridimensionais utilizados na composição do ambiente virtual (Parte 1).}
+
 	\fonte{Autoral.}
 	\label{fig:assetsomniverse1}
 \end{figure}
@@ -472,7 +471,7 @@ Para a composição visual da simulação, foi utilizada a biblioteca \textit{NV
 
 \begin{figure}[!htb]
 	\centering
-	
+	\caption{Elementos tridimensionais utilizados na composição do ambiente virtual (Parte 2).}
 	\begin{minipage}{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Caps/Figs/conesOmniverse}
@@ -485,7 +484,7 @@ Para a composição visual da simulação, foi utilizada a biblioteca \textit{NV
 		\caption*{(b) Modelos de vegetação utilizados no ambiente virtual.}
 	\end{minipage}
 	
-	\caption{Elementos tridimensionais utilizados na composição do ambiente virtual (Parte 2).}
+	
 	\fonte{Autoral.}
 	\label{fig:assetsomniverse2}
 \end{figure}
@@ -495,8 +494,9 @@ Como não foi encontrada uma \textit{asset} específica que representasse adequa
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/formworkOmniverse}
 	\caption{Representação das fôrmas no NVIDIA Omniverse.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/formworkOmniverse}
+	
 	\fonte{Autoral.}
 	\label{fig:formwork}
 \end{figure}
@@ -506,19 +506,20 @@ Para representar o solo do canteiro de obras no ambiente virtual, foram utilizad
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/sandOmniverse}
 	\caption{Aplicação de material para representação do solo do canteiro de obras no NVIDIA Omniverse.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/sandOmniverse}
 	\fonte{Autoral.}
 	\label{fig:areia}
 \end{figure}
 \FloatBarrier
 
-A Figura \ref{fig:resultadoomniverse} apresenta o resultado final da estilização do canteiro de obras no NVIDIA Omniverse. Os elementos tridimensionais foram distribuídos pelo ambiente de forma a representar a organização dinâmica e, muitas vezes, caótica presente em um canteiro de obras real, incluindo materiais, equipamentos e objetos espalhados ao longo da área operacional.
+A Figura \ref{fig:resultadoomniverse} apresenta o resultado final da estilização do canteiro de obras no NVIDIA Omniverse. Os elementos tridimensionais foram distribuídos pelo ambiente de forma a representar a organização dinâmica e, muitas vezes, complexa presente em um canteiro de obras real, incluindo materiais, equipamentos e objetos espalhados ao longo da área operacional.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/resultadoGeral}
 	\caption{Resultado final da estilização do ambiente virtual no NVIDIA Omniverse.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/resultadoGeral}
+	
 	\fonte{Autoral.}
 	\label{fig:resultadoomniverse}
 \end{figure}
@@ -548,8 +549,8 @@ A partir do mapeamento apresentado na Tabela \ref{tab:funcao_transicao}, em conj
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/automatoG}
 	\caption{Autômato gerador $G$ do sistema.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/automatoG}
 	\fonte{Autoral.}
 	\label{fig:automatog}
 \end{figure}
@@ -569,8 +570,8 @@ A composição paralela foi realizada com base na Equação \ref{eq:composicao_p
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.9\linewidth]{Caps/Figs/resultadocomposicaoparalela}
 	\caption{Resultado global da composição paralela entre $G$ e $G_{Al}$.}
+	\includegraphics[width=0.9\linewidth]{Caps/Figs/resultadocomposicaoparalela}
 	\fonte{Autoral.}
 	\label{fig:resultadocomposicaoparalelageral}
 \end{figure}
@@ -582,9 +583,8 @@ A composição paralela gera um novo espaço de estados no qual cada estado pass
 
 \begin{figure}[!htb]
 	\centering
+		\caption{Resultado da composição paralela (Parte 1).}
 	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelap1}
-	
-	\caption{Resultado da composição paralela (Parte 1).}
 	\fonte{Autoral.}
 	\label{fig:resultadocomposicaoparalela}
 \end{figure}
@@ -595,9 +595,10 @@ A composição paralela gera um novo espaço de estados no qual cada estado pass
 \begin{figure}[!htb]
 	\ContinuedFloat
 	\centering
+	\caption{Resultado da composição paralela (Parte 2).}
 	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelap2}
 	
-	\caption{Resultado da composição paralela (Parte 2).}
+	
 \end{figure}
 
 \FloatBarrier
@@ -606,9 +607,10 @@ A composição paralela gera um novo espaço de estados no qual cada estado pass
 \begin{figure}[!htb]
 	\ContinuedFloat
 	\centering
+	\caption{Resultado da composição paralela (Parte 3).}
 	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelap3}
 	
-	\caption{Resultado da composição paralela (Parte 3).}
+	
 \end{figure}
 
 \FloatBarrier
@@ -617,9 +619,10 @@ A composição paralela gera um novo espaço de estados no qual cada estado pass
 \begin{figure}[!htb]
 	\ContinuedFloat
 	\centering
+	\caption{Resultado da composição paralela (Parte 4).}
 	\includegraphics[width=\linewidth]{Caps/Figs/resultadocomposicaoparalelap4}
 	
-	\caption{Resultado da composição paralela (Parte 4).}
+	
 \end{figure}
 
 \FloatBarrier
@@ -634,8 +637,8 @@ A partir da composição paralela entre o autômato do sistema $G$ e o Autômato
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/diagnosticador}
 	\caption{Resultado do Autômato Diagnosticador $G_d$.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/diagnosticador}
 	\fonte{Autoral.}
 	\label{fig:diagnosticador}
 \end{figure}

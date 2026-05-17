@@ -9,7 +9,7 @@ No contexto deste estudo, essas duas abordagens (DES e ABM) operam de forma inte
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Processo de modelagem}
+	\caption{Processo de modelagem.}
 	\includegraphics[width=1 \textwidth]{Caps/Figs/crook-model.png}
 	\fonte{\citeonline{crooks2019} (Adaptado).}
 	\label{fig:modeling-process}
@@ -68,7 +68,7 @@ Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvime
 	& \textbf{Regras Físicas:} Os agentes devem respeitar as restrições espaciais de uma célula e a presença de outros agentes durante a movimentação. \\
 	\midrule
 	
-	Interações & \textbf{Interações Físicas:} Cada agente ocupa uma célula diferente, e deve haver no máximo dois agentes por sala. \\
+	Interações & \textbf{Interações Físicas:} Cada agente ocupa uma célula diferente, e deve haver no máximo dois agentes por cômodo. \\
 	& \textbf{Comunicação:} Comunicação entre os agentes trabalhadores e o processo. \\
 	& \textbf{Troca de recursos:} Troca indireta de recursos entre a empresa e os agentes. \\
 	\midrule
@@ -94,9 +94,9 @@ A Figura \ref{fig:modeling-worker} descreve, de modo geral, as etapas macro etap
 \end{figure}
 \FloatBarrier
 
-Conforme ilustrado na Figura \ref{fig:modeling-worker}, o fluxo construtivo é estruturado em um ciclo contínuo de macro etapas sequenciais. Nessa dinâmica, o operário atua como o agente ativo, responsável pela tomada de decisão e execução, enquanto a fôrma metálica representa o agente passivo, por ser alvo de toda decisão do processo. A lógica de execução do modelo baseia-se na divisão do pavimento em dois setores (dois meios pavimentos por andar), uma estratégia logística adotada para otimizar a alocação de recursos. Inicialmente, o trabalhador parte de seu ponto de origem para coletar as fôrmas e iniciar a etapa de montagem no primeiro meio pavimento, etapa que sucede a colocação da armadura (tela metálica da estrutura) e as instalações elétricas e hidrossanitárias. Após a concretagem desse setor, o modelo incorpora um tempo de espera de um dia, referente à cura do concreto. Concluído esse prazo, os operários realizam a desforma e a limpeza, transferindo as fôrmas sequencialmente para iniciar a montagem do segundo meio pavimento, repetindo esse ciclo até completar todos os pavimentos da obra.
+Conforme ilustrado na Figura \ref{fig:modeling-worker}, o fluxo construtivo é estruturado em um ciclo contínuo de macro etapas sequenciais. Nessa dinâmica, o operário atua como o agente ativo, responsável pela tomada de decisão e execução, enquanto a fôrma metálica representa o agente passivo, por ser alvo de toda decisão do processo. A lógica de execução do modelo baseia-se na divisão do pavimento em dois setores (dois meios pavimentos por andar), uma estratégia logística adotada para otimizar a alocação de recursos. Inicialmente, o trabalhador parte de seu ponto de origem para coletar as fôrmas e iniciar a etapa de montagem no primeiro meio pavimento, etapa que sucede a colocação da armadura (tela metálica da estrutura) e as instalações elétricas e hidrossanitárias. Após a concretagem desse setor, o modelo incorpora um tempo de espera de um dia, referente à cura do concreto. Concluído esse prazo, os trabalhadores realizam a desforma e a limpeza, transferindo as fôrmas sequencialmente para iniciar a montagem do segundo meio pavimento, repetindo esse ciclo até completar todos os pavimentos da obra.
 
-Para garantir a qualidade dos serviços de montagem e desmontagem, a empresa parceira utiliza Formulários de Verificação de Serviço diários.\ Contudo, observações em campo revelaram que os operários frequentemente negligenciam etapas obrigatórias. Essas omissões envolvem tanto os itens previstos nos formulários quanto recomendações cruciais de manuais técnicos, a exemplo da aplicação de desmoldante e da inserção de capas plásticas nas ancoragens. 
+Para garantir a qualidade dos serviços de montagem e desmontagem, a empresa parceira utiliza Formulários de Verificação de Serviço diários.\ Contudo, observações em campo revelaram que os operários frequentemente negligenciam etapas obrigatórias. Essas omissões envolvem tanto os itens previstos nos formulários quanto recomendações cruciais de manuais técnicos, a exemplo da aplicação de desmoldante e da inserção de capas plásticas nas faquetas. 
 
 A análise de dados históricos e documentos da empresa evidenciou uma forte correlação entre o comportamento da equipe (omissão de tarefas), o surgimento de defeitos nas paredes e a consequente necessidade de retrabalho, fatores que comprometem severamente a produtividade da obra. Nesse sentido, a não execução de qualquer atividade essencial do fluxo de trabalho resulta na consolidação de uma não conformidade.
 
@@ -116,7 +116,7 @@ Após a concretagem e o período de cura (processo de manutenção da umidade e 
 
 
 \subsection{Etapas de Modelagem do Comportamento dos Trabalhadores}
-Após o mapeamento do processo de construção e considerando os aspectos intrínsecos relacionados aos projetos de construção, foi possível propor um modelo computacional híbrido para simular e analisar o comportamento dos trabalhadores com base nas macroetapas e nas atividades necessárias para a montagem e desmontagem de fôrmas. A arquitetura metodológica do modelo computacional híbrido, dividida em duas perspectivas complementares (Figuras \ref{fig:de-model} e \ref{fig:abm-model}), permite simular e analisar o comportamento dos operários em função das macroetapas de montagem e desmontagem das fôrmas. A DES rege o fluxo físico e logístico da construção da parede de concreto, enquanto que a ABM executa a análise cognitiva das decisões dos trabalhadores durante a execução das tarefas. 
+Após o mapeamento do processo de construção e considerando os aspectos intrínsecos relacionados aos projetos de construção, foi possível propor um modelo computacional híbrido para simular e analisar o comportamento dos trabalhadores com base nas macroetapas e nas atividades necessárias para a montagem e desmontagem de fôrmas. A arquitetura metodológica do modelo computacional híbrido, dividida em duas perspectivas complementares (Figuras \ref{fig:de-model} e \ref{fig:abm-model}), permite simular e analisar o comportamento dos trabalhadores em função das macroetapas de montagem e desmontagem das fôrmas. A DES rege o fluxo físico e logístico da construção da parede de concreto, enquanto que a ABM executa a análise cognitiva das decisões dos trabalhadores durante a execução das tarefas. 
 \begin{figure}[!htb]
 	\centering
 	\caption{Estrutura da simulação utilizando DES.}
@@ -140,13 +140,13 @@ A Figura \ref{fig:de-model} detalha o Modelo do Canteiro de Obras sob a ótica d
 Por sua vez, a Figura \ref{fig:abm-model} ilustra a lógica interna da ABM. O diagrama sequencia os principais Eventos (E) e Tempos de Espera (T) vinculados às macroetapas da obra. Como regra de negócio do modelo, as operações de montagem e desmontagem possuem pré-requisitos estritos, como por exemplo, elas só são iniciadas mediante a verificação de segurança do ambiente e a disponibilidade de recursos físicos (agente desmoldante, faquetas, cunhas, pinos e alinhadores). Uma vez que as macroetapas de montagem (Evento 3) e desmontagem (Evento 5) são deflagradas, o modelo aciona as atividades operacionais (A1 a A10). É nesse nível de detalhe que a simulação híbrida se destaca: a execução correta ou a omissão de cada uma dessas subatividades dependerá exclusivamente do processo simulado de tomada de decisão do operário (agente ativo), permitindo quantificar o impacto dessas escolhas na qualidade e produtividade final do fluxo.
 
 
-Para compreender como a tomada de decisão ocorre dentro da ABM, a Figura \ref{fig:fatores_influencia} detalha o esquema lógico utilizado para determinar a probabilidade ($P$) de um operário executar, ou não, cada atividade operacional. Este esquema consiste em uma adaptação do modelo de análise cognitiva proposto por Zhang et al. (2019), originalmente voltado para o comportamento de segurança de trabalhadores da construção civil, agora transposto para a análise de produtividade e conformidade de execução.
+Para compreender como a tomada de decisão ocorre dentro da ABM, a Figura \ref{fig:fatores_influencia} detalha o esquema lógico utilizado para determinar a probabilidade ($P$) de um operário executar, ou não, cada atividade operacional. Este esquema consiste em uma adaptação do modelo de análise cognitiva proposto por \citeonline{ZHANG201929}, originalmente voltado para o comportamento de segurança de trabalhadores da construção civil, agora transposto para a análise de produtividade e conformidade de execução.
 
 \begin{figure}[!htb]
 	\centering
 	\caption{Análise do modelo cognitivo.}
 	\includegraphics[width=0.9 \textwidth]{Caps/Figs/FatoresDeInfluencia.png}
-	\fonte{\cite{tao2019} (Adaptado).}
+	\fonte{\cite{ZHANG201929} (Adaptado).}
 	\label{fig:fatores_influencia}
 \end{figure}
 \FloatBarrier
@@ -169,7 +169,7 @@ As respostas probabilísticas determinam a tendência do agente em adotar um com
 	\label{eq:prob_cognitiva}
 \end{equation}
 
-Nessa formulação, adaptada de \citeonline{tao2019}, cada um dos cinco estágios do modelo cognitivo possui um fator de influência chave específico. As variáveis e operadores da equação são definidos da seguinte forma:\begin{itemize}\item $P$: representa a probabilidade final de o agente adotar um comportamento inadequado (consolidando a falha).\item $X_1$: representa o valor do fator de influência chave no primeiro estágio (Consciência).\item O operador de somatório ($\sum$) percorre os estágios subsequentes do modelo cognitivo (do estágio 2 ao 5).\item O operador de produtório ($\prod$) itera sobre todos os estágios anteriores ao estágio $j$, calculando a contribuição do sucesso acumulado na probabilidade final de falha.\item $X_j$ e $X_i$: representam os valores dos fatores de influência chave nos estágios $j$ e $i$, respectivamente.\end{itemize}Para incorporar o ganho de experiência do trabalhador em função do tempo e da repetição das tarefas, o modelo utiliza uma equação geral de curva de aprendizado aplicada a cada um dos cinco estágios, expressa na Equação \ref{eq:curva_aprendizado}:
+Nessa formulação, adaptada de \citeonline{ZHANG201929}, cada um dos cinco estágios do modelo cognitivo possui um fator de influência chave específico. As variáveis e operadores da equação são definidos da seguinte forma:\begin{itemize}\item $P$: representa a probabilidade final de o agente adotar um comportamento inadequado (consolidando a falha).\item $X_1$: representa o valor do fator de influência chave no primeiro estágio (Consciência).\item O operador de somatório ($\sum$) percorre os estágios subsequentes do modelo cognitivo (do estágio 2 ao 5).\item O operador de produtório ($\prod$) itera sobre todos os estágios anteriores ao estágio $j$, calculando a contribuição do sucesso acumulado na probabilidade final de falha.\item $X_j$ e $X_i$: representam os valores dos fatores de influência chave nos estágios $j$ e $i$, respectivamente.\end{itemize}Para incorporar o ganho de experiência do trabalhador em função do tempo e da repetição das tarefas, o modelo utiliza uma equação geral de curva de aprendizado aplicada a cada um dos cinco estágios, expressa na Equação \ref{eq:curva_aprendizado}:
 
 \begin{equation}
 	Y(t) = 1 - (1 - Y(0)) X(t)^{-\theta}
@@ -189,7 +189,7 @@ Esta seção detalha o processo de coleta de dados empíricos para viabilizar as
 
 Os dados coletados não apenas validaram o problema prático com base na experiência operacional da equipe, mas também forneceram os parâmetros de entrada para o modelo computacional. Cabe destacar que, embora o estudo utilize um caso exemplar específico, os valores padrão dos parâmetros e variáveis podem ser facilmente ajustados para simular outros canteiros de obras que adotem o mesmo sistema construtivo.
 
-Adapatado ao modelo de \citeonline{tao2019}, originalmente voltada à segurança do trabalho, o diferencial desta pesquisa reside na introdução de uma simulação híbrida, que incorpora elementos de DES e um modelo de detecção de falhas utilizando SED.
+Adapatado ao modelo de \citeonline{ZHANG201929}, originalmente voltada à segurança do trabalho, o diferencial desta pesquisa reside na introdução de uma simulação híbrida, que incorpora elementos de DES e um modelo de detecção de falhas utilizando SED.
 
 A parametrização do tempo demandou a observação direta e a cronometragem do período despendido pelos operários na execução de cada atividade obrigatória (A1 a A10) \cite{tesecarol}. É importante ressaltar que essas estimativas refletem o desempenho de uma equipe específica no canteiro de obras analisado, aproximando os parâmetros daquela realidade particular, sem a pretensão de generalizar para todos os cenários possíveis da construção civil. Contudo, a flexibilidade do software permite que o usuário modifique esses valores para estudos futuros. 
 
@@ -203,7 +203,7 @@ Durante a coleta, observou-se que algumas atividades apresentavam tempos de exec
 \end{figure}
 \FloatBarrier
 
-Para aprofundar a análise, o estudo também investigou os fatores de influência subjacentes às falhas de processo. Por meio de um questionário aplicado a 15 trabalhadores, buscou-se identificar quais elementos mais induzem a omissão de atividades obrigatórias durante a montagem e desmontagem das fôrmas \cite{tesecarol}. As opções de múltipla escolha fornecidas aos respondentes foram fundamentadas na literatura, principalmente nos estudos de \citeonline{tao2019}, havendo também um campo aberto para sugestões.
+Para aprofundar a análise, o estudo também investigou os fatores de influência subjacentes às falhas de processo. Por meio de um questionário aplicado a 15 trabalhadores, buscou-se identificar quais elementos mais induzem a omissão de atividades obrigatórias durante a montagem e desmontagem das fôrmas \cite{tesecarol}. As opções de múltipla escolha fornecidas aos respondentes foram fundamentadas na literatura, principalmente nos estudos de \citeonline{ZHANG201929}, havendo também um campo aberto para sugestões.
 
 A análise dos resultados, ilustrada na Figura \ref{fig:resultado_questionario}, ranqueou a percepção dos operários sobre esses fatores. O defeito mais frequentemente apontado foi a ``Falta de materiais ou recursos, como ferramentas e equipamentos''. Em segundo lugar, empataram a ``Falta de comunicação por parte de gerentes e supervisores'' e a ``Falta de experiência ou conhecimento dos trabalhadores''. Na sequência, foram citados o ``Estresse do trabalhador'' e a ``Pressão para acelerar o trabalho''. Fatores como ``Prazos apertados'', ``Falta de inspeções'' e ``Falta de treinamento'' apresentaram menor incidência. No campo aberto, a própria rotina intensa do canteiro de obras foi relatada como um fator influente.
 
@@ -262,8 +262,8 @@ As Figuras \ref{fig:obra1} e \ref{fig:obra2} apresentam registros fotográficos 
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/obra2}
 	\caption{Ambiente do canteiro de obras utilizado para modelagem visual da simulação.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/obra2}
 	\fonte{Banco de dados do GETEC.}
 	\label{fig:obra2}
 \end{figure}
@@ -289,7 +289,7 @@ O conjunto finito de estados $X$ representa as condições operacionais do cante
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Estados do SED}
+	\caption{Estados do SED.}
 	\includegraphics[width=0.8 \textwidth]{Caps/Figs/estados-sed.png}
 	\fonte{Autoral.}
 	\label{fig:estados-sed}

@@ -18,17 +18,14 @@ Essas tecnologias têm potencial para solucionar problemas da construção civil
 	\label{fig:obra}
 \end{figure}
 
-Durante a produção, o fluxo de trabalho é intenso e os operários atuam em condições complexas, lidando com a constante montagem e desmontagem das fôrmas \cite{tesecarol}. Consequentemente, a dificuldade de gestão manual frequentemente resulta em erros construtivos, defeitos nas formas, variabilidades na superfície do concreto e, consequentemente, retrabalhos. Tais distúrbios no processo construtivo configuram-se como falhas operacionais. Conforme estabelece \citeonline{raman2005}, falha é um termo geral usado para descrever um distúrbio significativo que leva um processo para um ponto longe da sua faixa normal de operação, onde um sistema de controle não pode regular eficientemente o processo. Se esta situação não for corrigida por uma ação adequada, a operação pode entrar em uma situação emergencial que pode levar a consequências.
+Durante a produção, o fluxo de trabalho é intenso e os operários atuam em condições complexas, lidando com a constante montagem e desmontagem das fôrmas \cite{tesecarol}. Consequentemente, a dificuldade de gestão manual frequentemente resulta em erros construtivos, defeitos nas formas, variabilidades na superfície do concreto e, portanto, retrabalhos. Tais distúrbios no processo construtivo configuram-se como falhas operacionais. Conforme estabelece \citeonline{raman2005}, falha é um termo geral usado para descrever um distúrbio significativo que leva um processo para um ponto longe da sua faixa normal de operação, onde um sistema de controle não pode regular eficientemente o processo. Se esta situação não for corrigida por uma ação adequada, a operação pode entrar em uma situação emergencial que pode levar a consequências.
 
 Para modelar essa dinâmica de forma rigorosa, pode ser adotada a perspectiva dos Sistemas a Eventos Discretos (SED). Conforme define \citeonline{mestradoDudu}, SED são sistemas dinâmicos de estados discretos cuja transição de estados se dá por meio da ocorrência, em geral assíncrona, de eventos. No contexto da construção, cada etapa para montagem e desmontagem das fôrmas representa um evento que altera o estado do sistema, permitindo que o fluxo construtivo seja tratado matematicamente através de autômatos finitos. Para mitigar os erros nessas etapas, será feito um estudo sobre detecção e diagnóstico de falhas.
 
 
 Portanto, considerando o potencial do uso integrado de ferramentas tecnológicas e computacionais avançadas para solucionar problemas da construção civil, este trabalho adota Simulação Híbrida, Gêmeos Digitais e SED, aliados à teoria de diagnóstico de falhas, com o objetivo de modelar processos construtivos, modernizar a gestão da produção, detectar anomalias de forma antecipada e otimizar a alocação de recursos físicos no sistema construtivo de paredes de concreto moldadas in loco.
 	
-\subsection{Contexto da Pesquisa}
-A pesquisa desenvolvida neste Trabalho de Conclusão de Curso está inserida nas atividades do Grupo de Pesquisa e Extensão em Gestão e Tecnologia das Construções (GETEC), vinculado à Escola Politécnica da Universidade Federal da Bahia (UFBA).
 
-O trabalho foi realizado no contexto de um projeto de pesquisa em nível de doutorado, conduzido por \citeonline{tesecarol}, com foco no desenvolvimento de um sistema de Gêmeo Digital para gerenciamento e controle de recursos físicos em sistemas construtivos de parede de concreto. O presente estudo se integra como contribuição complementar, com ajuda e orientações do Professor Carlos Eduarno Viana Nunes. Durante o desenvolvimento desta pesquisa, o atuei como bolsista de Iniciação Tecnológica e Industrial (ITI), auxiliando na pesquisa e densenvolvimento do trabalho, com fomento do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq).
 
 
 
@@ -44,7 +41,7 @@ Como aponta \citeonline{cheng}, para permitir a tomada de decisões mais oportun
 Ademais, há, também,  o impacto direto das falhas operacionais no fluxo produtivo. Conforme afirma \citeonline{kechida}, cada falha ou defeito pode levar a paralisações ou uma ruptura do serviço e, consequentemente, a uma redução da produção da planta. No sistema de paredes de concreto, onde o ciclo de execução é extremamente rápido e repetitivo, a não detecção de uma inconsistência pode comprometer toda qualidade de produção do canteiro. Nesse contexto, a aplicação da diagnose de falhas torna-se um diferencial estratégico, pois, a detecção precoce e a correção de falhas podem ajudar a evitar as paradas dos sistemas e danos materiais \cite{mestradoDudu}.
 
 
-Sendo assim, este trabalho justifica-se pela necessidade de preencher essa lacuna tecnológica, analítica e visual. A proposta de integrar a robustez matemática da diagnose de falhas em SEDs, com a Simulação híbrida como processo de criação de um Gêmeo Digital realista, fornece aos gestores uma ferramenta avançada de supervisão. Essa abordagem substitui o planejamento estático e o controle manual por um monitoramento dinâmico e visualmente imersivo, capaz de identificar anomalias antes que estas resultem em desperdícios financeiros ou atrasos irreversíveis na execução de paredes de concreto. 
+Sendo assim, este trabalho justifica-se pela necessidade de preencher essa lacuna tecnológica, analítica e visual. A proposta de integrar a robustez matemática da diagnose de falhas em SEDs, com a Simulação Híbrida como processo de criação de um Gêmeo Digital realista, fornece aos gestores uma ferramenta avançada de supervisão. Essa abordagem substitui o planejamento estático e o controle manual por um monitoramento dinâmico e visualmente imersivo, capaz de identificar anomalias antes que estas resultem em desperdícios financeiros ou atrasos irreversíveis na execução de paredes de concreto. 
 
 
 \section{Objetivos}
@@ -75,6 +72,11 @@ O Capítulo \ref{chap:resultados} expõe o desenvolvimento e validação do mode
 O Capítulo \ref{chap:discussao} faz a discussão sobre os impactos da integração das ferramentas na gestão do sistema construtivo de paredes de concreto e a eficácia da diagnose na redução de retrabalhos.
 
 Por fim, o Capítulo \ref{chap:conclusao} apresenta as considerações finais, as limitações encontradas ao longo do estudo e as sugestões para trabalhos futuros.
+
+\section{Contexto da Pesquisa}
+A pesquisa desenvolvida neste Trabalho de Conclusão de Curso está inserida nas atividades do Grupo de Pesquisa e Extensão em Gestão e Tecnologia das Construções (GETEC), vinculado à Escola Politécnica da Universidade Federal da Bahia (UFBA).
+
+O trabalho foi realizado no contexto de um projeto de pesquisa em nível de doutorado, conduzido por \citeonline{tesecarol}, com foco no desenvolvimento de um sistema de Gêmeo Digital para gerenciamento e controle de recursos físicos em sistemas construtivos de parede de concreto. O presente estudo se integra como contribuição complementar, sob orientações do Professor Carlos Eduarno Viana Nunes. Durante o desenvolvimento desta pesquisa, eu atuei como bolsista de Iniciação Tecnológica e Industrial (ITI), auxiliando na pesquisa e densenvolvimento do trabalho, com fomento do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq).
 
 
 
