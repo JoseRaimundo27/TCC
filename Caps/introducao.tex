@@ -2,6 +2,9 @@
 \label{chap:intro}
 A Modelagem e Simulação Computacional representa um pilar na engenharia moderna. Ela consiste em uma abordagem analítica avançada que permite traduzir o comportamento do mundo real para um ambiente computacional controlado. Devido à sua capacidade de lidar com a complexidade e a incerteza inerentes aos processos físicos, a simulação é considerada uma ferramenta eficaz de análise operacional \cite{halpin2003}.
 
+\nomenclature[A]{DES}{Simulação a Eventos Discretos}
+\nomenclature[A]{ABM}{Modelagem Baseada em Agentes}
+
 No entanto, para modelar sistemas altamente dinâmicos, a adoção de um único paradigma de simulação pode ser insuficiente. Para solucionar esse problema, emprega-se a Simulação Híbrida. A modelagem híbrida utiliza dois ou mais modelos para representar o comportamento de um sistema, integrando abordagens baseadas em dados e em princípios da física \cite{hybridmodeling}. A Simulação a Eventos Discretos (DES) e a Modelagem Baseada em Agentes (ABM) são abordagens fundamentais e complementares na simulação de sistemas. Enquanto a DES estrutura o modelo como um fluxo sequencial de processos e atividades cronologicamente ordenados, a ABM foca no comportamento descentralizado de entidades individuais autônomas (agentes) regidas por regras lógicas de decisão \cite{Macal2009, Banks2005}.
 
 Aliado ao conceito de simulação, uma definição importante é a de Gêmeos Digitais. Segundo \citeonline{aeronautica}, um Gêmeo Digital é definido como um conjunto de construções virtuais de informação que imita a estrutura, o contexto e o comportamento de um ativo físico individual ou de um grupo de ativos físicos, sendo atualizado dinamicamente com dados do seu gêmeo físico ao longo do seu ciclo de vida e servindo de base para decisões que geram valor.
@@ -19,6 +22,8 @@ Essas tecnologias têm potencial para solucionar problemas da construção civil
 \end{figure}
 
 Durante a produção, o fluxo de trabalho é intenso e os operários atuam em condições complexas, lidando com a constante montagem e desmontagem das fôrmas \cite{tesecarol}. Consequentemente, a dificuldade de gestão manual frequentemente resulta em erros construtivos, defeitos nas formas, variabilidades na superfície do concreto e, portanto, retrabalhos. Tais distúrbios no processo construtivo configuram-se como falhas operacionais. Conforme estabelece \citeonline{raman2005}, falha é um termo geral usado para descrever um distúrbio significativo que leva um processo para um ponto longe da sua faixa normal de operação, onde um sistema de controle não pode regular eficientemente o processo. Se esta situação não for corrigida por uma ação adequada, a operação pode entrar em uma situação emergencial que pode levar a consequências.
+
+\nomenclature[A]{SED}{Sistemas a Eventos Discretos}
 
 Para modelar essa dinâmica de forma rigorosa, pode ser adotada a perspectiva dos Sistemas a Eventos Discretos (SED). Conforme define \citeonline{mestradoDudu}, SED são sistemas dinâmicos de estados discretos cuja transição de estados se dá por meio da ocorrência, em geral assíncrona, de eventos. No contexto da construção, cada etapa para montagem e desmontagem das fôrmas representa um evento que altera o estado do sistema, permitindo que o fluxo construtivo seja tratado matematicamente através de autômatos finitos. Para mitigar os erros nessas etapas, será feito um estudo sobre detecção e diagnóstico de falhas.
 
@@ -66,9 +71,9 @@ O Capítulo \ref{chap:revisao} dedica-se à revisão da literatura, abordando os
 
 O Capítulo \ref{chap:metodologia} descreve a metodologia da pesquisa, detalhando as etapas de construção do modelo conceitual, a modelagem da planta e do diagnosticador de falhas, a coleta de dados e a implementação computacional.
 
-O Capítulo \ref{chap:resultados} expõe o desenvolvimento e validação do modelo, a análise dos cenários simulados e os resultados da detecção de falhas operacionais através do diagnosticador implementado.
+O Capítulo \ref{chap:resultados} expõe o desenvolvimento e validação do modelo, a confecção da simulação e a síntese do autômato diagnosticador implementado.
 
-O Capítulo \ref{chap:discussao} faz a discussão sobre os impactos da integração das ferramentas na gestão do sistema construtivo de paredes de concreto e a eficácia da diagnose na redução de retrabalhos.
+O Capítulo \ref{chap:discussao} faz a discussão sobre o resultado da simulação, bem como do diagnosticador, realizando análise de cenários e impactos da integração das ferramentas na gestão do sistema construtivo de paredes de concreto e a eficácia da diagnose na redução de retrabalhos.
 
 Por fim, o Capítulo \ref{chap:conclusao} apresenta as considerações finais, as limitações encontradas ao longo do estudo e as sugestões para trabalhos futuros.
 
@@ -77,8 +82,5 @@ A pesquisa desenvolvida neste Trabalho de Conclusão de Curso está inserida nas
 
 O trabalho foi realizado no contexto de um projeto de pesquisa em nível de doutorado, conduzido por \citeonline{tesecarol}, com foco no desenvolvimento de um sistema de Gêmeo Digital para gerenciamento e controle de recursos físicos em sistemas construtivos de parede de concreto. O presente estudo se integra como contribuição complementar, sob orientações do Professor Carlos Eduarno Viana Nunes. Durante o desenvolvimento desta pesquisa, eu atuei como bolsista de Iniciação Tecnológica e Industrial (ITI), auxiliando na pesquisa e densenvolvimento do trabalho, com fomento do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq).
 
-
-
-
-
+A “Empresa A” foi selecionada como parceira deste estudo. Trata-se de uma empresa brasileira de médio porte do setor da construção civil, atuante no estado da Bahia desde 1987 e parceira do GETEC desde 2019. A empresa participou do projeto no contexto do programa MAI/DAI do CNPq, incentivando iniciativas de inovação tecnológica e melhoria dos processos de gestão. O canteiro de obras analisado pertence a um empreendimento residencial vinculado ao programa habitacional "Minha Casa, Minha Vida", servindo como base para as observações, coleta de informações e desenvolvimento das pesquisas adotadas neste trabalho.
 

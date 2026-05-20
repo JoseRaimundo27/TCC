@@ -16,7 +16,7 @@ No contexto deste estudo, essas duas abordagens (DES e ABM) operam de forma inte
 \end{figure}
 \FloatBarrier
 
-Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvimento da simulação é segmentado em grandes fases. Inicialmente, ocorre a Preparação e Design, seguida pela sua Construção e Modelagem, onde o modelo computacional deve ser submetido a procedimentos de verificação, Calibração e Validação de seus parâmetros. Apenas após a consolidação dessas três etapas o Sistema Híbrido torna-se apto para as fases de Explicação e Predição, permitindo a explicação de fenômenos passados e a previsão de cenários futuros no canteiro de obras.
+Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvimento da simulação é segmentado em grandes fases. Inicialmente, ocorre a Preparação e Design, seguida pela sua Construção e Modelagem, onde o modelo computacional deve ser submetido a procedimentos de verificação, Calibração e Validação de seus parâmetros. Apenas após a consolidação dessas três etapas o Sistema Híbrido torna-se apto para as fases de Explicação e Análise de Cenários, permitindo a explicação de fenômenos e o estudo de possíveis casos no canteiro de obras.
  
  Com as diretrizes metodológicas do ciclo de desenvolvimento da simulação estabelecidas, o passo seguinte consiste na estruturação lógica. Segundo \citeonline{crooks2019}, a fundamentação desse protocolo abrange os seguintes aspectos centrais:
  
@@ -162,6 +162,7 @@ Conforme ilustrado no fluxograma, o processo cognitivo do agente é estruturado 
 \end{enumerate}
 
 Dessa forma, o modelo computacional utiliza essa arquitetura de cinco filtros probabilísticos para simular, de forma realista, as nuances humanas que levam ao desvio de padrão no canteiro de obras.
+
 As respostas probabilísticas determinam a tendência do agente em adotar um comportamento adequado ou inadequado ao longo da simulação. Nesse processo interativo, curvas de aprendizado são empregadas para determinar os resultados parciais em cada um dos estágios cognitivos. A expressão geral utilizada para calcular a probabilidade do comportamento é apresentada na Equação \ref{eq:prob_cognitiva}:
 
 \begin{equation}
@@ -169,12 +170,25 @@ As respostas probabilísticas determinam a tendência do agente em adotar um com
 	\label{eq:prob_cognitiva}
 \end{equation}
 
-Nessa formulação, adaptada de \citeonline{ZHANG201929}, cada um dos cinco estágios do modelo cognitivo possui um fator de influência chave específico. As variáveis e operadores da equação são definidos da seguinte forma:\begin{itemize}\item $P$: representa a probabilidade final de o agente adotar um comportamento inadequado (consolidando a falha).\item $X_1$: representa o valor do fator de influência chave no primeiro estágio (Consciência).\item O operador de somatório ($\sum$) percorre os estágios subsequentes do modelo cognitivo (do estágio 2 ao 5).\item O operador de produtório ($\prod$) itera sobre todos os estágios anteriores ao estágio $j$, calculando a contribuição do sucesso acumulado na probabilidade final de falha.\item $X_j$ e $X_i$: representam os valores dos fatores de influência chave nos estágios $j$ e $i$, respectivamente.\end{itemize}Para incorporar o ganho de experiência do trabalhador em função do tempo e da repetição das tarefas, o modelo utiliza uma equação geral de curva de aprendizado aplicada a cada um dos cinco estágios, expressa na Equação \ref{eq:curva_aprendizado}:
+Nessa formulação, adaptada de \citeonline{ZHANG201929}, cada um dos cinco estágios do modelo cognitivo possui um fator de influência chave específico. As variáveis e operadores da equação são definidos da seguinte forma:
+% Cadastrando os símbolos da equação de probabilidade cognitiva:
+\nomenclature[S]{$P$}{Probabilidade final de o agente adotar um comportamento inadequado (consolidando a falha)}
+\nomenclature[S]{$X_1$}{Valor do fator de influência chave no primeiro estágio (Consciência)}
+\nomenclature[S]{$X_j, X_i$}{Valores dos fatores de influência chave nos estágios $j$ e $i$, respectivamente}
+\nomenclature[S]{$\sum$}{Operador de somatório que percorre os estágios subsequentes (do 2 ao 5)}
+\nomenclature[S]{$\prod$}{Operador de produtório que calcula a contribuição do sucesso acumulado até o estágio anterior}
+
+Para incorporar o ganho de experiência do trabalhador em função do tempo e da repetição das tarefas, o modelo utiliza uma equação geral de curva de aprendizado aplicada a cada um dos cinco estágios, expressa na Equação \ref{eq:curva_aprendizado}:
 
 \begin{equation}
 	Y(t) = 1 - (1 - Y(0)) X(t)^{-\theta}
 	\label{eq:curva_aprendizado}
 \end{equation}
+% Cadastrando os símbolos da curva de aprendizado:
+\nomenclature[S]{$Y(t)$}{Desempenho ou resultado do estágio cognitivo no tempo $t$}
+\nomenclature[S]{$Y(0)$}{Desempenho ou condição inicial do agente no estágio cognitivo}
+\nomenclature[S]{$X(t)$}{Variável de produção ou tempo acumulado até o instante $t$}
+\nomenclature[S]{$\theta$}{Exponente de aprendizado associado à inclinação da curva}
 
 Onde a constante que dita o ritmo dessa evolução técnica é a Taxa de Aprendizado (\textit{Learning Rate}), definida pela Equação \ref{eq:taxa_aprendizado}:
 
@@ -222,6 +236,11 @@ Como não surgiram ideias comportamentais adicionais fora do que já estava prev
 
 
 
+
+% Cadastrando a variável genérica dos estágios cognitivos na lista de símbolos:
+\nomenclature[S]{$X_i$}{Fator de influência chave associado ao $i$-ésimo estágio cognitivo, onde $i \in \{1, 2, 3, 4, 5\}$}
+
+Para correlacionar formalmente os aspectos humanos às equações probabilísticas apresentadas, o mapeamento de cada variável $X_i$ com o seu respectivo estágio cognitivo e o parâmetro de influência adotado neste estudo é detalhado na Tabela \ref{tab:fatores_influencia}.
 
 \begin{table}[htpb]
 	\centering
@@ -363,6 +382,12 @@ A premissa adotada no modelo lógico é que atividades classificadas com alto gr
 
 Da mesma forma, atividades cujas omissões não são percebidas pelos trabalhadores como defeitos, mas que foram constatadas \textit{in loco} pela pesquisa de \citeonline{tesecarol}, representam anomalias furtivas ideais para o rastreamento via autômato diagnosticador. Desta forma, os eventos de falha mais críticos selecionados para a implementação matemática no SED foram:
 
+% Cadastrando as falhas na lista de símbolos/nomenclatura:
+\nomenclature[S]{$F_1$}{Falha de omissão da verificação das condições iniciais (Segurança, limpeza e integridade)}
+\nomenclature[S]{$F_2$}{Falha de checagem das fôrmas mal executada}
+\nomenclature[S]{$F_3$}{Falha de omissão na aplicação do desmoldante}
+\nomenclature[S]{$F_4$}{Falha ou omissão na fixação de pinos, cunhas e faquetas}
+\nomenclature[S]{$F_5$}{Falha na remoção dos plásticos de proteção das faquetas}
 \begin{itemize}
 	\item \textbf{$F1$ - Omissão da verificação das condições iniciais (Segurança, limpeza e integridade):} Configura a burla das atividades ranqueadas em 1º, 2º e 3º lugares como as mais difíceis durante a fase de montagem (Tabela \ref{tab:dificuldade_montagem}). Está diretamente associada ao estado não observável $E_1$.
 	
@@ -387,6 +412,10 @@ A função $f(x, \sigma)$ estabelece o novo estado do sistema após a ocorrênci
 
 Para a construção de $f$, o fluxo foi estruturado assumindo que o avanço físico da montagem e desmontagem das fôrmas ocorre de forma sequencial (do estado $E_0$ ao $E_{11}$). Esse avanço pode ser impulsionado tanto pelos eventos regulares (observáveis $O_i$ e não observável $U_1$) quanto pelos eventos de falha ($f_i$). A Tabela \ref{tab:funcao_transicao} detalha exaustivamente todas as transições mapeadas no autômato gerador ($G$).
 
+% Cadastrando apenas os indexadores genéricos na lista de símbolos:
+\nomenclature[S]{$O_i$}{Evento observável genérico do sistema, onde $i \in \{1, 2, \dots, 12\}$}
+\nomenclature[S]{$U_i$}{Evento não observável genérico do sistema, onde $i \in \{1, 2, \dots\}$}
+\nomenclature[S]{$E_k$}{Estado do sistema de fôrmas, onde $k \in \{0, 1, \dots, 11\}$}
 \begin{table}[htpb]
 	\centering
 	\caption{Mapeamento da Função de Transição Parcial ($f$) do sistema de fôrmas.}
@@ -405,7 +434,9 @@ Para a construção de $f$, o fluxo foi estruturado assumindo que o avanço fís
 		$E_7$ & $O_8$ & Observável & $E_8$ \\
 		$E_8$ & $O_9$ & Observável & $E_9$ \\
 		$E_9$ & $O_{10}$ & Observável & $E_{10}$ \\
-		$E_{10}$ & $O_{11}$ & Observável & $E_{11}$ \\ \hline
+		$E_{10}$ & $O_{11}$ & Observável & $E_{11}$ \\ 
+		$E_{11}$ & $O_{12}$ & Observável & $E_{11}$ \\ 
+		\hline
 		\multicolumn{4}{c}{\textbf{Fluxo de Falhas }} \\ \hline
 		$E_0$ & $F_1$ & Omissão da verificação inicial & $E_1$ \\
 		$E_1$ & $F_2$ & Checagem mal executada & $E_2$ \\
@@ -427,7 +458,7 @@ Para isso, adota-se a construção do Autômato Diagnosticador, formalmente deno
 \begin{itemize}
 	\item \textbf{Normal ($N$):} Quando se tem certeza de que nenhuma falha ocorreu.
 	\item \textbf{Falha ($F_i$):} Quando se tem certeza de que a falha do tipo $i$ ocorreu.
-	\item \textbf{Incerto ($N, F_i$ ou $F_i, F_j$):} Quando os eventos observáveis até o momento não são suficientes para distinguir se o sistema está em um estado normal ou se já sofreu uma falha.
+	\item \textbf{Incerto ($N, F_i$):} Quando os eventos observáveis até o momento não são suficientes para distinguir se o sistema está em um estado normal ou se já sofreu uma falha.
 \end{itemize}
 
 O desenvolvimento do Autômato $G$ e a posterior geração e análise do Diagnosticador para a execução das paredes de concreto serão apresentados no capítulo de Resultados.

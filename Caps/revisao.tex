@@ -38,7 +38,7 @@ Contudo, a aplicação isolada da DES na construção civil apresenta gargalos o
 \subsection{Modelagem Baseada em Agentes (ABM)}
 \label{sec:ABM}
 
-A Modelagem Baseada em Agentes (ABM), assim como a DES, também atua sob a perspectiva de sistemas discretos, mas configura-se como uma abordagem computacional focada em entidades descentralizadas, sendo altamente adequada para os ciclos de monitoramento e controle em Gêmeos Digitais na construção \cite{sacks2020}. De acordo com \citeonline{bianchi2015}, a ABM simula a interação entre agentes heterogêneos inseridos em estruturas sociais complexas, como é o caso de um canteiro de obras.
+A ABM, assim como a DES, também atua sob a perspectiva de sistemas discretos, mas configura-se como uma abordagem computacional focada em entidades descentralizadas, sendo altamente adequada para os ciclos de monitoramento e controle em Gêmeos Digitais na construção \cite{sacks2020}. De acordo com \citeonline{bianchi2015}, a ABM simula a interação entre agentes heterogêneos inseridos em estruturas sociais complexas, como é o caso de um canteiro de obras.
 
 Sendo uma abordagem relativamente nova para observar efeitos coletivos, a premissa central dessa técnica é que padrões globais emergem a partir de regras locais, sem que o comportamento final seja explicitamente programado \cite{mustafee2015}. Para estruturar essa modelagem, \cite{macal2005} definem três elementos constituintes de um ABM típico: (1) os agentes, dotados de atributos e comportamentos próprios; (2) os métodos de relacionamento e interação entre os agentes; e (3) a interação do agente com o seu ambiente.
 
@@ -115,8 +115,8 @@ Para atingir esse objetivo, constroem-se sistemas de diagnose de falhas atuando 
 
 \subsection{Autômatos Finitos Determinísticos ($G$)}
 \label{subsec:automatos}
-
-Uma das maneiras mais eficientes e rigorosas de se modelar e visualizar um SED é através de Autômatos Finitos Determinísticos. Um autômato é um dispositivo matemático capaz de representar a linguagem de um sistema de acordo com regras bem definidas, sendo frequentemente ilustrado por diagramas de transição de estados \cite{basilio2010}.
+\nomenclature[S]{$G$}{Autômato finito determinístico (modelo da planta)}
+Uma das maneiras mais eficientes e rigorosas de se modelar e visualizar um SED é através de Autômatos Finitos Determinísticos ($G$). Um autômato é um dispositivo matemático capaz de representar a linguagem de um sistema de acordo com regras bem definidas, sendo frequentemente ilustrado por diagramas de transição de estados \cite{basilio2010}.
 
 
 \begin{figure}[!htb]
@@ -128,11 +128,17 @@ Uma das maneiras mais eficientes e rigorosas de se modelar e visualizar um SED �
 \end{figure}
 
 \FloatBarrier
-
 Formalmente, um autômato determinístico é definido pela quíntupla:
 \begin{equation}
 	G = (X, \Sigma, f, x_0, X_m)
 \end{equation}
+% Cadastrando os símbolos da quíntupla:
+\nomenclature[S]{$X$}{Conjunto finito de estados do sistema}
+\nomenclature[S]{$\Sigma$}{Conjunto finito de eventos (alfabeto)}
+\nomenclature[S]{$f$}{Função de transição parcial de estados}
+\nomenclature[S]{$x_0$}{Estado inicial do sistema}
+\nomenclature[S]{$X_m$}{Subconjunto de estados marcados}
+
 onde:
 \begin{itemize}
 	\item $X$ é o conjunto finito de estados do sistema;
@@ -143,48 +149,73 @@ onde:
 \end{itemize}
 
 Para complementar a dinâmica do modelo, define-se $\Gamma(x) \subseteq \Sigma$ como o conjunto de Eventos ativos no estado $x$, ou seja, o subconjunto de eventos que estão fisicamente ou logicamente habilitados a ocorrer quando o sistema se encontra naquele estado específico.
+% Cadastrando o símbolo de eventos ativos:
+\nomenclature[S]{$\Gamma(x)$}{Conjunto de eventos ativos no estado $x$}
 
 Para que seja possível aplicar a teoria de diagnose de falhas sobre o modelo $G$, a literatura clássica estabelece três premissas fundamentais que o sistema deve respeitar \cite{basilio2010}. No contexto da modelagem logística de um canteiro de obras, essas hipóteses traduzem-se da seguinte forma:
-
 \begin{enumerate}
-	\item \textbf{A1 - Sistema Vivo ($\Gamma(x) \neq \emptyset$ para todo $x \in X$):} Assume-se que o autômato gerado por $G$ não possui Estados de travamento irreversível (deadlocks). Na prática, isso significa que a obra está em contínua operação, mesmo que ocorra uma falha logística ou um atraso, o sistema sempre terá algum Evento possível para dar sequência ao processo.
-	\item \textbf{A2 - Ausência de ciclos não Observáveis:} O modelo não pode possuir nenhum ciclo de estados formado exclusivamente por Eventos Não Observáveis. Essa hipótese garante que, caso uma falha oculta ocorra, o sistema não ficará preso em um \textit{loop} invisível aos sensores. O processo de construção continuará avançando até gerar um evento observável, permitindo que o Gêmeo Digital detecte a falha pregressa.
+	\item \textbf{A1 - Sistema Vivo ($\Gamma(x) \neq \emptyset$ para todo $x \in X$):} Assume-se que o autômato gerado por $G$ não possui estados de travamento irreversível (\textit{deadlocks}). Na prática, isso significa que a obra está em contínua operação; mesmo que ocorra uma falha logística ou um atraso, o sistema sempre terá algum evento possível para dar sequência ao processo.
+	\item \textbf{A2 - Ausência de ciclos não observáveis:} O modelo não pode possuir nenhum ciclo de estados formado exclusivamente por eventos não observáveis. Essa hipótese garante que, caso uma falha oculta ocorra, o sistema não ficará preso em um \textit{loop} invisível aos sensores. O processo de construção continuará avançando até gerar um evento observável, permitindo que o Gêmeo Digital detecte a falha pregressa.
 	\item \textbf{A3 - Único tipo de falha ($\Sigma_f = \{\sigma_f\}$):} Assume-se a existência de apenas uma única classe de falha no sistema. No escopo deste trabalho, as anomalias físicas derivam de diferentes omissões do trabalhador ao longo do processo de montagem. Contudo, para fins de diagnóstico e controle de qualidade, todos esses eventos específicos de erro humano são agrupados em um único tipo de falha global ($\Sigma_f$), que caracteriza a "Não Conformidade" da fôrma. Dessa forma, utiliza-se um único autômato rotulador para identificar se o componente sofreu algum desvio de execução, independentemente de qual etapa exata foi negligenciada.
+	% Cadastrando os símbolos de falha:
+	\nomenclature[S]{$\Sigma_f$}{Conjunto ou classe de eventos de falha}
+	\nomenclature[S]{$\sigma_f$}{Evento de falha não observável}
 \end{enumerate}
-
 
 \subsection{Diagnose Centralizada sob Observação Parcial}
 \label{subsec:diagnosticador}
 
-A essência da diagnose de falhas em um SED reside na capacidade de inferir a ocorrência de Eventos Não Observáveis a partir da sequência de Eventos Observáveis gerada pelo sistema. Para formalizar essa restrição de visibilidade, define-se o conjunto de eventos do sistema como a união disjunta $\Sigma = \Sigma_o \cup \Sigma_{uo}$, onde $\Sigma_o$ representa os Eventos Observáveis (registrados pelos sensores ou apontamentos no canteiro) e $\Sigma_{uo}$ os Eventos Não Observáveis (que incluem o subconjunto de eventos de falha $\Sigma_f$). 
+A essência da diagnose de falhas em um SED reside na capacidade de inferir a ocorrência de eventos não observáveis a partir da sequência de eventos observáveis gerada pelo sistema. Para formalizar essa restrição de visibilidade, define-se o conjunto de eventos do sistema como a união disjunta $\Sigma = \Sigma_o \cup \Sigma_{uo}$, onde $\Sigma_o$ representa os eventos observáveis (registrados pelos sensores ou apontamentos no canteiro) e $\Sigma_{uo}$ os eventos não observáveis (que incluem o subconjunto de eventos de falha $\Sigma_f$) \cite{basilio2010}. 
+% Cadastrando os símbolos de partição do alfabeto:
+\nomenclature[S]{$\Sigma$}{Alfabeto ou conjunto total de eventos do sistema}
+\nomenclature[S]{$\Sigma_o$}{Subconjunto de eventos observáveis}
+\nomenclature[S]{$\Sigma_{uo}$}{Subconjunto de eventos não observáveis}
 
-Para que a tomada de decisão sobre a ocorrência ou não de uma falha seja realizada por um único agente analítico, utiliza-se a abordagem de diagnose centralizada. O projeto desse agente é dividido metodologicamente em duas etapas de modelagem: o Autômato Rotulador ($G_{al}$) e o Autômato Diagnosticador ($G_d$).
+Para que a tomada de decisão sobre a ocorrência ou não de uma falha seja realizada por um único agente analítico, utiliza-se a abordagem de diagnose centralizada. O projeto desse agente é dividido metodologicamente em duas etapas de modelagem: o Autômato Rotulador ($G_{al}$) e o Autômato Diagnosticador ($G_d$), obtido a partir da operação de observação aplicada ao modelo rotulado, conforme a fórmula $G_d = Obs( ($G$ \parallel G_{al}))$ , conforme definido por \citeonline{basilio2010}.
+% Cadastrando os símbolos dos autômatos analíticos:
+\nomenclature[S]{$G_{al}$}{Autômato rotulador}
+\nomenclature[S]{$G_d$}{Autômato diagnosticador}
 
 
+\subsubsection{Autômato Rotulador ($G_{Al}$)}
+% Cadastrando o autômato rotulador na lista
+\nomenclature[S]{$G_{Al}$}{Autômato rotulador de dois estados}
 
-\subsubsection{Autômato Rotulador ($G_{al}$)}
+Para rastrear o impacto das falhas ao longo das transições do sistema, o primeiro passo para a construção do diagnosticador consiste na modelagem de um Autômato Rotulador, denotado por $G_{Al}$. Conforme exposto por \citeonline{basilio2010}, este autômato possui apenas dois estados e atua expandindo o modelo original $G$, acoplando ao estado físico da planta uma "etiqueta" (ou rótulo) que indica se o evento de falha $\sigma_f$ ocorreu ou não.
 
-Para rastrear o impacto das falhas ao longo das transições do sistema, o primeiro passo consiste na construção de um Autômato Rotulador ($G_{al}$). Este autômato expande o modelo original $G$, acoplando ao estado físico do sistema uma "etiqueta" (ou rótulo) que indica a ocorrência de anomalias. Define-se o conjunto de rótulos $\Delta = \{N, F_1, F_2\}$, onde $N$ indica o comportamento Normal, enquanto $F_1$ e $F_2$ indicam a ocorrência pregressa das respectivas classes de falha modeladas na obra.
+Define-se o conjunto de rótulos como $\{N, Y\}$, onde $N$ indica a não ocorrência da falha (trajetória normal) e $Y$ indica que a falha $\sigma_f$ ocorreu. A dinâmica de marcação ocorre por meio da composição paralela entre a planta e o rotulador ($G \parallel G_{al}$). É fundamental destacar que o autômato resultante dessa composição gera a mesma linguagem que $G$ \cite{basilio2010}, ou seja, o rotulador não altera o comportamento físico ou operacional do canteiro de obras, funcionando puramente como um mecanismo de monitoramento.
+% Cadastrando os símbolos de rótulos e composição paralela:
+\nomenclature[S]{$N$}{Rótulo associado à trajetória normal (não ocorrência de falha)}
+\nomenclature[S]{$Y$}{Rótulo associado à ocorrência de falha}
+\nomenclature[S]{$G \parallel G_{al}$}{Composição paralela entre a planta e o autômato rotulador}
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Exemplo de Autômato Rotulador}
-	\includegraphics[width=0.6\textwidth]{Caps/Figs/rotulador.png}
-	\fonte{\citeonline{basilio2010}}
+	\caption{Exemplo de Autômato Rotulador de dois estados ($G_{al}$).}
+	\includegraphics[width=0.4\textwidth]{Caps/Figs/rotulador.png}
+	\fonte{Adaptado de \citeonline{basilio2010}.}
 	\label{fig:exemplo-rotulador}
 \end{figure}
-
 \FloatBarrier
-Dessa forma, os estados do autômato rotulador assumem a forma de pares ordenados $(x, l)$, onde $x \in X$ é o estado da planta e $l \in \Delta$ é a condição de falha associada. O $G_{al}$ processa todos os Eventos (Observáveis e Não Observáveis). Quando um evento de falha ocorre, o autômato altera o rótulo de $N$ para $F_i$ e propaga essa etiqueta para todos os Estados subsequentes, funcionando como uma memória permanente de que o sistema foi corrompido.
+
+Dessa forma, os estados de $G \parallel G_{al}$ assumem a forma de pares ordenados $(x, N)$ ou $(x, Y)$, dependendo estritamente se o evento $\sigma_f$ está ou não presente na sequência de eventos que leva do estado inicial $x_0$ até o estado atual $x$ \cite{basilio2010}. 
+% Cadastrando a forma dos estados compostos:
+\nomenclature[S]{$(x, l)$}{Estado composto do autômato rotulador, onde $x$ é o estado da planta e $l$ é o rótulo}
 
 \subsection{Composição Paralela}
 
 A operação de composição paralela é fundamental na teoria de SED quando se deseja modelar o comportamento conjunto e interativo de múltiplos subsistemas \cite{mestradoDudu}. Segundo \cite{basilio2010}, essa operação estabelece as regras de sincronização entre dois autômatos, definindo como os eventos comuns e os eventos privados devem se comportar.
 
-Suponha dois autômatos distintos definidos por $G_1 = (X_1, \Sigma_1, f_1, \Gamma_1, x_{01}, X_{m1})$ e $G_2 = (X_2, \Sigma_2, f_2, \Gamma_2, x_{02}, X_{m2})$. O autômato resultante que modela o comportamento síncrono de $G_1$ e $G_2$ é obtido através da composição paralela, denotada por $G_1 \parallel G_2$. Nesse novo modelo, duas regras fundamentais de execução são estabelecidas:
+Suponha dois autômatos distinotos definidos por $G_1 = (X_1, \Sigma_1, f_1, \Gamma_1, x_{01}, X_{m1})$ e $G_2 = (X_2, \Sigma_2, f_2, \Gamma_2, x_{02}, X_{m2})$. O autômato resultante que modela o comportamento síncrono de $G_1$ e $G_2$ é obtido através da composição paralela, denotada por $G_1 \parallel G_2$. Nesse novo modelo, duas regras fundamentais de execução são estabelecidas:
 \begin{itemize}
-	\item \textbf{Eventos comuns:} Um evento pertencente a ambos os alfabetos ($\sigma \in \Sigma_1 \cap \Sigma_2$) somente poderá ocorrer de forma sincronizada, ou seja, quando ambos os autômatos estiverem em estados cujos conjuntos de Eventos ativos possuam esse Evento de forma simultânea.
+	\item \textbf{Eventos comuns:} Um evento pertencente a ambos os alfabetos ($\sigma \in \Sigma_1 \cap \Sigma_2$) somente poderá ocorrer de forma sincronizada, ou seja, quando ambos os autômatos estiverem em estados cujos conjuntos de eventos ativos possuam esse evento de forma simultânea.
+	% Cadastrando evento genérico e a interseção (eventos comuns):
+	\nomenclature[S]{$\sigma$}{Evento genérico pertencente a um alfabeto}
+	\nomenclature[S]{$\Sigma_1 \cap \Sigma_2$}{Interseção de alfabetos (conjunto de eventos comuns/síncronos)}
+	
 	\item \textbf{Eventos privados:} Eventos pertencentes exclusivamente a um dos sistemas, definidos matematicamente por $\Sigma_1 \setminus \Sigma_2$ ou $\Sigma_2 \setminus \Sigma_1$, não requerem sincronização e podem ser executados de forma independente sempre que estiverem ativos no seu respectivo autômato.
+	% Cadastrando a diferença de conjuntos (eventos privados):
+	\nomenclature[S]{$\Sigma_1 \setminus \Sigma_2$}{Diferença de conjuntos de alfabetos (conjunto de eventos privados de $G_1$)}
 \end{itemize}
 
 Formalmente, a composição paralela de $G_1$ e $G_2$ é definida pela seguinte estrutura:
@@ -193,8 +224,12 @@ Formalmente, a composição paralela de $G_1$ e $G_2$ é definida pela seguinte 
 	Ac(X_1 \times X_2,\ \Sigma_1 \cup \Sigma_2,\ f_{1 \parallel 2},\ \Gamma_{1 \parallel 2},\ (x_{01},x_{02}),\ X_{m1} \times X_{m2})
 	\label{eq:composicao_paralela}
 \end{equation}
+% Cadastrando a operação de parte acessível:
+\nomenclature[S]{$Ac(\cdot)$}{Operação que extrai a parte acessível de um autômato}
 
 onde $\times$ denota o produto cartesiano e $Ac(\cdot)$ representa a operação que extrai a parte acessível do autômato, filtrando e mantendo apenas os estados que podem ser alcançados a partir do estado inicial $(x_{01}, x_{02})$ por meio de uma sequência válida de eventos em $(\Sigma_1 \cup \Sigma_2)^*$.
+% Cadastrando o fecho de Kleene:
+\nomenclature[S]{$\Sigma^*$}{Fecho de Kleene (conjunto de todas as sequências possíveis de eventos geradas a partir do alfabeto $\Sigma$, incluindo a sequência vazia)}
 
 A evolução da dinâmica desse sistema composto é governada pela sua função de transição parcial, $f_{1 \parallel 2} : (X_1 \times X_2) \times (\Sigma_1 \cup \Sigma_2) \to (X_1 \times X_2)$, definida por \cite{basilio2010} da seguinte forma:
 
@@ -213,12 +248,13 @@ A evolução da dinâmica desse sistema composto é governada pela sua função 
 	\label{eq:funcao_transicao_paralela}
 \end{equation}
 
-
-\subsection{Autômato Observador}
+\subsection{Observador}
 
 O comportamento dinâmico de um autômato que possui Eventos Não Observáveis pode ser descrito por um novo autômato determinístico, denominado \textit{Observador}, cujo conjunto de eventos é formado exclusivamente pelos Eventos Observáveis do sistema original. Os Estados do Observador correspondem a todos os Estados possíveis em que o autômato com Eventos Não Observáveis poderia estar após a ocorrência de uma dada sequência de Eventos Observáveis \cite{basilio2010}.
 
 O Observador para um autômato $G$, denotado por $Obs(G)$, é formalmente definido pela seguinte quíntupla:
+% Cadastrando o autómato observador:
+\nomenclature[S]{$Obs(G)$}{Autômato observador associado a $G$}
 
 \begin{equation}
 	Obs(G)=
@@ -227,13 +263,18 @@ O Observador para um autômato $G$, denotado por $Obs(G)$, é formalmente defini
 \end{equation}
 
 sendo que o conjunto de Estados do Observador pertence ao conjunto das partes de $X$, isto é, $X_{obs} \subseteq 2^X$. Os Estados marcados do Observador são definidos como $X_{m,obs} = \{q \in X_{obs} : q \cap X_m \neq \emptyset\}$. 
+% Cadastrando o conjunto das partes:
+\nomenclature[S]{$2^X$}{Conjunto das partes (ou conjunto potência) do conjunto de estados $X$}
 
 Para a definição formal do estado inicial $x_{0,obs}$, da função de Eventos ativos $\Gamma_{obs}$ e da função de transição $f_{obs}$, é necessário introduzir o conceito de \textbf{Alcance Não-Observável} (\textit{Unobservable Reach}). O Alcance Não Observável de um Estado $x \in X$, denotado por $UR(x)$, é o conjunto de Estados que podem ser alcançados a partir de $x$ por meio da ocorrência exclusiva de Eventos Não Observáveis:
+
 \begin{equation}
 	UR(x)=
 	\{x' \in X : (\exists s \in \Sigma_{uo}^{*})[f(x,s)=x']\}
 	\label{eq:unobservable_reach}
 \end{equation}
+% Cadastrando o alcance não observável:
+\nomenclature[S]{$UR(x)$}{Alcance não observável do estado $x$}
 
 De forma análoga, o Alcance Não Observável de um subconjunto de Estados $q \in 2^X$ é definido como a união dos alcances individuais de cada Estado contido em $q$:
 
@@ -255,58 +296,6 @@ Utilizando essas definições, os elementos de $Obs(G)$ podem ser construídos s
 
 A lógica fundamental desse algoritmo consiste em calcular o alcance não observável para cada Estado de $G$ que é atingido logo após a ocorrência de um evento Observável. Assim, no Passo 1, calcula-se o Alcance Não Observável do estado inicial $x_0$, formando o Estado inicial do Observador. No Passo 3, determinam-se os Eventos ativos dos Estados do Observador obtidos na iteração anterior. Além disso, calculam-se os próximos Estados do Observador, que correspondem aos Alcances Não Observáveis dos Estados de $G$ atingidos a partir do Estado atual do Observador por meio de Eventos Observáveis. Essa sequência iterativa é repetida até que todos os Estados acessíveis do Observador tenham sido mapeados (Cassandras e Lafortune, 2008).
 
-
-\subsubsection{Autômato Diagnosticador ($G_d$)}
-
-
-O diagnosticador centralizado, comumente denotado por $G_d$, é um autômato construído especificamente para realizar o rastreamento de falhas do sistema em tempo real. O seu conjunto de Eventos é estritamente igual ao conjunto dos Eventos Observáveis do modelo da planta $G$. A principal característica do diagnosticador é que seus estados são formados pela adição de rótulos (tipicamente $N$ (\textit{Normal}) e $F$ (\textit{Falha})) aos Estados originais de $G$, com o objetivo de indicar se um determinado Evento de falha Não Observável ($\sigma_f$) já ocorreu ou não.
-
-Formalmente, o diagnosticador $G_d$ é definido pela seguinte estrutura de autômato:
-\begin{equation}
-	G_d=
-	(X_d,\ \Sigma_d,\ f_d,\ \Gamma_d,\ x_{0,d},\ X_{m,d})
-	\label{eq:diagnosticador}
-\end{equation}
-
-sendo que o espaço de Estados do diagnosticador é um subconjunto das partes do produto cartesiano entre os Estados do sistema e o conjunto de rótulos, isto é, $X_d \subseteq 2^{X \times \{N, F\}}$. O conjunto de Eventos ativos no diagnosticador corresponde unicamente aos Eventos Observáveis do sistema ($\Sigma_d = \Sigma_{obs}$).
-
-A síntese matemática do diagnosticador $G_d$ pode ser realizada de forma sistemática por meio de dois passos operacionais fundamentais:
-\begin{enumerate}
-	\item[(i)] Obtenha a composição paralela $G \parallel A_l$, sendo $A_l$ o autômato rotulador de dois Estados, projetado para alterar seu Estado de "Normal" para "Falha" irreversivelmente após a ocorrência de $\sigma_f$, conforme ilustrado na Figura \ref{fig:exemplo-rotulador};
-	\item[(ii)] Calcule o autômato Observador para essa composição paralela gerada no passo anterior, ou seja, construa $Obs(G \parallel A_l)$ utilizando o Algoritmo de Alcance Não Observável previamente definido.
-\end{enumerate}
-
-\begin{figure}[!htb]
-	\centering
-	\caption{Exemplo de construção de um autômato diagnosticador $G_d$.}
-	
-	\begin{minipage}{0.34\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{Caps/Figs/automatoBasilio.png}
-		\caption*{(a) Exemplo de Autômato G.}
-		\label{fig:automatoG}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.32\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{Caps/Figs/composicaoParalela.png}
-		\caption*{(b) Composição paralela entre $G$ e $A_l$.}
-		\label{fig:composicaoParalela}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.32\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{Caps/Figs/observador.png}
-		\caption*{(c) $G_d = Obs(G \parallel A_l)$.}
-		\label{fig:observador}
-	\end{minipage}
-	
-	\fonte{\citeonline{basilio2010}.}
-	
-\end{figure}
-\FloatBarrier
-
-
 \subsection{Diagnosticabilidade}
 \label{subsec:diagnosticabilidade}
 
@@ -322,10 +311,10 @@ Por outro lado, um sistema é classificado como Não Diagnosticável quando exis
 
 \section{Consideração do capítulo}
 
-A compreensão do canteiro de obras, a análise do comportamento humano por meio da ABM e o fluxo físico da construção da parede de concreto realizada pela DES evidenciam uma realidade crítica: as decisões diárias dos trabalhadores são a causa raiz de diversos defeitos construtivos nas paredes de concreto. Essa dinâmica comportamental gera uma necessidade constante de retrabalho, o que compromete severamente a produtividade global e o planejamento da obra. A não execução de qualquer atividade essencial resulta, portanto, na consolidação de uma não conformidade.
+A modelagem do canteiro de obras por meio da integração DES e ABM permite representar o fluxo físico do processo construtivo e os fatores humanos associados à execução das atividades. No entanto, as falhas operacionais podem ocorrer sem que sejam imediatamente perceptíveis apenas pela observação do fluxo físico da obra. Nesse contexto, a Simulação Híbrida será importante não apenas para representar o comportamento dinâmico do ambiente construtivo, mas também para evidenciar limitações relacionadas à rastreabilidade e ao monitoramento das atividades executadas.
 
-Contudo, a simples observação física não é suficiente para capturar essas infrações, uma vez que elas ocorrem, na maioria das vezes, de forma silenciosa. O trabalhador burla os mecanismos de controle sem deixar rastros imediatos, o que faz com que esses erros se comportem, na ótica da simulação, como Eventos de Falha Não Observáveis.
+Dessa forma, surge a necessidade de complementar a abordagem de simulação com a teoria de SED, permitindo avançar da representação operacional do processo para a análise formal de falhas e da diagnosticabilidade do sistema. A partir do mapeamento das atividades executadas no canteiro, torna-se possível construir modelos capazes de relacionar os Eventos Observáveis do processo com possíveis falhas ocultas, permitindo inferir matematicamente a ocorrência de anomalias no ambiente produtivo.
 
-É exatamente para estudar essa lacuna de rastreabilidade percebida pela Simulação Híbrida que surge a necessidade da aplicação da teoria de SED,. O estudo do SED é uma alternativa para este trabalho porque permite avançar da simples constatação do problema para o diagnóstico formal. O mapeamento das atividades realizadas ou não do canteiro servirá como base para a construção de um modelo capaz de rastrear o fluxo visível (Observável) da obra e inferir, matematicamente, a ocorrência dessas anomalias ocultas, conectando as decisões do trabalhador à detecção analítica de falhas no processo produtivo.
- %Não consegui correlacionar com Gêmeos Digitais, falei de simulação hibrida aliada a SED
+Além disso, a integração entre DES, ABM e SED contribui para a construção de uma arquitetura baseada em princípios de Gêmeos Digitais, na qual a simulação computacional não se limita apenas à visualização do processo construtivo aprimorada (com NVIDIA Omniverse), mas também incorpora mecanismos de monitoramento, análise e suporte à tomada de decisão no contexto da construção civil.
+
  
