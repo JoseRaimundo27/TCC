@@ -296,7 +296,7 @@ Esses elementos foram utilizados como referência para composição do ambiente 
 
 \section{SED}
 \label{sec:SED}
-Esta seção detalha as etapas de desenvolvimento do diagnosticador do SED. Como evidenciado na modelagem comportamental prévia, o processo produtivo de montagem e desmontagem de fôrmas é suscetível a falhas não observáveis decorrentes das omissões dos trabalhadores. Para diagnosticar matematicamente essas anomalias, é possível adotar a teoria do SED, baseado no modelo de \citeonline{basilio2010}. Sob essa ótica, o fluxo logístico da construção será modelado por meio de autômatos de estados finitos determinísticos. 
+Esta seção detalha as etapas de desenvolvimento do diagnosticador do SED. Como evidenciado na modelagem comportamental prévia, o processo produtivo de montagem e desmontagem de fôrmas é suscetível a falhas Não Observáveis decorrentes das omissões dos trabalhadores. Para diagnosticar matematicamente essas anomalias, é possível adotar a teoria do SED, baseado no modelo de \citeonline{basilio2010}. Sob essa ótica, o fluxo logístico da construção será modelado por meio de autômatos de estados finitos determinísticos. 
 
 Formalmente, o sistema construtivo é representado por um gerador de linguagem, definido pela quíntupla:
 $$G = (X, \Sigma, f, x_0, X_m)$$
@@ -304,7 +304,7 @@ Onde cada parâmetro descreve uma característica física ou lógica do processo
 
 \subsection{Espaço de Estados ($X$) e Estado Inicial ($x_0$)}
 
-O conjunto finito de estados $X$ representa as condições operacionais do canteiro de obras em um dado instante de tempo. Na modelagem da execução das fôrmas, um estado consolida a situação atual do fluxo físico. Com base nas principais atividades realizadas pelo trabalhador, definidas na figura \ref{fig:abm-model}, é possível definir os estados do SED.
+O conjunto finito de Estados $X$ representa as condições operacionais do canteiro de obras em um dado instante de tempo. Na modelagem da execução das fôrmas, um Estado consolida a situação atual do fluxo físico. Com base nas principais atividades realizadas pelo trabalhador, definidas na figura \ref{fig:abm-model}, é possível definir os Estados do SED.
 
 \begin{figure}[!htb]
 	\centering
@@ -315,18 +315,18 @@ O conjunto finito de estados $X$ representa as condições operacionais do cante
 \end{figure}
 \FloatBarrier
 
-Dentro desse espaço, define-se o estado inicial $x_0 \in X$. Ele representa o ponto de partida do ciclo construtivo de um meio pavimento, caracterizado pela verificação de segurança e pela disponibilidade inicial de recursos e ferramentas antes da execução da primeira atividade, marcado como $E_0$ na figura \ref{fig:estados-sed}.  O estado final, ou subconjunto de estados marcados, é representado por $X_m \subseteq X$. Na modelagem proposta, o estado $E_{11}$ atua como o estado marcado, designando a conclusão de todas as etapas de montagem e desmontagem das fôrmas. Atingir este estado indica que o ciclo produtivo daquele meio pavimento foi finalizado e o sistema está apto a reiniciar o fluxo na próxima fôrma.
+Dentro desse espaço, define-se o Estado inicial $x_0 \in X$. Ele representa o ponto de partida do ciclo construtivo de um meio pavimento, caracterizado pela verificação de segurança e pela disponibilidade inicial de recursos e ferramentas antes da execução da primeira atividade, marcado como $E_0$ na figura \ref{fig:estados-sed}.  O estado final, ou subconjunto de estados marcados, é representado por $X_m \subseteq X$. Na modelagem proposta, o Estado $E_{11}$ atua como o Estado marcado, designando a conclusão de todas as etapas de montagem e desmontagem das fôrmas. Atingir este Estado indica que o ciclo produtivo daquele meio pavimento foi finalizado para uma fôrma específica.
 \subsection{Conjunto de Eventos ($\Sigma$) e Conjunto de Eventos de Falhas ($\Sigma_f$)}
 
-O conjunto finito de eventos $\Sigma$ engloba todas as ocorrências capazes de alterar o estado do sistema. No contexto desta pesquisa, os eventos correspondem à conclusão das macroetapas e das atividades obrigatórias detalhadas no capítulo anterior (como a aplicação de desmoldante, travamento mecânico, etc.). 
+O conjunto finito de Eventos $\Sigma$ engloba todas as ocorrências capazes de alterar o Estado do sistema. No contexto desta pesquisa, os Eventos correspondem à conclusão das macroetapas e das atividades obrigatórias detalhadas no capítulo anterior (como a aplicação de desmoldante, travamento mecânico, etc.). 
 
 Para viabilizar a arquitetura de diagnóstico, esse conjunto é particionado de forma disjunta em duas categorias principais:
 $$\Sigma = \Sigma_o \cup \Sigma_{uo}$$
 Onde $\Sigma_o$ representa o conjunto de Eventos Observáveis e $\Sigma_{uo}$ representa os Eventos Não Observáveis. Dentro de $\Sigma_{uo}$, encontra-se o subconjunto de Eventos de Falhas ($\Sigma_f$), que modela matematicamente o momento exato em que o operário decide omitir uma atividade obrigatória de forma velada.
 
-A fim de definir o Conjunto de Eventos, utilizou-se como base o sequenciamento lógico das etapas de montagem e desmontagem, que ditam as transições entre os estados previamente mapeados na Figura \ref{fig:estados-sed}. Dessa forma, os eventos regulares que compõem o sistema representam as ações operacionais que impulsionam o fluxo do canteiro de obras do estado inicial ($E_0$) até a sua conclusão no estado marcado ($E_{11}$). 
+A fim de definir o Conjunto de Eventos, utilizou-se como base o sequenciamento lógico das etapas de montagem e desmontagem, que ditam as transições entre os Estados previamente mapeados na Figura \ref{fig:estados-sed}. Dessa forma, os Eventos regulares que compõem o sistema representam as ações operacionais que impulsionam o fluxo do canteiro de obras do Estado inicial ($E_0$) até a sua conclusão no estado marcado ($E_{11}$). 
 
-Para fins de notação e padronização do modelo matemático, os Eventos Observáveis foram indexados com a letra ``O'' (do inglês \textit{Observable}), enquanto os Eventos Não Observáveis foram indexados com a letra ``U'' (do inglês \textit{Unobservable}). Conforme detalhado na Figura \ref{fig:eventos}, o único evento regular da operação classificado como Não Observável ($U_1$) corresponde à conclusão da checagem das fôrmas. Essa modelagem justifica-se pelo fato de que, na dinâmica real do canteiro de obras, não há um mecanismo de controle formal que permita validar de maneira inequívoca se o trabalhador de fato realizou, ou não, essa inspeção visual preliminar.
+Para fins de notação e padronização do modelo matemático, os Eventos Observáveis foram indexados com a letra ``O'' (do inglês \textit{Observable}), enquanto os Eventos Não Observáveis foram indexados com a letra ``U'' (do inglês \textit{Unobservable}). Conforme detalhado na Figura \ref{fig:eventos}, o único Evento regular da operação classificado como Não Observável ($U_1$) corresponde à conclusão da checagem das fôrmas. Essa modelagem justifica-se pelo fato de que, na dinâmica real do canteiro de obras, não há um mecanismo de controle formal que permita validar de maneira inequívoca se o trabalhador de fato realizou, ou não, essa inspeção visual preliminar.
 
 \begin{figure}[!htb]
 	\centering
@@ -380,7 +380,7 @@ A premissa adotada no modelo lógico é que atividades classificadas com alto gr
 	\fonte{\citeonline{tesecarol} (Adaptado).}
 \end{table}
 
-Da mesma forma, atividades cujas omissões não são percebidas pelos trabalhadores como defeitos, mas que foram constatadas \textit{in loco} pela pesquisa de \citeonline{tesecarol}, representam anomalias furtivas ideais para o rastreamento via autômato diagnosticador. Desta forma, os eventos de falha mais críticos selecionados para a implementação matemática no SED foram:
+Da mesma forma, atividades cujas omissões não são percebidas pelos trabalhadores como defeitos, mas que foram constatadas \textit{in loco} pela pesquisa de \citeonline{tesecarol}, representam anomalias furtivas ideais para o rastreamento via autômato diagnosticador $G_d$. Desta forma, os Eventos de falha mais críticos selecionados para a implementação matemática no SED foram:
 
 % Cadastrando as falhas na lista de símbolos/nomenclatura:
 \nomenclature[S]{$F_1$}{Falha de omissão da verificação das condições iniciais (Segurança, limpeza e integridade)}
@@ -389,7 +389,7 @@ Da mesma forma, atividades cujas omissões não são percebidas pelos trabalhado
 \nomenclature[S]{$F_4$}{Falha ou omissão na fixação de pinos, cunhas e faquetas}
 \nomenclature[S]{$F_5$}{Falha na remoção dos plásticos de proteção das faquetas}
 \begin{itemize}
-	\item \textbf{$F1$ - Omissão da verificação das condições iniciais (Segurança, limpeza e integridade):} Configura a burla das atividades ranqueadas em 1º, 2º e 3º lugares como as mais difíceis durante a fase de montagem (Tabela \ref{tab:dificuldade_montagem}). Está diretamente associada ao estado não observável $E_1$.
+	\item \textbf{$F1$ - Omissão da verificação das condições iniciais (Segurança, limpeza e integridade):} Configura a burla das atividades ranqueadas em 1º, 2º e 3º lugares como as mais difíceis durante a fase de montagem (Tabela \ref{tab:dificuldade_montagem}). Está diretamente associada ao Estado $E_1$.
 	
 	\item \textbf{$F2$ - Checagem das fôrmas mal executada:} Ainda em relação às 3 atividades ranqueadas como mais difíceis durante a montagem, destaca-se as atividades de verificação e checahem de integridade das fôrmas, portanto esta falha foi escolhida
 	
@@ -398,7 +398,7 @@ Da mesma forma, atividades cujas omissões não são percebidas pelos trabalhado
 	\item \textbf{$F5$ - Falha na remoção dos plásticos de proteção das faquetas:} A remoção desses componentes ocupou o 3º lugar no ranking de dificuldade durante a desmontagem (Tabela \ref{tab:dificuldade_desmontagem}).
 \end{itemize}
 
-Esses eventos não observáveis em $\Sigma_f$ representam desvios críticos da rota ideal do autômato. No modelo do SED, a ocorrência de qualquer um desses eventos leva o sistema de um estado regular para um estado de falha, acionando a necessidade de o diagnosticador utilizar a sequência de eventos observáveis subsequentes ($\Sigma_o$) para inferir, retrospectivamente, qual omissão foi cometida pela equipe.
+Esses Eventos Não Observáveis de falhas $\Sigma_f$ representam desvios críticos da rota ideal do autômato $G$. No modelo do SED, a ocorrência de qualquer um desses Eventos leva o sistema de um Estado regular para um Estado de falha, acionando a necessidade de o diagnosticador utilizar a sequência de Eventos Observáveis subsequentes ($\Sigma_o$) para inferir, retrospectivamente, se houve omissão cometida pela equipe.
 
 \subsection{Função de Transição Parcial ($f$)}
 
@@ -408,9 +408,9 @@ A evolução sequencial do canteiro de obras é formalizada pela função de tra
 	\label{eq:funcao_transicao}
 \end{equation}
 
-A função $f(x, \sigma)$ estabelece o novo estado do sistema após a ocorrência de um evento $\sigma \in \Sigma$, partindo de um estado atual $x \in X$. No contexto da execução das paredes de concreto, essa função atua como o controle lógico de precedência do projeto. 
+A função $f(x, \sigma)$ estabelece o novo Estado do sistema após a ocorrência de um Evento $\sigma \in \Sigma$, partindo de um Estado atual $x \in X$. No contexto da execução das paredes de concreto, essa função atua como o controle lógico de precedência do projeto. 
 
-Para a construção de $f$, o fluxo foi estruturado assumindo que o avanço físico da montagem e desmontagem das fôrmas ocorre de forma sequencial (do estado $E_0$ ao $E_{11}$). Esse avanço pode ser impulsionado tanto pelos eventos regulares (observáveis $O_i$ e não observável $U_1$) quanto pelos eventos de falha ($f_i$). A Tabela \ref{tab:funcao_transicao} detalha exaustivamente todas as transições mapeadas no autômato gerador ($G$).
+Para a construção de $f$, o fluxo foi estruturado assumindo que o avanço físico da montagem e desmontagem das fôrmas ocorre de forma sequencial (do estado $E_0$ ao $E_{11}$). Esse avanço pode ser impulsionado tanto pelos Eventos regulares (observáveis $O_i$ e não observável $U_1$) quanto pelos Eventos de falha ($f_i$). A Tabela \ref{tab:funcao_transicao} detalha todas as transições mapeadas no autômato $G$.
 
 % Cadastrando apenas os indexadores genéricos na lista de símbolos:
 \nomenclature[S]{$O_i$}{Evento observável genérico do sistema, onde $i \in \{1, 2, \dots, 12\}$}
@@ -448,13 +448,13 @@ Para a construção de $f$, o fluxo foi estruturado assumindo que o avanço fís
 \end{table}
 \FloatBarrier
 
-Observe que as falhas modeladas levam o sistema para o mesmo estado físico subsequente que o evento regular correspondente levaria (por exemplo, tanto $O_1$ quanto $F1$ levam o canteiro ao estado $E_1$). Essa é a representação matemática do fato de que o trabalhador continua o processo construtivo mesmo tendo pulado ou executado mal uma etapa. Para a gestão da obra, a parede parece estar sendo montada normalmente, reforçando a natureza oculta da anomalia.
+Observe que as falhas modeladas levam o sistema para o mesmo Estado físico subsequente que o Evento regular correspondente levaria (por exemplo, tanto $O_1$ quanto $F1$ levam o canteiro ao estado $E_1$). Essa é a representação matemática do fato de que o trabalhador continua o processo construtivo mesmo tendo pulado ou executado mal uma etapa. Para a gestão da obra, a parede parece estar sendo montada normalmente, reforçando a natureza oculta da anomalia.
 
 \subsection{Arquitetura do Autômato Diagnosticador ($G_d$)}
 
 Uma vez definidas as regras lógicas e a quíntupla que compõe o Autômato $G$, a metodologia requer a síntese de um sistema supervisor capaz de inferir a ocorrência dos eventos ocultos de falha com base exclusivamente no fluxo de Eventos Observáveis que a gestão da obra consegue enxergar. 
 
-Para isso, adota-se a construção do Autômato Diagnosticador, formalmente denotado como $G_d$. A síntese do $G_d$ consiste em calcular o fechamento Não Observável do sistema e atribuir rótulos aos estados estimados. Segundo a formulação clássica de \citeonline{basilio2010}, cada estado do Diagnosticador carrega consigo o diagnóstico atual da planta, podendo ser classificado como:
+Para isso, adota-se a construção do Autômato Diagnosticador $G_d$. A síntese do $G_d$ consiste em calcular o fechamento Não Observável do sistema e atribuir rótulos aos estados estimados. Segundo a formulação clássica de \citeonline{basilio2010}, cada estado do Diagnosticador carrega consigo o diagnóstico atual da planta, podendo ser classificado como:
 \begin{itemize}
 	\item \textbf{Normal ($N$):} Quando se tem certeza de que nenhuma falha ocorreu.
 	\item \textbf{Falha ($F_i$):} Quando se tem certeza de que a falha do tipo $i$ ocorreu.

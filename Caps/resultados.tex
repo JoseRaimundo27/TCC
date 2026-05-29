@@ -1,11 +1,11 @@
 \chapter{Resultados}
 \label{chap:resultados}
 
-Neste capítulo, são apresentados e discutidos os resultados obtidos a partir da implementação dos modelos propostos. A análise é dividida em duas grandes etapas: primeiramente, avalia-se o comportamento do sistema produtivo por meio da simulação computacional híbrida e sua respectiva visualização avançada, em seguida, apresenta-se a síntese do SED capaz de rastrear as falhas comportamentais observadas no modelo da simulação.
+Neste capítulo, são apresentados e discutidos os resultados obtidos a partir da implementação dos modelos propostos. A análise é dividida em duas grandes etapas: primeiramente, avalia-se o comportamento do sistema produtivo por meio da Simulação Computacional Híbrida e sua respectiva visualização avançada, em seguida, apresenta-se a síntese do SED capaz de rastrear as falhas comportamentais observadas no modelo da simulação.
 
 \section{Simulação Híbrida no AnyLogic}
 
-A simulação híbrida, combinando a Modelagem Baseada em Agentes (ABM) e a Simulação a Eventos Discretos (DES), foi implementada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado, as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas e a disposição física da obra.
+A Simulação Híbrida, combinando a Modelagem Baseada em Agentes (ABM) e a Simulação a Eventos Discretos (DES), foi implementada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado, as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas e a disposição física da obra.
 
 Primeiramente, foram estruturados os agentes da simulação: as fôrmas (\textit{Formworks}) e os trabalhadores (\textit{Workers}). No ambiente de modelagem AnyLogic, os agentes representam entidades com participação ativa ou passiva no sistema. Nesse sentido, as fôrmas atuam como os principais elementos de fluxo da DES, enquanto os trabalhadores representam os agentes autônomos da ABM.
 
@@ -33,7 +33,7 @@ De maneira análoga, foram criados os agentes dos trabalhadores e inseridos na \
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Propriedades do Agente trabalhador.}
+	\caption{Propriedades do Agente Trabalhador.}
 	\includegraphics[width=0.6\textwidth]{Caps/Figs/workers.png}
 	\fonte{Autoral.}
 	\label{fig:workers}
@@ -77,7 +77,7 @@ Para operacionalizar a movimentação física das fôrmas no ambiente simulado, 
 \end{figure}
 \FloatBarrier
 
-A lógica de roteamento da montagem baseada em eventos discretos é estabelecida por uma cadeia de blocos interconectados (Figura \ref{fig:assembly-logic}). Após a inserção da fôrma no sistema pelo bloco \textit{Enter}, aplicou-se um bloco de \textit{Delay} de 1 segundo com o intuito de evitar sobrecarga computacional durante a simulação. Em seguida, o fluxo alcança o bloco \textit{SelectOutputln}, que atua como o controlador de roteamento. Esse bloco chama a função \textit{chooseOutput}, a qual é regida por condições lógicas que verificam continuamente a disponibilidade de espaço em cada parede. Uma vez que a capacidade máxima de uma parede é atingida, o fluxo é redirecionado para a próxima, até que a montagem de todo o ambiente seja concluída e as entidades saiam do sistema por meio do bloco \textit{Exit} (Figura \ref{fig:choose-output}).
+A lógica de roteamento da montagem baseada em Eventos discretos é estabelecida por uma cadeia de blocos interconectados (Figura \ref{fig:assembly-logic}). Após a inserção da fôrma no sistema pelo bloco \textit{Enter}, aplicou-se um bloco de \textit{Delay} de 1 segundo com o intuito de evitar sobrecarga computacional durante a simulação. Em seguida, o fluxo alcança o bloco \textit{SelectOutputln}, que atua como o controlador de roteamento. Esse bloco chama a função \textit{chooseOutput}, a qual é regida por condições lógicas que verificam continuamente a disponibilidade de espaço em cada parede. Uma vez que a capacidade máxima de uma parede é atingida, o fluxo é redirecionado para a próxima, até que a montagem de todo o ambiente seja concluída e as entidades saiam do sistema por meio do bloco \textit{Exit} (Figura \ref{fig:choose-output}).
 
 \begin{figure}[!htb]
 	\centering
@@ -157,7 +157,7 @@ Como as etapas são sequenciais, somente após a conclusão da montagem (\textit
 
 \subsection{ABM no AnyLogic}
 
-A abordagem ABM foi responsável por descrever o modelo cognitivo do trabalhador. A Figura \ref{fig:statechart} apresenta o diagrama de estados, representando os possíveis estados do trabalhador no processo de montagem e desmontagem. O agente trabalhador inicia no estado Ocioso (\textit{Idle}). No estado de Locomoção (\textit{Locomotion}) encontra-se a lógica principal do comportamento do trabalhador, seguido pelas etapas de montagem, à esquerda, e de desmontagem, à direita, cuja execução é influenciada pelos parâmetros de influência. Os estados finais definem se o comportamento do trabalhador foi adequado (\textit{AdeqBehaviorA}), quando todas as atividades são concluídas, ou inadequado (\textit{InadeqBehavior}), quando pelo menos uma atividade é ignorada.
+A abordagem ABM foi responsável por descrever o modelo cognitivo do trabalhador. A Figura \ref{fig:statechart} apresenta o diagrama de estados, representando os possíveis Estados do trabalhador no processo de montagem e desmontagem. O agente trabalhador inicia no estado Ocioso (\textit{Idle}). No estado de Locomoção (\textit{Locomotion}) encontra-se a lógica principal do comportamento do trabalhador, seguido pelas etapas de montagem, à esquerda, e de desmontagem, à direita, cuja execução é influenciada pelos parâmetros de influência. Os Estados finais definem se o comportamento do trabalhador foi adequado (\textit{AdeqBehaviorA}), quando todas as atividades são concluídas, ou inadequado (\textit{InadeqBehavior}), quando pelo menos uma atividade é ignorada.
 
 \begin{figure}[!htb]
 	\centering
@@ -168,7 +168,7 @@ A abordagem ABM foi responsável por descrever o modelo cognitivo do trabalhador
 \end{figure}
 \FloatBarrier
 
-A transição do estado Ocioso para o estado de Locomoção ocorre a partir de um Evento. No AnyLogic, eventos são elementos de modelagem utilizados para agendar e executar ações específicas em momentos definidos ou quando determinadas condições são satisfeitas durante o tempo de simulação.
+A transição do estado Ocioso para o estado de Locomoção ocorre a partir de um Evento. No AnyLogic, Eventos são elementos de modelagem utilizados para agendar e executar ações específicas em momentos definidos ou quando determinadas condições são satisfeitas durante o tempo de simulação.
 
 \begin{figure}[!htb]
 	\centering
@@ -179,7 +179,7 @@ A transição do estado Ocioso para o estado de Locomoção ocorre a partir de u
 \end{figure}
 \FloatBarrier
 
-No contexto do projeto, o trabalhador deixa o estado Ocioso quando as condições de trabalho são atendidas, ou seja, quando o turno de serviço é iniciado. Os eventos Turno da Manhã (\textit{MorningShift}) e Turno da Tarde (\textit{EveningShift}) são responsáveis por retirar o trabalhador da ociosidade, configurando a variável Hora de Serviço (\textit{ServiceHours}) como \textit{True}.
+No contexto do projeto, o trabalhador deixa o estado Ocioso quando as condições de trabalho são atendidas, ou seja, quando o turno de serviço é iniciado. Os Eventos Turno da Manhã (\textit{MorningShift}) e Turno da Tarde (\textit{EveningShift}) são responsáveis por retirar o trabalhador da ociosidade, configurando a variável Hora de Serviço (\textit{ServiceHours}) como \textit{True}.
 
 \begin{figure}[!htb]
 	\centering
@@ -203,7 +203,7 @@ No contexto do projeto, o trabalhador deixa o estado Ocioso quando as condiçõe
 	
 \end{figure}
 
-De forma análoga, o evento de descanso (\textit{Break}) retorna o trabalhador ao estado Ocioso, configurando a variável \textit{ServiceHours} como \textit{False}.
+De forma análoga, o Evento de descanso (\textit{Break}) retorna o trabalhador ao estado Ocioso, configurando a variável \textit{ServiceHours} como \textit{False}.
 
 \begin{figure}[!htb]
 	\centering
@@ -214,11 +214,11 @@ De forma análoga, o evento de descanso (\textit{Break}) retorna o trabalhador a
 \end{figure}
 \FloatBarrier
 
-Os eventos \textit{EndA} e \textit{EndD} referem-se ao término da montagem (\textit{End Assemble}) e da desmontagem (\textit{End Disassemble}), respectivamente.
+Os Eventos \textit{EndA} e \textit{EndD} referem-se ao término da montagem (\textit{End Assemble}) e da desmontagem (\textit{End Disassemble}), respectivamente.
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Propriedades dos eventos de término.}
+	\caption{Propriedades dos Eventos de término.}
 	
 	\begin{minipage}{0.45\textwidth}
 		\centering
@@ -238,7 +238,7 @@ Os eventos \textit{EndA} e \textit{EndD} referem-se ao término da montagem (\te
 	
 \end{figure}
 
-Esses eventos são disparados quando a montagem ou desmontagem é concluída. Essa verificação é realizada ao identificar se a última parede foi montada, no caso da montagem, ou se todas as fôrmas (total de 36) foram desmontadas. Os eventos atribuem valores às variáveis \textit{qAssemble} e \textit{qDisassemble}, conforme a funcionalidade previamente discutida. Além disso, a variável \textit{ServiceHours} é configurada como \textit{False}, indicando o término do serviço.
+Esses Eventos são disparados quando a montagem ou desmontagem é concluída. Essa verificação é realizada ao identificar se a última parede foi montada, no caso da montagem, ou se todas as fôrmas (total de 36) foram desmontadas. Os Eventos atribuem valores às variáveis \textit{qAssemble} e \textit{qDisassemble}, conforme a funcionalidade previamente discutida. Além disso, a variável \textit{ServiceHours} é configurada como \textit{False}, indicando o término do serviço.
 
 Conforme a Figura \ref{fig:simulationStates}, cada atividade do trabalhador, tanto de montagem como de desmontagem terá uma variável associada. Essas variáveis serão incrementadas sempre que a atividade for realizada por fôrma. Sendo assim, no fim da simulação, as variáveis nos dará o quantitativo de vezes em que a atividade foi realizada, podendo gerar estatísticas associadas. Ademais, variáveis auxiliares relacionadas ao processo cognitivo são atualizadas com base na conclusão das atividades.
 
@@ -293,7 +293,7 @@ Conforme a Figura \ref{fig:simulationStates}, cada atividade do trabalhador, tan
  
  Na Figura \ref{fig:calculatex1}, apresenta-se um exemplo do cálculo do fator de influência associado ao \textit{TrainingCycles}, baseado na Equação \ref{eq:curva_aprendizado}. O valor inicial foi modelado por meio de uma distribuição normal truncada, com média igual a 0{,}85 e desvio padrão de 0{,}1, limitada ao intervalo unitário. O parâmetro $\theta$, presente na Equação \ref{eq:taxa_aprendizado}, foi definido como 0{,}734. Esses valores foram selecionados com base na literatura e validados por meio de testes experimentais no modelo.
  
-Como visto anteriormente, no diagrama de estados, o trabalhador inicia no estado \textit{Idle} e transiciona para \textit{Locomotion} por meio do evento \textit{MorningShift}. O estado \textit{Locomotion} é responsável por controlar o estado operacional do trabalhador, verificando se ele se encontra na fase de montagem, desmontagem ou se já concluiu todas as atividades.
+Como visto anteriormente, no diagrama de estados, o trabalhador inicia no estado \textit{Idle} e transiciona para \textit{Locomotion} por meio do Evento \textit{MorningShift}. O estado \textit{Locomotion} é responsável por controlar o estado operacional do trabalhador, verificando se ele se encontra na fase de montagem, desmontagem ou se já concluiu todas as atividades.
 
 \begin{figure}[!htb]
 	\centering
@@ -351,7 +351,7 @@ Caso o trabalhador execute corretamente a etapa, a variável \textit{cognition} 
 
 Por outro lado, caso o trabalhador ignore a etapa, é incrementada a variável associada especificamente à atividade em questão. No exemplo apresentado, referente à etapa \textit{CheckFormworkCondition}, a variável incrementada é \textit{FormworkCondition}. De forma análoga, a variável \textit{NoCognitionCount} é utilizada para contabilizar o número total de etapas ignoradas durante a execução do processo.
 
-O diagrama executa as etapas do fluxo de forma sequencial. Ao final de todos os estados de atividade, tanto para a montagem quanto para a desmontagem, o trabalhador é direcionado para um estado de cognição.
+O diagrama executa as etapas do fluxo de forma sequencial. Ao final de todos os Estados de atividade, tanto para a montagem quanto para a desmontagem, o trabalhador é direcionado para um estado de cognição.
 \begin{figure}[!htb]
 	\centering
 	\caption{Estados de cognição.}
@@ -362,18 +362,18 @@ A lógica do estado de cognição consiste inicialmente em verificar se alguma a
 Além disso, é calculada a variável \textit{cognitionRate}, responsável por representar a porcentagem de atividades executadas pelo trabalhador durante o ciclo atual. Essa taxa é obtida pela razão entre a quantidade de atividades realizadas (\textit{Cognition}) e o número total de atividades existentes no fluxo correspondente, sendo seis atividades para o processo de montagem e quatro atividades para o processo de desmontagem.
 Por fim, é utilizada uma variável estatística denominada \textit{cognitionStats}, responsável por armazenar os valores da taxa de cognição calculados ao longo da simulação. Dessa forma, torna-se possível analisar estatisticamente o desempenho cognitivo do trabalhador durante a execução das atividades.
 
-A partir dos estados de cognição, o trabalhador pode transicionar para o estado de comportamento adequado (\textit{AdeqBehavior}) ou para o estado de comportamento inadequado (\textit{InadeqBehavior}).
+A partir dos Estados de cognição, o trabalhador pode transicionar para o estado de comportamento adequado (\textit{AdeqBehavior}) ou para o estado de comportamento inadequado (\textit{InadeqBehavior}).
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Transições dos estados de cognição.}
+	\caption{Transições dos Estados de cognição.}
 	\includegraphics[width=0.4\linewidth]{Caps/Figs/transictions}
 	\fonte{Autoral.}
 	\label{fig:transictions}
 \end{figure}
 \FloatBarrier
 
-A transição entre os estados ocorre com base na quantidade de atividades executadas durante o fluxo. Caso o trabalhador cumpra todas as atividades previstas — seis atividades para a montagem e quatro atividades para a desmontagem — ele é direcionado para o estado de comportamento adequado (\textit{AdeqBehavior}).
+A transição entre os Estados ocorre com base na quantidade de atividades executadas durante o fluxo. Caso o trabalhador cumpra todas as atividades previstas — seis atividades para a montagem e quatro atividades para a desmontagem — ele é direcionado para o estado de comportamento adequado (\textit{AdeqBehavior}).
 
 Nesse estado, a variável de conformidade (\textit{Conformity}) é incrementada, representando a execução completa e correta das atividades previstas no ciclo. Além disso, a variável \textit{cognition} é redefinida para zero, permitindo o início de um novo ciclo de execução.
 
@@ -400,7 +400,7 @@ Por outro lado, caso o trabalhador deixe de executar pelo menos uma atividade do
 \end{figure}
 \FloatBarrier
 
-A partir de ambos os estados, o trabalhador retorna ao estado \textit{Locomotion}, reiniciando o ciclo operacional e permitindo a continuidade das atividades no ambiente de simulação.
+A partir de ambos os Estados, o trabalhador retorna ao estado \textit{Locomotion}, reiniciando o ciclo operacional e permitindo a continuidade das atividades no ambiente de simulação.
 
 
 \subsection{Visualização da simulação}
@@ -545,7 +545,7 @@ A Simulação Híbrida desenvolvida anteriormente demonstrou que o trabalhador n
 
 \subsection{Autômato $G$ do Canteiro de Obras}
 
-A partir do mapeamento apresentado na Tabela \ref{tab:funcao_transicao}, em conjunto com o Diagrama de Estados ilustrado na Figura \ref{fig:statechart}, foi possível construir o autômato gerador $G$ do sistema.
+A partir do mapeamento apresentado na Tabela \ref{tab:funcao_transicao}, em conjunto com o diagrama de estados ilustrado na Figura \ref{fig:statechart}, foi possível construir o autômato gerador $G$ do sistema.
 
 \begin{figure}[!htb]
 	\centering
@@ -556,17 +556,17 @@ A partir do mapeamento apresentado na Tabela \ref{tab:funcao_transicao}, em conj
 \end{figure}
 \FloatBarrier
 
-O autômato representa formalmente os estados operacionais do processo de montagem e desmontagem das fôrmas, bem como os eventos responsáveis pelas transições entre esses estados. Os símbolos associados aos estados, eventos observáveis, eventos não observáveis e eventos de falha são apresentados nas Figuras \ref{fig:estados-sed} e \ref{fig:eventos}.
+O autômato representa formalmente os Estados operacionais do processo de montagem e desmontagem das fôrmas, bem como os Eventos responsáveis pelas transições entre esses Estados. Os símbolos associados aos Estados, Eventos Observáveis, Eventos Não Observáveis e Eventos de falha são apresentados nas Figuras \ref{fig:estados-sed} e \ref{fig:eventos}.
 
-A análise do autômato permite observar que diferentes caminhos de execução podem conduzir o sistema ao mesmo estado físico do processo. No caso do estado $E1$ (Fôrmas em Checagem), por exemplo, a transição para o estado $E2$ (Desmoldante em Aplicação) pode ocorrer tanto por meio de um evento não observável quanto pela ocorrência de uma falha associada à atividade. De maneira semelhante, os estados $E0$, $E2$, $E5$ e $E8$ podem transicionar para seus respectivos estados subsequentes através de eventos observáveis ou por meio de eventos de falha ($F1$, $F3$, $F4$ e $F5$, respectivamente).
+A análise do autômato permite observar que diferentes caminhos de execução podem conduzir o sistema ao mesmo estado físico do processo. No caso do estado $E1$ (Fôrmas em Checagem), por exemplo, a transição para o estado $E2$ (Desmoldante em Aplicação) pode ocorrer tanto por meio de um Evento não observável quanto pela ocorrência de uma falha associada à atividade. O sistema fica preso no Estado final $E_{12}$ a partir do Evento Ocioso $O_{12}$. Os Estados $E0$, $E2$, $E5$ e $E8$ podem transicionar para seus respectivos Estados subsequentes através de Eventos observáveis ou por meio de Eventos de falha ($F1$, $F3$, $F4$ e $F5$, respectivamente).
 
-Essas ramificações de falha criam trajetórias paralelas dentro do autômato que convergem para os mesmos estados operacionais do sistema. Como consequência, diferentes sequências de execução podem produzir o mesmo comportamento observável externamente, mesmo quando determinadas atividades não foram corretamente realizadas. Esse comportamento evidencia a dificuldade de identificar falhas apenas pela observação direta da evolução do processo produtivo, justificando a necessidade da modelagem formal por SED para fins de diagnóstico.
+Essas ramificações de falha criam trajetórias paralelas dentro do autômato que convergem para os mesmos Estados operacionais do sistema. Como consequência, diferentes sequências de execução podem produzir o mesmo comportamento observável externamente, mesmo quando determinadas atividades não foram corretamente realizadas. Esse comportamento evidencia a dificuldade de identificar falhas apenas pela observação direta da evolução do processo produtivo, justificando a necessidade da modelagem formal por SED para fins de diagnóstico.
 
 \subsection{Composição Paralela entre $G$ e $G_{Al}$}
 
-Com o objetivo de construir o Autômato Diagnosticador $G_d$, torna-se necessário realizar a composição paralela entre o autômato do sistema $G$ e o Autômato Rotulador $G_{Al}$. O autômato rotulador de dois estados definido por \citeonline{basilio2010}, apresentado na Figura \ref{fig:exemplo-rotulador}, foi adotado neste trabalho para representar a ocorrência de falhas no sistema.
+Com o objetivo de construir o Autômato Diagnosticador $G_d$, torna-se necessário realizar a composição paralela entre o autômato do sistema $G$ e o Autômato Rotulador $G_{Al}$. O autômato rotulador de dois Estados definido por \citeonline{basilio2010}, apresentado na Figura \ref{fig:exemplo-rotulador}, foi adotado neste trabalho para representar a ocorrência de falhas no sistema.
 
-A composição paralela foi realizada com base na Equação \ref{eq:composicao_paralela}, permitindo combinar os estados e eventos do sistema produtivo com os estados de rotulação de falha do autômato $G_{Al}$. Dessa forma, o modelo resultante passa a representar simultaneamente o comportamento operacional do sistema e a informação referente à ocorrência ou não de falhas ao longo da execução das atividades.
+A composição paralela foi realizada com base na Equação \ref{eq:composicao_paralela}, permitindo combinar os Estados e Eventos do sistema produtivo com os Estados de rotulação de falha do autômato $G_{Al}$. Dessa forma, o modelo resultante passa a representar simultaneamente o comportamento operacional do sistema e a informação referente à ocorrência ou não de falhas ao longo da execução das atividades.
 
 \begin{figure}[!htb]
 	\centering
@@ -577,9 +577,9 @@ A composição paralela foi realizada com base na Equação \ref{eq:composicao_p
 \end{figure}
 \FloatBarrier
 
-O resultado da composição paralela pode ser observado de forma completa na Figura \ref{fig:resultadocomposicaoparalelageral}. Entretanto, devido à quantidade de estados e transições geradas, o autômato também foi dividido em partes para facilitar sua visualização e análise, conforme apresentado na Figura \ref{fig:resultadocomposicaoparalela}.
+O resultado da composição paralela pode ser observado de forma completa na Figura \ref{fig:resultadocomposicaoparalelageral}. Entretanto, devido à quantidade de Estados e transições geradas, o autômato também foi dividido em partes para facilitar sua visualização e análise, conforme apresentado na Figura \ref{fig:resultadocomposicaoparalela}.
 
-A composição paralela gera um novo espaço de estados no qual cada estado passa a representar simultaneamente o estado operacional do sistema e a condição de falha associada ao autômato rotulador. Assim, o modelo torna-se capaz de distinguir trajetórias em que falhas ocorreram daquelas em que todas as atividades foram executadas corretamente, mesmo quando ambas conduzem ao mesmo comportamento observável.
+A composição paralela gera um novo espaço de Estados no qual cada estado passa a representar simultaneamente o estado operacional do sistema e a condição de falha associada ao autômato rotulador. Assim, o modelo torna-se capaz de distinguir trajetórias em que falhas ocorreram daquelas em que todas as atividades foram executadas corretamente, mesmo quando ambas conduzem ao mesmo comportamento observável.
 
 \begin{figure}[!htb]
 	\centering
@@ -644,9 +644,9 @@ A partir da composição paralela entre o autômato do sistema $G$ e o Autômato
 \end{figure}
 \FloatBarrier
 
-A Figura \ref{fig:diagnosticador} apresenta o Autômato Diagnosticador gerado para o sistema modelado. Diferentemente do autômato original, os estados do diagnosticador passam a carregar informações associadas às condições de falha do sistema. Assim, cada estado representa não apenas a posição operacional do processo, mas também o conjunto de hipóteses de falha compatíveis com a sequência de eventos observada.
+A Figura \ref{fig:diagnosticador} apresenta o Autômato Diagnosticador gerado para o sistema modelado. Diferentemente do autômato original, os Estados do diagnosticador passam a carregar informações associadas às condições de falha do sistema. Assim, cada Estado representa não apenas a posição operacional do processo, mas também o conjunto de hipóteses de falha compatíveis com a sequência de Eventos observada.
 
-Os estados do diagnosticador podem conter rótulos associados ao funcionamento normal do sistema (rótulo \textit{N}) ou a diferentes modos de falha, representados pelos eventos $F1$, $F2$, $F3$, $F4$ e $F5$ (rótulo \textit{Y}). Esses rótulos permitem identificar quais falhas podem ter ocorrido com base apenas na observação parcial do comportamento do sistema.
+Os Estados do diagnosticador podem conter rótulos associados ao funcionamento normal do sistema (rótulo \textit{N}) ou a diferentes modos de falha, representados pelos Eventos $F1$, $F2$, $F3$, $F4$ e $F5$ (rótulo \textit{Y}). Esses rótulos permitem identificar quais falhas podem ter ocorrido com base apenas na observação parcial do comportamento do sistema.
 
 % - Explique a evolução do diagnóstico: por exemplo, como o sistema percebe que a "Falha 3 (Omissão do desmoldante)" aconteceu logo após a leitura do evento observável O4.
 

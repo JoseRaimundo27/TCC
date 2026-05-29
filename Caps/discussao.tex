@@ -181,10 +181,10 @@ A partir do Autômato Diagnosticador apresentado na Figura \ref{fig:diagnosticad
 
 Os estados finais do Diagnosticador $G_d$ correspondem ao estado de incerteza com $E11$ rotulado como $N$ (normal) e $E11$ rotulado como $Y$ (falha) e ao estado com $E11$ rotulado como $Y$ (falha). Dessa forma, verifica-se que o sistema modelado é \textbf{Não Diagnosticável}.
 
-Isso significa que, analisando apenas os eventos observáveis disponíveis no sistema, um gestor ou sistema de supervisão não conseguiria determinar com exatidão se determinadas atividades foram realmente executadas ou se alguma falha ocorreu durante o processo. Em termos práticos, o sistema pode evoluir para o mesmo estado operacional independentemente da ocorrência de falhas, produzindo sequências observáveis indistinguíveis.
+Isso significa que, analisando apenas os Eventos Observáveis disponíveis no sistema, um gestor ou sistema de supervisão não conseguiria determinar com exatidão se determinadas atividades foram realmente executadas ou se alguma falha ocorreu durante o processo. Em termos práticos, o sistema pode evoluir para o mesmo Estado operacional independentemente da ocorrência de falhas, produzindo sequências observáveis indistinguíveis.
 
 
-A não diagnosticabilidade observada está diretamente relacionada à existência de eventos não observáveis e às trajetórias paralelas geradas pelas transições de falha no autômato original. 
+A não diagnosticabilidade observada está diretamente relacionada à existência de Eventos Não Observáveis e às trajetórias paralelas geradas pelas transições de falha no autômato original. 
 
 \subsection{Análise de cenário}
 
@@ -201,7 +201,7 @@ A partir dessa modificação, um novo autômato $G$ foi gerado, conforme apresen
 \end{figure}
 \FloatBarrier
 
-Com a alteração da observabilidade do evento associado à omissão da verificação inicial, foi realizada novamente a composição paralela entre o autômato do sistema $G$ e o autômato rotulador $G_{Al}$. O resultado dessa composição pode ser observado na Figura \ref{fig:resultadocomposicaoparalelacenario}.
+Com a alteração da observabilidade do Evento associado à omissão da verificação inicial, foi realizada novamente a composição paralela entre o autômato do sistema $G$ e o autômato rotulador $G_{Al}$. O resultado dessa composição pode ser observado na Figura \ref{fig:resultadocomposicaoparalelacenario}.
 
 \begin{figure}[!htb]
 	\centering
@@ -271,9 +271,9 @@ Após a aplicação do operador observador sobre a Composição Paralela, foi ob
 \end{figure}
 \FloatBarrier
 
-A análise dos estados finais do novo diagnosticador demonstra que o sistema passa a apresentar comportamento \textbf{Diagnosticável}. Nesse cenário, os estados finais permitem distinguir claramente entre o estado $E_{11}$ rotulado como $N$ (normal) e o estado $E_{11}$ rotulado como $Y$ (falha), eliminando a ambiguidade presente no modelo anterior.
+A análise dos estados finais do novo diagnosticador demonstra que o sistema passa a apresentar comportamento \textbf{Diagnosticável}. Nesse cenário, os Estados finais permitem distinguir claramente entre o Estado $E_{11}$ rotulado como $N$ (normal) e o Estado $E_{11}$ rotulado como $Y$ (falha), eliminando a ambiguidade presente no modelo anterior.
 
-Dessa forma, conclui-se que a observabilidade do evento associado à omissão da verificação das condições iniciais é determinante para a Diagnosticabilidade do sistema. Quando essa etapa passa a ser monitorada explicitamente, o Diagnosticador consegue identificar em tempo finito a ocorrência da falha, tornando possível diferenciar trajetórias normais de trajetórias com falha.
+Dessa forma, conclui-se que a observabilidade do Evento associado à omissão da verificação das condições iniciais é determinante para a Diagnosticabilidade do sistema. Quando essa etapa passa a ser monitorada explicitamente, o Diagnosticador consegue identificar em tempo finito a ocorrência da falha, tornando possível diferenciar trajetórias normais de trajetórias com falha.
 
 Nesse sentido, o Evento relacionado à verificação das condições iniciais constitui um ponto crítico do processo sob a perspectiva de monitoramento e diagnóstico. Assim, torna-se recomendável que gestores adotem mecanismos adicionais de controle para essa etapa específica, como checklists digitais, formulários de inspeção, sensores de confirmação de atividade ou sistemas de validação operacional, visando aumentar a observabilidade do processo e reduzir a ocorrência de falhas não detectáveis no ambiente de obra.
 
