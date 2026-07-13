@@ -5,7 +5,7 @@ Neste capítulo, são apresentados e discutidos os resultados obtidos a partir d
 
 \section{Simulação Híbrida no AnyLogic}
 
-A Simulação Híbrida, combinando a Modelagem Baseada em Agentes (ABM) e a Simulação a Eventos Discretos (DES), foi implementada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado, as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas e a disposição física da obra.
+A Simulação Híbrida, combinando a ABM e a DES, foi implementada no software AnyLogic. O protótipo computacional foi alimentado com os parâmetros e variáveis coletados empiricamente no canteiro de obras, incorporando os tempos de execução, as curvas de aprendizado, as percepções de dificuldade dos trabalhadores para cada atividade obrigatória da montagem e desmontagem das fôrmas e a disposição física da obra.
 
 Primeiramente, foram estruturados os agentes da simulação: as fôrmas (\textit{Formworks}) e os trabalhadores (\textit{Workers}). No ambiente de modelagem AnyLogic, os agentes representam entidades com participação ativa ou passiva no sistema. Nesse sentido, as fôrmas atuam como os principais elementos de fluxo da DES, enquanto os trabalhadores representam os agentes autônomos da ABM.
 
@@ -66,7 +66,7 @@ A abordagem DES foi responsável por definir a representação geométrica do es
 \end{figure}
 \FloatBarrier
 
-Para operacionalizar a movimentação física das fôrmas no ambiente simulado, utilizou-se o elemento \textit{Transporter Fleet} do Anylogic, configurado com o tipo de navegação de espaço livre. O \textit{Transporter Fleet} é um bloco capaz de definir e gerenciar um grupo de transportadores de outros agentes e  simular movimentações dentro do software, sendo utilizado para que os trabalhadores movam as fôrmas no canteiro. A capacidade dessa frota foi restrita a apenas dois agentes por cômodo, em estrita conformidade com as observações empíricas realizadas durante a coleta de dados no canteiro. Além de gerenciar a logística, o \textit{Transporter Fleet} atua como a principal ponte de comunicação entre a modelagem DES e a ABM. Conforme configurado na ação nativa \textit{On Release} (Figura \ref{fig:transporter}), assim que um trabalhador conclui a tarefa de montagem ou desmontagem de um painel, o sistema emite uma mensagem de "finalizado" (\textit{finished}). Essa mensagem é imediatamente capturada e processada pelo diagrama de estados (\textit{Statechart}) do agente trabalhador na ABM, que será visto mais a frente. Ao chegar ao destino final do transporte com "\textit{on destination reached}", ou seja, quando o trabalhador está montando as fôrmas é realizada uma transformação estética nas fôrmas para melhor visualização.
+Para operacionalizar a movimentação física das fôrmas no ambiente simulado, utilizou-se o elemento \textit{Transporter Fleet} do Anylogic, configurado com o tipo de navegação de espaço livre. O \textit{Transporter Fleet} é um bloco capaz de definir e gerenciar um grupo de transportadores de outros agentes e  simular movimentações dentro do software, sendo utilizado para que os trabalhadores movam as fôrmas no canteiro. A capacidade foi restrita a apenas dois agentes por cômodo, em estrita conformidade com as observações empíricas realizadas durante a coleta de dados no canteiro. Além de gerenciar a logística, o \textit{Transporter Fleet} atua como a principal ponte de comunicação entre a modelagem DES e a ABM. Conforme configurado na ação nativa \textit{On Release} (Figura \ref{fig:transporter}), assim que um trabalhador conclui a tarefa de montagem ou desmontagem de um painel, o sistema emite uma mensagem de "finalizado" (\textit{finished}). Essa mensagem é imediatamente capturada e processada pelo diagrama de estados (\textit{Statechart}) do agente trabalhador na ABM, que será visto mais a frente. Ao chegar ao destino final do transporte com "\textit{on destination reached}", ou seja, quando o trabalhador está montando as fôrmas é realizada uma transformação estética nas fôrmas para melhor visualização.
 
 \begin{figure}[!htb]
 	\centering
@@ -403,7 +403,7 @@ Por outro lado, caso o trabalhador deixe de executar pelo menos uma atividade do
 A partir de ambos os Estados, o trabalhador retorna ao estado \textit{Locomotion}, reiniciando o ciclo operacional e permitindo a continuidade das atividades no ambiente de simulação.
 
 
-\subsection{Visualização da simulação}
+\subsection{Visualização da Simulação}
 
 A Figura \ref{fig:simulation2d} apresenta a simulação em execução e seu funcionamento no ambiente 2D do AnyLogic. Durante o turno da manhã, os trabalhadores deixam suas posições iniciais, deslocam-se até a posição inicial das fôrmas e realizam o transporte necessário para a execução da montagem. Após a conclusão da montagem de todas as paredes, os trabalhadores entram no período de descanso (\textit{Break}) e retornam no turno da tarde para executar a desmontagem das fôrmas, encerrando assim o ciclo da simulação. 
 

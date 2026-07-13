@@ -56,9 +56,9 @@ O AnyLogic é reconhecido como a ferramenta pioneira na modelagem e simulação 
 
 \begin{figure}[!htb]
 \centering
-\caption{Métodos de simulação do Anylogic}
+\caption{Métodos de simulação do Anylogic.}
 \includegraphics[width=0.8\textwidth]{Caps/Figs/anylogicModels.png}
-\fonte{\citeonline{AnyLogicFeatures}}
+\fonte{\citeonline{AnyLogicFeatures}.}
 \label{fig:anylogic-models}
 \end{figure}
 \FloatBarrier
@@ -71,13 +71,13 @@ Neste trabalho, o AnyLogic será a parte analítica do sistema. Ele será respon
 \subsection{NVIDIA Omniverse}
 \label{subsec:omniverse}
 
-O NVIDIA Omniverse é uma coleção de bibliotecas e microsserviços voltada para o desenvolvimento de aplicações, como Gêmeos Digitais industriais e simulações complexas \cite{NvidiaOmniverse}. Aproveitando a expertise da NVIDIA em computação acelerada, a plataforma integra funcionalidades avançadas, como bibliotecas de cálculo estrutural (NVIDIA PhysX) e renderização baseada em física e em tempo real (NVIDIA RTX). Fundamentado no padrão OpenUSD (Universal Scene Description), o Omniverse permite a interoperabilidade perfeita de dados e a colaboração em tempo real, viabilizando a criação de Gêmeos Digitais prontos para simulação.
+O NVIDIA Omniverse é uma coleção de bibliotecas e microsserviços voltada para o desenvolvimento de aplicações, como Gêmeos Digitais industriais e simulações complexas \cite{NvidiaOmniverse}. Aproveitando a expertise da NVIDIA em computação acelerada, a plataforma integra funcionalidades avançadas, como bibliotecas de cálculo estrutural (NVIDIA PhysX) e renderização baseada em física e em tempo real (NVIDIA RTX). Fundamentado no padrão OpenUSD (Universal Scene Description), o Omniverse permite a interoperabilidade de dados e a colaboração em tempo real, viabilizando a criação de Gêmeos Digitais prontos para simulação.
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Exemplo de Gêmeo Digital no Nvidia Omniverse}
+	\caption{Exemplo de Gêmeo Digital no Nvidia Omniverse.}
 	\includegraphics[width=0.8\textwidth]{Caps/Figs/omniverse.png}
-	\fonte{\citeonline{NvidiaOmniverse}}
+	\fonte{\citeonline{NvidiaOmniverse}.}
 	\label{fig:omniverse-example}
 \end{figure}
 \FloatBarrier
@@ -88,7 +88,7 @@ Conforme discutido anteriormente com base em \citeonline{zamani2024}, os softwar
 
 Os SED são sistemas dinâmicos de Estados discretos cuja transição se dá por meio da ocorrência, em geral assíncrona, de Eventos \cite{ basilio2010}. O fato de o Estado do sistema ser discreto implica que este pode assumir valores simbólicos, como por exemplo \{ligado, desligado\}, ou valores numéricos pertencentes a conjuntos discretos (como $\mathbb{N}$ ou $\mathbb{Z}$). Os Eventos, por sua vez, podem estar associados a ações específicas iniciadas por agentes ou ser o resultado do cumprimento de diversas condições lógicas ou físicas \cite{ basilio2010}.
 
-Embora seja possível modelar praticamente qualquer sistema físico como um SED, dependendo do grau de abstração adotado, determinados ambientes operacionais são naturalmente discretos e têm sua evolução determinada estritamente pela ocorrência de Eventos \cite{mestradoDudu}. Nesse sentido, as etapas de trabalho em um canteiro de obras enquadram-se perfeitamente nesse paradigma, uma vez que o avanço físico da montagem ou desmontagem de formas dependem de transições pontuais e sequenciais do processo de construção.
+Embora seja possível modelar praticamente qualquer sistema físico como um SED, dependendo do grau de abstração adotado, determinados ambientes operacionais são naturalmente discretos e têm sua evolução determinada estritamente pela ocorrência de Eventos \cite{mestradoDudu}. Nesse sentido, as etapas de trabalho em um canteiro de obras enquadram-se perfeitamente nesse paradigma, uma vez que o avanço físico da montagem ou desmontagem de fôrmas dependem de transições pontuais e sequenciais do processo de construção.
 
 Ao se considerar a evolução de um SED, a maior preocupação da modelagem reside na sequência de Estados visitados e nos Eventos que causaram as correspondentes transições \cite{mestradoDudu}. Conforme fundamentado pela teoria clássica de \cite{cassandra2008}, o modelo formal de um SED é composto basicamente por esses dois elementos fundamentais: Estados e Eventos.
 
@@ -121,14 +121,22 @@ Uma das maneiras mais eficientes e rigorosas de se modelar e visualizar um SED �
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Exemplo de Autômato}
+	\caption{Exemplo de Autômato.}
 	\includegraphics[width=0.6\textwidth]{Caps/Figs/automato.png}
-	\fonte{\citeonline{basilio2010}}
+	\fonte{\citeonline{basilio2010}.}
 	\label{fig:exemplo-automato}
 \end{figure}
 
-\FloatBarrier
+
 Formalmente, um autômato determinístico é definido pela quíntupla:
+\\
+\\
+\\
+\\
+\\
+\\
+
+\FloatBarrier
 \begin{equation}
 	G = (X, \Sigma, f, x_0, X_m)
 \end{equation}
@@ -287,9 +295,9 @@ De forma análoga, o Alcance Não Observável de um subconjunto de Estados $q \i
 Utilizando essas definições, os elementos de $Obs(G)$ podem ser construídos sistematicamente por meio do algoritmo da Figura \ref{fig:algoritmoobservador}.
 \begin{figure}[!htb]
 	\centering
+	\caption{Algoritmo de construção do Autômato Observador.}
 	\includegraphics[width=0.7\linewidth]{Caps/Figs/algoritmoObservador}
-	\caption{Algoritmo de construção do Autômato Observador}
-	\fonte{\cite{mestradoDudu}}
+	\fonte{\cite{mestradoDudu}.}
 	\label{fig:algoritmoobservador}
 \end{figure}
 \FloatBarrier
@@ -309,7 +317,7 @@ Por outro lado, segundo \citeonline{basilio2010}, um sistema é classificado com
 
 
 
-\section{Consideração do capítulo}
+\section{Consideração do Capítulo}
 
 A modelagem do canteiro de obras por meio da integração DES e ABM permite representar o fluxo físico do processo construtivo e os fatores humanos associados à execução das atividades. No entanto, as falhas operacionais podem ocorrer sem que sejam imediatamente perceptíveis apenas pela observação do fluxo físico da obra. Nesse contexto, a Simulação Híbrida será importante não apenas para representar o comportamento dinâmico do ambiente construtivo, mas também para evidenciar limitações relacionadas à rastreabilidade e ao monitoramento das atividades executadas.
 

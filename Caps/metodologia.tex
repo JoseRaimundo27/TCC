@@ -16,7 +16,7 @@ No contexto deste estudo, essas duas abordagens (DES e ABM) operam de forma inte
 \end{figure}
 \FloatBarrier
 
-Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvimento da simulação é segmentado em grandes fases. Inicialmente, ocorre a Preparação e Design, seguida pela sua Construção e Modelagem, onde o modelo computacional deve ser submetido a procedimentos de verificação, Calibração e Validação de seus parâmetros. Apenas após a consolidação dessas três etapas o Sistema Híbrido torna-se apto para as fases de Explicação e Análise de Cenários, permitindo a explicação de fenômenos e o estudo de possíveis casos no canteiro de obras.
+Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvimento da simulação é segmentado em grandes fases. Inicialmente, ocorre a Preparação e Design, seguida pela sua Construção e Modelagem, onde o modelo computacional deve ser submetido a procedimentos de verificação, Calibração e Validação de seus parâmetros.\ Apenas após a consolidação dessas três etapas o Sistema Híbrido torna-se apto para as fases de Explicação e Análise de Cenários, permitindo a explicação de fenômenos e o estudo de possíveis casos no canteiro de obras.
  
  Com as diretrizes metodológicas do ciclo de desenvolvimento da simulação estabelecidas, o passo seguinte consiste na estruturação lógica. Segundo \citeonline{crooks2019}, a fundamentação desse protocolo abrange os seguintes aspectos centrais:
  
@@ -30,10 +30,10 @@ Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvime
  	\item \textbf{Interações:} Estruturam a dinâmica sistêmica do canteiro. Incluem as interações \textbf{físicas}, ou seja, as forças de atração ou restrições de ocupação em um cômodo, as vias de \textbf{comunicação} de status da obra e a lógica de \textbf{troca de recursos} indiretos essenciais para a continuidade do fluxo.
  	\item \textbf{Agentes:} Representam as entidades autônomas responsáveis por impulsionar a simulação híbrida. O projeto metodológico do agente encapsula três pilares: suas \textbf{Características} intrínsecas , suas \textbf{Decisões} e suas \textbf{Ações}.
  \end{itemize}
- Sendo assim, é possível organizar as premissas do sistema de forma padronizada. A Tabela \ref{tab:protocolo_abm} sintetiza o protocolo geral de modelagem e os parâmetros de entrada definidos para o presente projeto
+ Sendo assim, é possível organizar as premissas do sistema de forma padronizada. A Tabela \ref{tab:protocolo_abm} sintetiza o protocolo geral de modelagem e os parâmetros de entrada definidos para o presente projeto.
  
 \begin{longtable}{@{} p{0.28\textwidth} p{0.68\textwidth} @{}}
-	\caption{Dimensões de Modelagem, Adaptado de \citeonline{tesecarol}}
+	\caption{Dimensões de Modelagem, Adaptado de \citeonline{tesecarol}.}
 	\label{tab:protocolo_abm} \\
 	
 	\toprule
@@ -83,7 +83,7 @@ Conforme ilustrado na Figura \ref{fig:modeling-process}, o ciclo de desenvolvime
  
  
 
-\subsection{Descrição do contexto da obra}
+\subsection{Descrição do Contexto da Obra}
 A Figura \ref{fig:modeling-worker} descreve, de modo geral, as macro etapas do processo de produção de paredes de concreto em um edifício, utilizando fôrmas metálicas e trabalhadores como agentes passivos e ativos de interesse, respectivamente.
 \begin{figure}[!htb]
 	\centering
@@ -135,7 +135,7 @@ Após o mapeamento do processo de construção e considerando os aspectos intrí
 \end{figure}
 \FloatBarrier
 
-A Figura \ref{fig:de-model} detalha o Modelo do Canteiro de Obras sob a ótica da DES. O ambiente espacial simula a geometria de um cômodo pertencente a um apartamento típico do sistema construtivo em estudo. Alinhada à realidade da Empresa A e do setor, a meta de produção estabelecida no modelo é a execução de um meio pavimento por dia. A dinâmica do sistema obedece a um fluxo logístico rigoroso, categorizando as ações em inventário (localização inicial das fôrmas e operários), transporte (trajetórias de movimentação), processamento (montagem e desmontagem) e inspeção.
+A Figura \ref{fig:de-model} detalha o Modelo do Canteiro de Obras sob a ótica da DES. O ambiente espacial simula a geometria de um cômodo pertencente a um apartamento típico do sistema construtivo em estudo. Alinhada à realidade da Empresa A e do setor, a meta de produção estabelecida no modelo é a execução de um meio pavimento por dia. A dinâmica do sistema obedece a um fluxo logístico rigoroso, categorizando as ações em estoque (localização inicial das fôrmas e operários), transporte (trajetórias de movimentação), processamento (montagem e desmontagem) e inspeção.
 
 Por sua vez, a Figura \ref{fig:abm-model} ilustra a lógica interna da ABM. O diagrama sequencia os principais Eventos (E) e Tempos de Espera (T) vinculados às macroetapas da obra. Como regra de negócio do modelo, as operações de montagem e desmontagem possuem pré-requisitos estritos, como por exemplo, elas só são iniciadas mediante a verificação de segurança do ambiente e a disponibilidade de recursos físicos (agente desmoldante, faquetas, cunhas, pinos e alinhadores). Uma vez que as macroetapas de montagem (Evento 3) e desmontagem (Evento 5) são deflagradas, o modelo aciona as atividades operacionais (A1 a A10). É nesse nível de detalhe que a simulação híbrida se destaca: a execução correta ou a omissão de cada uma dessas subatividades dependerá exclusivamente do processo simulado de tomada de decisão do operário (agente ativo), permitindo quantificar o impacto dessas escolhas na qualidade e produtividade final do fluxo.
 
@@ -163,41 +163,42 @@ Conforme ilustrado no fluxograma, o processo cognitivo do agente é estruturado 
 
 Dessa forma, o modelo computacional utiliza essa arquitetura de cinco filtros probabilísticos para simular, de forma realista, as nuances humanas que levam ao desvio de padrão no canteiro de obras.
 
-As respostas probabilísticas determinam a tendência do agente em adotar um comportamento adequado ou inadequado ao longo da simulação. Nesse processo interativo, curvas de aprendizado são empregadas para determinar os resultados parciais em cada um dos estágios cognitivos. A expressão geral utilizada para calcular a probabilidade do comportamento é apresentada na Equação \ref{eq:prob_cognitiva}:
+As respostas probabilísticas determinam a tendência do agente em adotar um comportamento adequado ou inadequado ao longo da simulação. Nesse processo interativo, curvas de aprendizado são empregadas para atualizar os fatores de influência associados a cada estágio cognitivo, refletindo a evolução do trabalhador em função da experiência acumulada. A expressão geral utilizada para calcular a probabilidade de ocorrência de um comportamento inadequado é apresentada na Equação \ref{eq:prob_cognitiva}:
 
 \begin{equation}
 	P = (1 - X_1) + \sum_{j=2}^{5} \left[ (1 - X_j) \prod_{i=1}^{j-1} X_i \right]
 	\label{eq:prob_cognitiva}
 \end{equation}
 
-Nessa formulação, adaptada de \citeonline{ZHANG201929}, cada um dos cinco estágios do modelo cognitivo possui um fator de influência chave específico. As variáveis e operadores da equação são definidos da seguinte forma:
-% Cadastrando os símbolos da equação de probabilidade cognitiva:
-\nomenclature[S]{$P$}{Probabilidade final de o agente adotar um comportamento inadequado (consolidando a falha)}
-\nomenclature[S]{$X_1$}{Valor do fator de influência chave no primeiro estágio (Consciência)}
-\nomenclature[S]{$X_j, X_i$}{Valores dos fatores de influência chave nos estágios $j$ e $i$, respectivamente}
-\nomenclature[S]{$\sum$}{Operador de somatório que percorre os estágios subsequentes (do 2 ao 5)}
-\nomenclature[S]{$\prod$}{Operador de produtório que calcula a contribuição do sucesso acumulado até o estágio anterior}
+Nessa formulação, adaptada de \citeonline{ZHANG201929}, cada um dos cinco estágios do modelo cognitivo é representado por um parâmetro de influência $X_i$, cujo valor corresponde à probabilidade de sucesso naquele estágio específico do processo cognitivo. A probabilidade final $P$ é obtida pela combinação desses parâmetros, considerando que o trabalhador pode falhar em qualquer estágio após ter obtido sucesso nos estágios anteriores. As variáveis e operadores da equação são definidos da seguinte forma:
 
-Para incorporar o ganho de experiência do trabalhador em função do tempo e da repetição das tarefas, o modelo utiliza uma equação geral de curva de aprendizado aplicada a cada um dos cinco estágios, expressa na Equação \ref{eq:curva_aprendizado}:
+\nomenclature[S]{$P$}{Probabilidade final de o agente adotar um comportamento inadequado (consolidando a falha)}
+\nomenclature[S]{$X_i$}{Parâmetro de influência associado ao estágio cognitivo $i$, representando a probabilidade de sucesso nesse estágio}
+\nomenclature[S]{$X_j$}{Parâmetro de influência associado ao estágio cognitivo $j$}
+\nomenclature[S]{$\sum$}{Operador de somatório que considera todos os possíveis estágios em que a falha pode ocorrer}
+\nomenclature[S]{$\prod$}{Operador de produtório que representa a probabilidade de sucesso acumulado nos estágios anteriores}
+
+Para incorporar o ganho de experiência do trabalhador em função do tempo e da repetição das tarefas, o modelo utiliza uma curva de aprendizado aplicada individualmente aos parâmetros de influência de cada estágio cognitivo, conforme apresentado na Equação \ref{eq:curva_aprendizado}:
 
 \begin{equation}
 	Y(t) = 1 - (1 - Y(0)) X(t)^{-\theta}
 	\label{eq:curva_aprendizado}
 \end{equation}
-% Cadastrando os símbolos da curva de aprendizado:
-\nomenclature[S]{$Y(t)$}{Desempenho ou resultado do estágio cognitivo no tempo $t$}
-\nomenclature[S]{$Y(0)$}{Desempenho ou condição inicial do agente no estágio cognitivo}
-\nomenclature[S]{$X(t)$}{Variável de produção ou tempo acumulado até o instante $t$}
-\nomenclature[S]{$\theta$}{Exponente de aprendizado associado à inclinação da curva}
 
-Onde a constante que dita o ritmo dessa evolução técnica é a Taxa de Aprendizado (\textit{Learning Rate}), definida pela Equação \ref{eq:taxa_aprendizado}:
+Nessa equação, $Y(t)$ representa o valor atualizado da variável de interesse no instante $t$, enquanto $Y(0)$ corresponde ao seu valor inicial. A variável $X(t)$ representa a unidade de progresso acumulada, isto é, o número de vezes em que o trabalhador executou ou foi exposto à atividade responsável por promover o aprendizado. O parâmetro $\theta$ determina a inclinação da curva, controlando a velocidade com que ocorre a evolução do desempenho. As variáveis são definidas a seguir:
+
+\nomenclature[S]{$Y(t)$}{Valor atualizado da variável de interesse no instante $t$}
+\nomenclature[S]{$Y(0)$}{Valor inicial da variável de interesse}
+\nomenclature[S]{$X(t)$}{Unidade de progresso acumulada, correspondente ao número de repetições da atividade responsável pelo aprendizado}
+\nomenclature[S]{$\theta$}{Parâmetro que determina a inclinação da curva de aprendizado}
+
+Onde a constante que define a velocidade de evolução do aprendizado é denominada Taxa de Aprendizado (\textit{Learning Rate}), calculada pela Equação \ref{eq:taxa_aprendizado}:
 
 \begin{equation}
 	\text{Taxa de Aprendizado} = 2^{-\theta}
 	\label{eq:taxa_aprendizado}
 \end{equation}
-
-\subsection{Coleta de dados para definição dos fatores de influência, parâmetros e variáveis}
+\subsection{Coleta de Dados para Definição dos Fatores de Influência, Parâmetros e Variáveis}
 
 Esta seção detalha o processo de coleta de dados empíricos para viabilizar as operações práticas da simulação e permitir a criação e análise de diferentes cenários. Segundo \citeonline{tesecarol}, objetivo principal das idas a campo foi monitorar o fluxo de trabalho na produção das paredes de concreto, identificar os problemas mais recorrentes nas fases de montagem e desmontagem das fôrmas metálicas, avaliar o grau de dificuldade das atividades obrigatórias e determinar os principais fatores que influenciam a não conformidade dessas tarefas, segundo a percepção dos próprios trabalhadores. 
 
@@ -210,7 +211,7 @@ A parametrização do tempo demandou a observação direta e a cronometragem do 
 Durante a coleta, observou-se que algumas atividades apresentavam tempos de execução consistentes, sendo consolidadas no modelo como tempos médios fixos. Por outro lado, tarefas com maior variabilidade natural foram modeladas como intervalos de tempo (valores mínimo e máximo), permitindo que a simulação aplique uma função de distribuição para selecionar o tempo de forma estocástica a cada ciclo. Os tempos médios e os intervalos derivados dessa análise, medidos em segundos, estão consolidados na Figura \ref{fig:tempo_atividade}.
 \begin{figure}[!htb]
 	\centering
-	\caption{Tempo médio observado de cada etapa}
+	\caption{Tempo médio observado de cada etapa.}
 	\includegraphics[width=0.8 \textwidth]{Caps/Figs/TempoPorAtividade.png}
 	\fonte{\cite{tesecarol} (Adaptado).}
 	\label{fig:tempo_atividade}
@@ -223,7 +224,7 @@ A análise dos resultados, ilustrada na Figura \ref{fig:resultado_questionario},
 
 \begin{figure}[!htb]
 	\centering
-	\caption{Questionário sobre fatores para omissões dos trabalhadores}
+	\caption{Questionário sobre fatores para omissões dos trabalhadores.}
 	\includegraphics[width=0.8 \textwidth]{Caps/Figs/resultado_questionario.png}
 	\fonte{\cite{tesecarol} (Adaptado).}
 	\label{fig:resultado_questionario}
@@ -244,7 +245,7 @@ Para correlacionar formalmente os aspectos humanos às equações probabilístic
 
 \begin{table}[htpb]
 	\centering
-	\caption{Estágios do modelo cognitivo e parâmetros de influência adotados no estudo, Adaptado de \citeonline{tesecarol}}
+	\caption{Estágios do modelo cognitivo e parâmetros de influência adotados no estudo, Adaptado de \citeonline{tesecarol}.}
 	\label{tab:fatores_influencia}
 	\begin{tabular}{cll}
 		\hline
@@ -264,7 +265,7 @@ Em síntese, o levantamento em campo confirmou que os operários percebem divers
 
 Por fim, informações como a duração global dos serviços e as diretrizes de layout do canteiro de obras foram obtidas por meio de entrevistas não estruturadas com a equipe de gestão e fundamentadas na experiência empírica do pesquisador com este sistema construtivo específico.
 
-\subsection{Metodologia para visualização no NVIDIA Omniverse}
+\subsection{Metodologia para Visualização no NVIDIA Omniverse}
 
 Para a implementação da parte visual da simulação no NVIDIA Omniverse, foram realizadas visitas técnicas ao canteiro de obras A, com o objetivo de compreender as características físicas e operacionais do ambiente real da construção civil. Essas visitas permitiram identificar elementos relevantes para a representação gráfica da simulação, contribuindo para a construção de um ambiente virtual mais próximo das condições observadas em campo.
 
@@ -272,8 +273,9 @@ As Figuras \ref{fig:obra1} e \ref{fig:obra2} apresentam registros fotográficos 
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Caps/Figs/obra}
 	\caption{Registro fotográfico do canteiro de obras utilizado como referência visual para a simulação.}
+	\includegraphics[width=0.7\linewidth]{Caps/Figs/obra}
+	
 	\fonte{Banco de dados do GETEC.}
 	\label{fig:obra1}
 \end{figure}
